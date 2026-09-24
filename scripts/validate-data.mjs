@@ -2,19 +2,17 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import process from "node:process";
 import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
+import { loadDatasets } from "./catalogue-data.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const schema = JSON.parse(fs.readFileSync(path.join(root, "schema/glitter.schema.json"), "utf8"));
-const seedDirectory = path.join(root, "data/seed");
-const seedFiles = fs.readdirSync(seedDirectory).filter((name) => name.endsWith(".json")).sort();
 const ajv = new Ajv2020({ allErrors: true, strict: true });
 addFormats(ajv);
 const validate = ajv.compile(schema);
-const datasets = seedFiles.map((name) => ({ name, data: JSON.parse(fs.readFileSync(path.join(seedDirectory, name), "utf8")) }));
+const datasets = loadDatasets(root);
 
 let failed = false;
 for (const { name, data } of datasets) {
@@ -22,6 +20,18 @@ for (const { name, data } of datasets) {
     failed = true;
     console.error(`${name}: schema validation failed`);
     for (const error of validate.errors ?? []) console.error(`  ${error.instancePath || "/"} ${error.message}`);
+  }
+  if (name.startsWith("data/community/")) {
+    for (const entity of data.entities) {
+      if (!entity.landingPage) {
+        failed = true;
+        console.error(`${name}: community entity ${entity.id} needs landingPage`);
+      }
+      if (!entity.sources?.length) {
+        failed = true;
+        console.error(`${name}: community entity ${entity.id} needs source provenance`);
+      }
+    }
   }
 }
 
@@ -48,10 +58,14 @@ for (const { name, data } of datasets) {
       failed = true;
       console.error(`${name}: relationship ${relationship.id} points to an unknown entity`);
     }
+    if (relationship.predicate !== "cataloguedBy" && !relationship.evidence?.length) {
+      failed = true;
+      console.error(`${name}: relationship ${relationship.id} needs evidence`);
+    }
   }
 }
 
 if (failed) process.exit(1);
 const entityCount = datasets.reduce((count, dataset) => count + dataset.data.entities.length, 0);
 const relationshipCount = datasets.reduce((count, dataset) => count + dataset.data.relationships.length, 0);
-console.log(`Validated ${seedFiles.length} datasets: ${entityCount} entities and ${relationshipCount} relationships.`);
+console.log(`Validated ${datasets.length} datasets: ${entityCount} entities and ${relationshipCount} relationships.`);

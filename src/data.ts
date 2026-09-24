@@ -1,7 +1,3 @@
-import initial from "../data/seed/initial-resources.json";
-import pha4ge from "../data/seed/pha4ge-guidance.json";
-import curated from "../data/seed/curated-resources.json";
-
 export type Source = {
   name: string;
   sourceUrl: string;
@@ -73,7 +69,9 @@ export type GraphLink = {
   relationship: Relationship;
 };
 
-const datasets = [initial, pha4ge, curated];
+type Dataset = { standardVersion: string; entities: Entity[]; relationships: Relationship[] };
+const datasetModules = import.meta.glob("../data/{seed,community}/*.json", { eager: true, import: "default" }) as Record<string, Dataset>;
+const datasets = Object.entries(datasetModules).sort(([left], [right]) => left.localeCompare(right)).map(([, dataset]) => dataset);
 const entityMap = new Map<string, Entity>();
 for (const dataset of datasets) {
   for (const item of dataset.entities as Entity[]) {

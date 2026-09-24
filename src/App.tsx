@@ -36,8 +36,9 @@ import {
   type GraphLink,
   type GraphNode,
 } from "./data";
+import StandardPage from "./StandardPage";
 
-type View = "resources" | "graph";
+type View = "resources" | "graph" | "standard";
 type Filters = {
   types: string[];
   facets: string[];
@@ -346,7 +347,8 @@ function GraphView({ results, selected, onSelect, filters, setFilters, filtersOp
 }
 
 export default function App() {
-  const [view, setView] = useState<View>("resources");
+  const viewFromPath = (): View => window.location.pathname === "/standard" ? "standard" : window.location.pathname === "/graph" ? "graph" : "resources";
+  const [view, setView] = useState<View>(viewFromPath);
   const [query, setQuery] = useState("");
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -361,24 +363,36 @@ export default function App() {
   const activeFilterCount = filters.types.length + filters.facets.length + filters.sources.length + filters.funding.length + Number(filters.licenceKnown) + Number(filters.connectedOnly);
 
   function select(entity: Entity) { setSelectedId((current) => current === entity.id ? null : entity.id); }
+  function navigate(next: View) {
+    const path = next === "resources" ? "/" : `/${next}`;
+    window.history.pushState({}, "", path);
+    setView(next);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
-  return <div className="app-shell">
+  useEffect(() => {
+    const onPopState = () => setView(viewFromPath());
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  return <div className={`app-shell ${view === "standard" ? "is-standard" : ""}`}>
     <header className="topbar">
-      <a className="brand" href="/" aria-label="Glitter resource knowledgebase"><span className="brand-mark"><i /><i /><i /></span><strong>glitter</strong><span>pathogen genomics knowledgebase</span></a>
+      <a className="brand" href="/" onClick={(event) => { event.preventDefault(); navigate("resources"); }} aria-label="Glitter resource knowledgebase"><span className="brand-mark"><i /><i /><i /></span><strong>glitter</strong><span>pathogen genomics knowledgebase</span></a>
       <nav aria-label="Primary navigation">
-        <button className={view === "resources" ? "is-active" : ""} onClick={() => setView("resources")}><List size={15} /> Resources</button>
-        <button className={view === "graph" ? "is-active" : ""} onClick={() => setView("graph")}><Network size={15} /> Graph</button>
-        <a href="https://github.com/happykhan/glitter/blob/main/docs/model.md" target="_blank" rel="noreferrer"><FileText size={15} /> Standard</a>
+        <button className={view === "resources" ? "is-active" : ""} onClick={() => navigate("resources")}><List size={15} /> Resources</button>
+        <button className={view === "graph" ? "is-active" : ""} onClick={() => navigate("graph")}><Network size={15} /> Graph</button>
+        <button className={view === "standard" ? "is-active" : ""} onClick={() => navigate("standard")}><FileText size={15} /> Standard</button>
         <a href="https://github.com/happykhan/glitter" target="_blank" rel="noreferrer"><Github size={15} /> GitHub</a>
       </nav>
     </header>
-    <section className="search-band" aria-label="Search resources">
+    {view !== "standard" && <section className="search-band" aria-label="Search resources">
       <Search size={20} />
       <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search protocols, software, papers, standards and funding calls" aria-label="Search resources" />
       {query && <button onClick={() => setQuery("")} aria-label="Clear search"><X size={17} /></button>}
       <button className="search-filter-button" onClick={() => setFiltersOpen(true)}><Filter size={15} /> Filters{activeFilterCount > 0 && <b>{activeFilterCount}</b>}</button>
-    </section>
-    {view === "resources" ? <CatalogueView results={results} selected={selected} onSelect={select} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : <GraphView results={results} selected={selected} onSelect={select} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} />}
+    </section>}
+    {view === "resources" ? <CatalogueView results={results} selected={selected} onSelect={select} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : view === "graph" ? <GraphView results={results} selected={selected} onSelect={select} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : <StandardPage />}
     <footer className="statusbar"><span><span className="status-dot" /> Public-health genomics resources</span><span>{resources.length} resources · {relationships.filter((relationship) => relationship.predicate !== "cataloguedBy").length} useful connections</span><span>Source provenance and licence uncertainty retained</span></footer>
   </div>;
 }

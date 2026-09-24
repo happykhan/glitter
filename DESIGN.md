@@ -135,6 +135,19 @@ Rails, controls, panels and actions are square. Circular geometry is semantic an
 
 ## Components
 
+### Resource Specification
+
+The `/standard` surface is a Read-mode extension of the workbench. It retains
+the square application bar, ruled navigation, IBM Plex Sans and white canvas,
+then opens into a wide editorial column with a sticky section index. Dense
+technical material is expressed through field ledgers, predicate lists and
+dark code specimens rather than card grids. API endpoints and contribution
+steps are operational links, not decorative documentation.
+
+On mobile the index becomes a compact two-column contents strip, the article
+uses the full viewport width, code specimens scroll internally, and endpoint
+rows collapse without widening the document.
+
 ### Search and Filters
 
 Search occupies a full-width 58px ruled band and matches names, descriptions, resource forms, facets and source catalogues. The filter rail separates resource form, topic/scope, funding state, source and record quality. Active filters appear as removable chips. On mobile the same controls move into a labelled drawer.

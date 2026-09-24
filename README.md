@@ -24,6 +24,8 @@ second view of the same filtered result set.
 
 - Live site: <https://glitter-roan.vercel.app>
 - Frontend: React, TypeScript and `react-force-graph-2d`
+- Resource specification: <https://glitter-roan.vercel.app/standard>
+- Read-only JSON API: <https://glitter-roan.vercel.app/api/v1>
 
 Run it locally with `npm install` followed by `npm run dev`.
 
@@ -62,12 +64,19 @@ every analysis reported by every paper.
 - [Curated papers, software and funding calls](data/seed/curated-resources.json)
 - [Source-ingestion design](docs/source-ingestion.md)
 - [Initial source registry](config/sources.yaml)
+- [API reference](docs/api.md)
+- [Contribution guide](CONTRIBUTING.md)
 
 Refresh the PHA4GE seed from its public WordPress feed with:
 
 ```sh
 node scripts/import-pha4ge.mjs
 ```
+
+Community contributions belong in `data/community/`. Start from
+[`examples/resource-contribution.json`](examples/resource-contribution.json)
+and run `npm run check` before opening a pull request. The same validation runs
+automatically on GitHub.
 
 ## Proposed standards stack
 

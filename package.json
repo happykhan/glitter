@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run validate:data && npm run build:api && tsc -b && vite build",
+    "build:api": "node scripts/build-api.mjs",
     "preview": "vite preview",
     "test": "node --test",
     "validate:data": "node scripts/validate-data.mjs",
-    "check": "npm run validate:data && npm test && npm run build"
+    "check": "npm test && npm run build"
   },
   "dependencies": {
     "@fontsource/ibm-plex-sans": "^5.2.7",

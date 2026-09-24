@@ -52,6 +52,11 @@ and move between standards, guidance, protocols, software and training.
 - Imported records retain source provenance and do not infer unknown licences.
 - The prototype is read-only and contains no person-level clinical data.
 - Initial deployment target: Vercel.
+- A human-readable standards page must explain the resource model, provenance,
+  relationships, API and contribution route without requiring repository knowledge.
+- Consumers can retrieve versioned static JSON through unauthenticated,
+  cross-origin API endpoints.
+- Community resource pull requests are schema-validated before review.
 
 ## Evidence on Hand
 

@@ -1,0 +1,30 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://example.org/resources/example-tool",
+      "types": ["Software"],
+      "name": "Example pathogen-genomics tool",
+      "description": "Replace this example with a concise factual description of what the resource helps a user do.",
+      "landingPage": "https://example.org/resources/example-tool",
+      "license": "https://spdx.org/licenses/MIT.html",
+      "facets": [
+        {
+          "scheme": "Glitter method",
+          "id": "bioinformatics",
+          "label": "Bioinformatics"
+        }
+      ],
+      "sources": [
+        {
+          "name": "Canonical project website",
+          "sourceUrl": "https://example.org/resources/example-tool",
+          "sourceRecordId": "example-tool",
+          "retrievedAt": "2026-09-25"
+        }
+      ],
+      "status": "active"
+    }
+  ],
+  "relationships": []
+}
