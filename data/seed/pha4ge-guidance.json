@@ -154,6 +154,7 @@
       "name": "PHA4GE hAMRonization Tool",
       "description": "PHA4GE has developed an AMR gene detection output standard to address inconsistencies across existing tools and reference databases. Supporting parsers and automated pipelines enable harmonised outputs, benchmarking, and improved reuse of AMR surveillance data.",
       "landingPage": "https://github.com/pha4ge/hAMRonization",
+      "license": "https://spdx.org/licenses/LGPL-3.0.html",
       "facets": [
         {
           "scheme": "Glitter application",

@@ -8,13 +8,19 @@ standards, datasets, training, guidance and funding opportunities.
 The project is at the **v0.1 design stage**. The current files are a discussion
 draft, not a normative or production-ready standard.
 
-## Interactive prototype
+## Interactive knowledgebase
 
-The website opens directly into an interactive knowledge graph. Resource
-records are connected to their resource form, pathogen scope, method,
-application and source catalogue, alongside explicit relationships asserted in
-the Glitter data. Selecting a node isolates its immediate neighbourhood and
-opens a provenance and licensing inspector.
+The website combines a searchable resource directory with an interactive
+knowledge graph. The graph shows evidence-backed resource-to-resource
+assertions; resource form, pathogen scope, method, application and source
+catalogue remain filters rather than being counted as scientific connections.
+Selecting a resource opens a provenance, licensing and relationship inspector.
+
+The default website view is a searchable resource directory. Search covers
+titles, descriptions, types, facets and source catalogues. Filters cover
+resource form, pathogen/method/application, funding state, source catalogue,
+licence availability and the presence of curated connections. The graph is a
+second view of the same filtered result set.
 
 - Live site: <https://glitter-roan.vercel.app>
 - Frontend: React, TypeScript and `react-force-graph-2d`
@@ -46,10 +52,14 @@ every analysis reported by every paper.
 
 - [Conceptual model](docs/model.md)
 - [Relationship vocabulary](vocabularies/relationships.yaml)
+- [Resource type vocabulary](vocabularies/resource-types.yaml)
+- [Resource profiles](docs/profiles.md)
+- [Relationship curation rules](docs/relationship-curation.md)
 - [Draft JSON Schema](schema/glitter.schema.json)
 - [Worked knowledge-hub example](examples/knowledge-hub.json)
 - [Initial imported seed records](data/seed/initial-resources.json)
 - [PHA4GE guidance and standards seed](data/seed/pha4ge-guidance.json)
+- [Curated papers, software and funding calls](data/seed/curated-resources.json)
 - [Source-ingestion design](docs/source-ingestion.md)
 - [Initial source registry](config/sources.yaml)
 

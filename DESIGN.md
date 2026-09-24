@@ -1,6 +1,6 @@
 ---
 name: Glitter Scientific Network Workbench
-description: A graph-first evidence workbench for pathogen-genomics resources and provenance.
+description: A searchable evidence workbench with an explorable pathogen-genomics resource graph.
 colors:
   workbench-ink: "#25343d"
   canvas-white: "#ffffff"
@@ -48,14 +48,15 @@ components:
 
 **Creative North Star: "The Scientific Network Workbench"**
 
-Glitter opens as the knowledge graph itself: a serious analysis surface closer to Cytoscape or Gephi than a catalogue landing page. A clean white canvas, square institutional rails, compact controls and a persistent status line make it operational from the first viewport. The graph carries the story; there is no hero, workflow fiction or decorative prose.
+Glitter opens as a searchable resource directory with a graph view of the same filtered records. A clean white canvas, square institutional rails, compact controls and a persistent status line make it operational from the first viewport. Search and filters lead discovery; the graph explains useful evidence-backed connections. There is no hero, workflow fiction or decorative prose.
 
 Selection binds topology to evidence. Choosing a node recentres and zooms the graph, isolates its one-hop neighbourhood, reveals edge predicates and presents the same neighbours as keyboard-operable inspector controls. Provenance and licence uncertainty remain first-class facts.
 
 **Key Characteristics:**
 
-- Populated force-directed graph as the primary surface.
-- Square ruled rails around a white dotted canvas.
+- Prominent search across titles, descriptions, types, facets and sources.
+- Faceted directory as the primary surface and force-directed graph as a peer view.
+- Square ruled rails around white list and graph canvases.
 - IBM Plex Sans for every interface and evidence role.
 - Semantic node colours reinforced by shape and text.
 - Shared selection across graph, node index and inspector.
@@ -110,13 +111,13 @@ One disciplined grotesk unifies node labels, navigation and evidence. Hierarchy 
 
 ## Layout
 
-Desktop uses a 56px application bar, flexible workbench and 29px status line. The workbench has a 255px searchable node index, a central graph with a 420px minimum and a 320px inspector. The graph itself has a 39px toolbar, flexible canvas and 26px help strip.
+Desktop uses a 56px application bar, a 58px global search band, a flexible workbench and 29px status line. The workbench has a 238px filter rail, a central results or graph surface and a 340px inspector. The graph itself has a 52px relationship toolbar, flexible canvas and 28px help strip.
 
-At 1080px the rails contract to 225px and 285px and the brand descriptor disappears. At 760px the shell becomes document-height: the workbench stacks, the graph receives 58dvh, type toggles scroll horizontally, and the node index opens only for search or the explicit browse control. A populated inspector becomes a fixed 56dvh bottom sheet above the status line.
+At 1120px the rails contract to 215px and 300px and the brand descriptor disappears. At 820px the shell becomes document-height: filters move into an off-canvas drawer, result metadata simplifies, and a populated inspector becomes a fixed bottom sheet above the status line. The graph receives 68dvh and retains relationship selection, zoom and fit controls.
 
-The node index and connected-node list are the keyboard counterpart to direct graph manipulation. Closing details returns focus to the prior indexed node when present.
+The result list and connected-resource list are the keyboard counterpart to direct graph manipulation.
 
-**The Graph-First Rule.** Rails may contract or stack, but the populated topology remains the primary working surface.
+**The Discovery-First Rule.** Search and filters must reveal useful records within seconds; the graph is available as a peer view, never the only route to content.
 
 **The Shared-Selection Rule.** Canvas, index and connected-node list represent one synchronized state.
 
@@ -134,17 +135,17 @@ Rails, controls, panels and actions are square. Circular geometry is semantic an
 
 ## Components
 
-### Search and Node Filters
+### Search and Filters
 
-Search is borderless within a 47px ruled band and matches names plus resource descriptions. Seven type toggles combine colour, shape, text and checked state; inactive kinds remain at 42% opacity. On mobile they become a horizontal strip.
+Search occupies a full-width 58px ruled band and matches names, descriptions, resource forms, facets and source catalogues. The filter rail separates resource form, topic/scope, funding state, source and record quality. Active filters appear as removable chips. On mobile the same controls move into a labelled drawer.
 
-### Node Index
+### Resource Results
 
-Each ruled button carries a semantic mark, truncated name, uppercase kind and chevron. Hover and selection use a pale blue-neutral field; selection adds a 3px inset coral rail. Rows remain keyboard operable.
+Each ruled result carries a semantic mark, resource form, title, description, facets, source and curated-connection count. Hover and selection use a pale blue-neutral field; selection adds a 3px inset coral rail. Rows remain keyboard operable.
 
 ### Graph Toolbar and Canvas
 
-The 39px toolbar exposes counts, zoom and fit controls as square cells. The white canvas uses a 15px pale-blue dotted grid. Selecting recentres over 550ms, zooms to 2.1, dims non-neighbours to 12% and outlines the node in coral. Background click clears isolation. Metadata edges are fine and neutral; explicit assertions are thicker coral lines with arrows. Every selected edge shows direction, predicate and “verified” when explicit.
+The graph toolbar exposes resource and connection counts, relationship filtering, an optional catalogue-provenance layer, zoom and fit controls. The white canvas uses a 15px pale-blue dotted grid. Selecting recentres, zooms and isolates one-hop neighbours. Directed edges represent curated assertions; resource type, scope and source catalogue are not converted into default graph edges.
 
 ### Inspector
 
@@ -156,13 +157,13 @@ Ruled fact rows keep resource form, resource licence, source metadata licence an
 
 ### Navigation, Status and Browser Surfaces
 
-The active Graph navigation cell combines a tonal field with a 3px coral underline. The 29px ink status bar reports prototype state, counts and traceability; mobile retains state and count. Scrollbars are thin (8px) with a seashell-blue thumb, cool-white track and 2px inset track border. Text selection is ink on peach. Buttons, links and inputs share a 3px teal focus outline with 2px offset. Reduced motion collapses transitions to 0.01ms and disables smooth scrolling.
+The active Graph navigation cell combines a tonal field with a 3px coral underline. The 29px ink status bar reports catalogue scope, counts and traceability; mobile retains scope and count. Scrollbars are thin (8px) with a seashell-blue thumb, cool-white track and 2px inset track border. Text selection is ink on peach. Buttons, links and inputs share a 3px teal focus outline with 2px offset. Reduced motion collapses transitions to 0.01ms and disables smooth scrolling.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** open on the populated graph with index and evidence inspector framing it.
+- **Do** open on search and filter results with the evidence inspector available immediately.
 - **Do** synchronize colour, shape and written kind labels across canvas, filters, index and inspector.
 - **Do** expose the selected one-hop neighbourhood and predicates on both canvas and keyboard controls.
 - **Do** distinguish source record, retrieval date, source metadata licence and unknown resource licence.
@@ -172,7 +173,7 @@ The active Graph navigation cell combines a tonal field with a 3px coral underli
 ### Don't:
 
 - **Don't** restore the former pathway atlas, workflow stages, hero, card grid or editorial display face.
-- **Don't** hide topology behind a list-first or marketing-first surface.
+- **Don't** force users through the graph when a list and filters answer the question faster.
 - **Don't** use colour alone for kind, selection, assertion, provenance or licence status.
 - **Don't** leave selected-edge meaning in hover-only tooltips.
 - **Don't** infer resource licence from source metadata licence.

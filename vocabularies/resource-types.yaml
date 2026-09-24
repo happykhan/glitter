@@ -1,0 +1,37 @@
+version: 0.1.0
+status: discussion-draft
+resource_types:
+  - id: Publication
+    label: Paper or publication
+  - id: Software
+    label: Software project
+  - id: ComputationalWorkflow
+    label: Computational workflow
+  - id: Protocol
+    label: Protocol
+  - id: Dataset
+    label: Dataset
+  - id: DataStandard
+    label: Data standard
+  - id: TrainingResource
+    label: Training resource
+  - id: GuidanceDocument
+    label: Guidance document
+  - id: FundingOpportunity
+    label: Funding opportunity
+  - id: Project
+    label: Project or programme
+  - id: Database
+    label: Database
+  - id: StrainCollection
+    label: Strain collection
+  - id: Instrument
+    label: Instrument
+  - id: Event
+    label: Event
+  - id: Person
+    label: Person
+  - id: Organization
+    label: Organisation
+  - id: Concept
+    label: Controlled concept

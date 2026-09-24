@@ -102,6 +102,7 @@ const entities = [
     name: card.title,
     ...(card.description ? { description: card.description } : {}),
     landingPage: card.url,
+    ...(card.url === "https://github.com/pha4ge/hAMRonization" ? { license: "https://spdx.org/licenses/LGPL-3.0.html" } : {}),
     facets: facets(card.title),
     sources: [source],
     status: "active",

@@ -133,6 +133,7 @@
           "items": { "$ref": "#/$defs/identifier" }
         },
         "landingPage": { "$ref": "#/$defs/uri" },
+        "license": { "$ref": "#/$defs/uri" },
         "distributions": {
           "type": "array",
           "items": { "$ref": "#/$defs/distribution" }
@@ -155,10 +156,13 @@
         {
           "if": {
             "properties": {
-              "types": { "contains": { "const": "FundingOpportunity" } }
+              "types": { "type": "array", "contains": { "const": "FundingOpportunity" } }
             }
           },
-          "then": { "required": ["fundingOpportunity"] }
+          "then": {
+            "properties": { "fundingOpportunity": { "$ref": "#/$defs/fundingOpportunity" } },
+            "required": ["fundingOpportunity"]
+          }
         }
       ]
     },

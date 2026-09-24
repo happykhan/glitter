@@ -1,6 +1,6 @@
 {
   "name": "Glitter Scientific Network Workbench",
-  "description": "A graph-first evidence workbench for pathogen-genomics resources and provenance.",
+  "description": "A searchable evidence workbench with an explorable pathogen-genomics resource graph.",
   "mode": "operate",
   "seed": "cc35f485",
   "tokens": {
@@ -40,9 +40,9 @@
     }
   },
   "layout": {
-    "desktop": "56px application bar; 255px node rail; fluid graph; 320px inspector; 29px status line",
-    "mobile": "stacked search and 58dvh graph with a fixed 56dvh bottom inspector",
-    "breakpoint": "760px"
+    "desktop": "56px application bar; 58px search; 238px filters; fluid results or graph; 340px inspector; 29px status line",
+    "mobile": "global search, off-canvas filters, stacked results or 68dvh graph, fixed bottom inspector",
+    "breakpoint": "820px"
   },
   "nodeKinds": [
     "resource",
@@ -54,8 +54,8 @@
     "organization"
   ],
   "principles": [
-    "The populated knowledge graph is the primary interface.",
-    "Search, filters and a keyboard-operable index provide redundant access to every node.",
+    "Search and faceted resource results are the primary interface.",
+    "The graph is a peer view of the same filtered records.",
     "Selection isolates one-hop context and reveals directed predicate labels.",
     "Provenance and licensing remain attached to imported records.",
     "Metadata relationships and verified assertions are visually distinct.",

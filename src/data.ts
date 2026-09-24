@@ -1,5 +1,6 @@
 import initial from "../data/seed/initial-resources.json";
 import pha4ge from "../data/seed/pha4ge-guidance.json";
+import curated from "../data/seed/curated-resources.json";
 
 export type Source = {
   name: string;
@@ -8,30 +9,57 @@ export type Source = {
   sourceLicense?: string;
   retrievedAt: string;
   sourceUpdatedAt?: string;
+  sourceRevision?: string;
 };
 
-export type Facet = { scheme: string; id: string; label: string };
+export type Facet = { scheme: string; id: string; label: string; uri?: string };
+export type Identifier = { scheme: string; value: string; uri?: string };
+export type FundingDetails = {
+  applicationUrl: string;
+  opens?: string;
+  closes?: string;
+  status: "upcoming" | "open" | "rolling" | "closed";
+  eligibility?: string;
+  geographicScope?: string[];
+  amount?: number;
+  currency?: string;
+  lastChecked: string;
+};
 
 export type Entity = {
   id: string;
   types: string[];
   name: string;
   description?: string;
+  datePublished?: string;
+  dateModified?: string;
+  identifiers?: Identifier[];
   landingPage?: string;
+  license?: string;
   facets?: Facet[];
   sources?: Source[];
   status?: string;
+  fundingOpportunity?: FundingDetails;
 };
 
-export type Relationship = { id: string; subject: string; predicate: string; object: string };
-export type GraphKind = "resource" | "catalogue" | "type" | "target" | "method" | "application" | "organization";
+export type Evidence = { source: string; locator?: string; quote?: string };
+export type Relationship = {
+  id: string;
+  subject: string;
+  predicate: string;
+  object: string;
+  description?: string;
+  evidence?: Evidence[];
+  assertedOn?: string;
+  status?: "proposed" | "verified" | "disputed" | "retracted";
+};
+
+export type GraphKind = "resource" | "organization";
 export type GraphNode = {
   id: string;
   name: string;
   kind: GraphKind;
-  entity?: Entity;
-  source?: Source;
-  resourceCount?: number;
+  entity: Entity;
   x?: number;
   y?: number;
   vx?: number;
@@ -42,96 +70,142 @@ export type GraphLink = {
   source: string | GraphNode;
   target: string | GraphNode;
   predicate: string;
-  explicit?: boolean;
+  relationship: Relationship;
 };
 
-export const entities = [...initial.entities, ...pha4ge.entities] as Entity[];
-export const relationships = [...initial.relationships, ...pha4ge.relationships] as Relationship[];
+const datasets = [initial, pha4ge, curated];
+const entityMap = new Map<string, Entity>();
+for (const dataset of datasets) {
+  for (const item of dataset.entities as Entity[]) {
+    const existing = entityMap.get(item.id);
+    entityMap.set(item.id, existing ? {
+      ...existing,
+      ...item,
+      types: [...new Set([...existing.types, ...item.types])],
+      sources: [...(existing.sources ?? []), ...(item.sources ?? [])],
+      facets: [...(existing.facets ?? []), ...(item.facets ?? [])],
+    } : item);
+  }
+}
+
+export const entities = [...entityMap.values()];
+export const relationships = datasets.flatMap((dataset) => dataset.relationships as Relationship[]);
 export const resources = entities.filter((entity) => !entity.types.includes("Organization"));
-export const resourceTypes = ["DataStandard", "Protocol", "GuidanceDocument", "Software", "TrainingResource"];
+export const organizations = entities.filter((entity) => entity.types.includes("Organization"));
 
 export const typeLabels: Record<string, string> = {
-  DataStandard: "Data standard",
-  Protocol: "Protocol",
-  GuidanceDocument: "Guidance",
+  Publication: "Paper",
   Software: "Software",
+  ComputationalWorkflow: "Workflow",
+  Protocol: "Protocol",
+  Dataset: "Dataset",
+  DataStandard: "Data standard",
   TrainingResource: "Training",
+  GuidanceDocument: "Guidance",
+  FundingOpportunity: "Funding call",
+  Project: "Project",
+  Database: "Database",
+  StrainCollection: "Strain collection",
+  Instrument: "Instrument",
+  Event: "Event",
+  Person: "Person",
   Organization: "Organisation",
+  Concept: "Concept",
 };
 
-export const kindLabels: Record<GraphKind, string> = {
-  resource: "Resource",
-  catalogue: "Source catalogue",
-  type: "Resource type",
-  target: "Pathogen scope",
-  method: "Method",
-  application: "Application",
-  organization: "Organisation",
+export const predicateLabels: Record<string, string> = {
+  mentions: "mentions",
+  describes: "describes",
+  uses: "uses",
+  acceptsInput: "accepts input",
+  producesOutput: "produces output",
+  implements: "implements",
+  conformsTo: "conforms to",
+  mapsTo: "maps to",
+  hasPart: "has part",
+  supersedes: "supersedes",
+  isDocumentedBy: "is documented by",
+  isSupplementTo: "is supplement to",
+  offeredBy: "offered by",
+  teaches: "teaches",
+  authoredBy: "authored by",
+  maintainedBy: "maintained by",
+  publishedBy: "published by",
+  cataloguedBy: "catalogued by",
+  about: "about",
+  appliesToTaxon: "applies to taxon",
 };
 
 export function readableType(type: string) {
-  return type.replace(/([a-z])([A-Z])/g, "$1 $2");
+  return typeLabels[type] ?? type.replace(/([a-z])([A-Z])/g, "$1 $2");
 }
 
-function facetKind(scheme: string): GraphKind {
-  if (scheme.includes("method")) return "method";
-  if (scheme.includes("application")) return "application";
-  return "target";
+export function facetAxis(facet: Facet) {
+  const scheme = facet.scheme.toLowerCase();
+  if (scheme.includes("method")) return "Method";
+  if (scheme.includes("application")) return "Application";
+  return "Pathogen";
 }
 
-export function buildKnowledgeGraph() {
-  const nodes = new Map<string, GraphNode>();
-  const links = new Map<string, GraphLink>();
-  const addNode = (node: GraphNode) => {
-    if (!nodes.has(node.id)) nodes.set(node.id, node);
-    return nodes.get(node.id)!;
-  };
-  const addLink = (link: GraphLink) => {
-    if (!links.has(link.id)) links.set(link.id, link);
-  };
+export function resourceRelations(id: string) {
+  return relationships.filter((relationship) => relationship.subject === id || relationship.object === id);
+}
 
-  for (const entity of entities) {
-    const isOrganization = entity.types.includes("Organization");
-    addNode({ id: entity.id, name: entity.name, kind: isOrganization ? "organization" : "resource", entity });
-    if (isOrganization) continue;
+export function fundingState(entity: Entity, today = new Date()) {
+  const funding = entity.fundingOpportunity;
+  if (!funding) return null;
+  const day = today.toISOString().slice(0, 10);
+  if (funding.status === "rolling") return "rolling";
+  if (funding.opens && day < funding.opens) return "upcoming";
+  if (funding.closes && day > funding.closes) return "closed";
+  return "open";
+}
 
-    for (const type of entity.types) {
-      const typeId = `type:${type}`;
-      addNode({ id: typeId, name: typeLabels[type] ?? readableType(type), kind: "type" });
-      addLink({ id: `${entity.id}|hasType|${typeId}`, source: entity.id, target: typeId, predicate: "has type" });
+export function buildResourceGraph(visibleIds?: Set<string>, includeCatalogueLinks = false) {
+  const substantive = relationships.filter((relationship) => includeCatalogueLinks || relationship.predicate !== "cataloguedBy");
+  const included = new Set<string>();
+  if (visibleIds) {
+    for (const id of visibleIds) included.add(id);
+    for (const relationship of substantive) {
+      if (visibleIds.has(relationship.subject) || visibleIds.has(relationship.object)) {
+        included.add(relationship.subject);
+        included.add(relationship.object);
+      }
     }
-
-    for (const facet of entity.facets ?? []) {
-      const kind = facetKind(facet.scheme);
-      const facetId = `facet:${facet.scheme}:${facet.id}`;
-      addNode({ id: facetId, name: facet.label, kind });
-      const predicate = kind === "method" ? "supports method" : kind === "application" ? "supports application" : "has scope";
-      addLink({ id: `${entity.id}|${predicate}|${facetId}`, source: entity.id, target: facetId, predicate });
-    }
-
-    for (const source of entity.sources ?? []) {
-      const sourceId = `catalogue:${source.name}`;
-      addNode({ id: sourceId, name: source.name, kind: "catalogue", source });
-      addLink({ id: `${entity.id}|cataloguedBy|${sourceId}`, source: entity.id, target: sourceId, predicate: "catalogued by" });
+  } else {
+    for (const entity of resources) included.add(entity.id);
+    for (const relationship of substantive) {
+      included.add(relationship.subject);
+      included.add(relationship.object);
     }
   }
 
-  for (const relationship of relationships) {
-    if (!nodes.has(relationship.subject) || !nodes.has(relationship.object)) continue;
-    addLink({ id: relationship.id, source: relationship.subject, target: relationship.object, predicate: readableType(relationship.predicate).toLowerCase(), explicit: true });
-  }
+  const nodes: GraphNode[] = entities
+    .filter((entity) => included.has(entity.id))
+    .map((entity) => ({ id: entity.id, name: entity.name, kind: entity.types.includes("Organization") ? "organization" : "resource", entity }));
+  const nodeIds = new Set(nodes.map((node) => node.id));
+  const links: GraphLink[] = substantive
+    .filter((relationship) => nodeIds.has(relationship.subject) && nodeIds.has(relationship.object))
+    .map((relationship) => ({
+      id: relationship.id,
+      source: relationship.subject,
+      target: relationship.object,
+      predicate: predicateLabels[relationship.predicate] ?? relationship.predicate,
+      relationship,
+    }));
+  return { nodes, links };
+}
 
-  const nodeList = [...nodes.values()];
-  const linkList = [...links.values()];
-  for (const node of nodeList) {
-    node.resourceCount = new Set(linkList.flatMap((link) => {
-      const sourceId = typeof link.source === "string" ? link.source : link.source.id;
-      const targetId = typeof link.target === "string" ? link.target : link.target.id;
-      if (sourceId !== node.id && targetId !== node.id) return [];
-      const otherId = sourceId === node.id ? targetId : sourceId;
-      return nodes.get(otherId)?.kind === "resource" ? [otherId] : [];
-    })).size;
-  }
+export const filterOptions = {
+  types: [...new Set(resources.flatMap((entity) => entity.types))].sort((a, b) => readableType(a).localeCompare(readableType(b))),
+  facets: [...new Set(resources.flatMap((entity) => (entity.facets ?? []).map((facet) => `${facetAxis(facet)}|${facet.label}`)))].sort(),
+  sources: [...new Set(resources.flatMap((entity) => (entity.sources ?? []).map((source) => source.name)))].sort(),
+};
 
-  return { nodes: nodeList, links: linkList };
+export function licenceLabel(url?: string) {
+  if (!url) return "Not recorded";
+  if (/spdx\.org\/licenses\/MIT/.test(url)) return "MIT";
+  if (/LGPL-3\.0/.test(url)) return "LGPL-3.0";
+  if (/creativecommons\.org\/licenses\/by\/4\.0/.test(url)) return "CC BY 4.0";
+  try { return new URL(url).hostname; } catch { return url; }
 }

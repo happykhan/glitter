@@ -59,6 +59,8 @@ and move between standards, guidance, protocols, software and training.
 - Fourteen IPSN and GHRU seed resources in `data/seed/initial-resources.json`.
 - Nine PHA4GE resources plus PHA4GE as an organisation in
   `data/seed/pha4ge-guidance.json`.
+- Curated publication, software and funding-call records with evidence-backed
+  relationships in `data/seed/curated-resources.json`.
 - Source definitions and ingestion policy in `config/sources.yaml` and
   `docs/source-ingestion.md`.
 - No testimonials, adoption claims, usage analytics or production service

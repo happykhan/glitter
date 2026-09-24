@@ -1,0 +1,230 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://www.who.int/",
+      "types": ["Organization"],
+      "name": "World Health Organization",
+      "landingPage": "https://www.who.int/"
+    },
+    {
+      "id": "https://www.afro.who.int/",
+      "types": ["Organization"],
+      "name": "WHO Regional Office for Africa",
+      "landingPage": "https://www.afro.who.int/"
+    },
+    {
+      "id": "https://doi.org/10.1093/gigascience/giac003",
+      "types": ["Publication"],
+      "name": "Future-proofing and maximizing the utility of metadata: The PHA4GE SARS-CoV-2 contextual data specification package",
+      "description": "A peer-reviewed description of the PHA4GE SARS-CoV-2 contextual data specification and its supporting templates, protocols and harmonisation tools.",
+      "datePublished": "2022-02-16",
+      "identifiers": [
+        { "scheme": "DOI", "value": "10.1093/gigascience/giac003", "uri": "https://doi.org/10.1093/gigascience/giac003" },
+        { "scheme": "PMID", "value": "35169842", "uri": "https://pubmed.ncbi.nlm.nih.gov/35169842/" }
+      ],
+      "landingPage": "https://doi.org/10.1093/gigascience/giac003",
+      "facets": [
+        { "scheme": "Glitter target", "id": "sars-cov-2", "label": "SARS-CoV-2" },
+        { "scheme": "Glitter method stage", "id": "metadata-harmonisation", "label": "Metadata harmonisation" }
+      ],
+      "sources": [{ "name": "PubMed", "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/35169842/", "sourceRecordId": "35169842", "retrievedAt": "2026-09-24" }],
+      "status": "active"
+    },
+    {
+      "id": "https://doi.org/10.1099/mgen.0.000908",
+      "types": ["Publication"],
+      "name": "The DataHarmonizer: a tool for faster data harmonization, validation, aggregation and analysis of pathogen genomics contextual information",
+      "description": "The publication describing DataHarmonizer, a browser-based spreadsheet editor and validator for structured pathogen-genomics contextual data.",
+      "datePublished": "2023-01-24",
+      "identifiers": [{ "scheme": "DOI", "value": "10.1099/mgen.0.000908", "uri": "https://doi.org/10.1099/mgen.0.000908" }],
+      "landingPage": "https://doi.org/10.1099/mgen.0.000908",
+      "facets": [{ "scheme": "Glitter method stage", "id": "metadata-harmonisation", "label": "Metadata harmonisation" }],
+      "sources": [{ "name": "DataHarmonizer repository", "sourceUrl": "https://github.com/cidgoh/DataHarmonizer", "sourceRecordId": "README manuscript citation", "retrievedAt": "2026-09-24" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/cidgoh/DataHarmonizer",
+      "types": ["Software"],
+      "name": "DataHarmonizer",
+      "description": "A browser-based spreadsheet editor and validator for harmonising, validating and exporting structured pathogen-genomics contextual data.",
+      "landingPage": "https://github.com/cidgoh/DataHarmonizer",
+      "license": "https://spdx.org/licenses/MIT.html",
+      "facets": [{ "scheme": "Glitter method stage", "id": "metadata-harmonisation", "label": "Metadata harmonisation" }],
+      "sources": [{ "name": "GitHub repository", "sourceUrl": "https://github.com/cidgoh/DataHarmonizer", "sourceRecordId": "cidgoh/DataHarmonizer", "retrievedAt": "2026-09-24" }],
+      "status": "active"
+    },
+    {
+      "id": "https://doi.org/10.1101/2024.03.07.583950",
+      "types": ["Publication"],
+      "name": "hAMRonization: Enhancing antimicrobial resistance prediction using the PHA4GE AMR detection specification and tooling",
+      "description": "A preprint describing the hAMRonization specification and software for converting antimicrobial-resistance prediction outputs into a common data structure.",
+      "datePublished": "2024-03-07",
+      "identifiers": [{ "scheme": "DOI", "value": "10.1101/2024.03.07.583950", "uri": "https://doi.org/10.1101/2024.03.07.583950" }],
+      "landingPage": "https://doi.org/10.1101/2024.03.07.583950",
+      "facets": [{ "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }],
+      "sources": [{ "name": "bioRxiv", "sourceUrl": "https://www.biorxiv.org/content/10.1101/2024.03.07.583950v1", "sourceRecordId": "2024.03.07.583950v1", "retrievedAt": "2026-09-24" }],
+      "status": "active"
+    },
+    {
+      "id": "https://doi.org/10.1099/mgen.0.001308",
+      "types": ["Publication"],
+      "name": "AMRColab — a user-friendly antimicrobial resistance detection and visualization tool",
+      "description": "A peer-reviewed description of AMRColab, which integrates AMRFinderPlus and hAMRonization for accessible antimicrobial-resistance analysis and visualisation.",
+      "datePublished": "2024-10-01",
+      "identifiers": [
+        { "scheme": "DOI", "value": "10.1099/mgen.0.001308", "uri": "https://doi.org/10.1099/mgen.0.001308" },
+        { "scheme": "PMID", "value": "39432417", "uri": "https://pubmed.ncbi.nlm.nih.gov/39432417/" }
+      ],
+      "landingPage": "https://doi.org/10.1099/mgen.0.001308",
+      "facets": [{ "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }],
+      "sources": [{ "name": "PubMed", "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39432417/", "sourceRecordId": "39432417", "retrievedAt": "2026-09-24" }],
+      "status": "active"
+    },
+    {
+      "id": "https://doi.org/10.1099/mgen.0.001260",
+      "types": ["Publication", "DataStandard"],
+      "name": "PHA4GE quality control contextual data tags",
+      "description": "Standardised contextual-data tags for sharing public-health sequence datasets with known quality issues for testing and training.",
+      "datePublished": "2024-06-01",
+      "identifiers": [
+        { "scheme": "DOI", "value": "10.1099/mgen.0.001260", "uri": "https://doi.org/10.1099/mgen.0.001260" },
+        { "scheme": "PMID", "value": "38860884", "uri": "https://pubmed.ncbi.nlm.nih.gov/38860884/" }
+      ],
+      "landingPage": "https://doi.org/10.1099/mgen.0.001260",
+      "facets": [{ "scheme": "Glitter method stage", "id": "sequence-quality-control", "label": "Sequence quality control" }],
+      "sources": [{ "name": "PubMed", "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38860884/", "sourceRecordId": "38860884", "retrievedAt": "2026-09-24" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/news-room/articles-detail/catalytic-grant-fund-application-cycle-2026-2027",
+      "types": ["FundingOpportunity"],
+      "name": "IPSN Catalytic Grant Fund 2026–2027",
+      "description": "Funding for IPSN member organisations in low- and middle-income countries to pilot pathogen genomic surveillance or wastewater and environmental surveillance approaches.",
+      "landingPage": "https://www.who.int/news-room/articles-detail/catalytic-grant-fund-application-cycle-2026-2027",
+      "facets": [
+        { "scheme": "Glitter application", "id": "routine-surveillance", "label": "Pathogen genomic surveillance" },
+        { "scheme": "Glitter application", "id": "wastewater-surveillance", "label": "Wastewater surveillance" }
+      ],
+      "fundingOpportunity": {
+        "applicationUrl": "https://www.who.int/news-room/articles-detail/catalytic-grant-fund-application-cycle-2026-2027",
+        "opens": "2026-04-17",
+        "closes": "2026-05-14",
+        "status": "closed",
+        "eligibility": "IPSN member organisations in low- and middle-income countries, or consortia led by an eligible IPSN member.",
+        "geographicScope": ["Low- and middle-income countries"],
+        "amount": 250000,
+        "currency": "USD",
+        "lastChecked": "2026-09-24"
+      },
+      "sources": [{ "name": "World Health Organization", "sourceUrl": "https://www.who.int/news-room/articles-detail/catalytic-grant-fund-application-cycle-2026-2027", "sourceRecordId": "2026/2027 application cycle", "retrievedAt": "2026-09-24" }],
+      "status": "archived"
+    },
+    {
+      "id": "https://www.afro.who.int/call-for-applications-joint-who-afro-tdr-impact-grants-2026-2027",
+      "types": ["FundingOpportunity"],
+      "name": "Joint WHO AFRO/TDR Impact Grants 2026–2027",
+      "description": "Implementation-research grants addressing regional public-health priorities, including surveillance, antimicrobial resistance and One Health approaches.",
+      "landingPage": "https://www.afro.who.int/call-for-applications-joint-who-afro-tdr-impact-grants-2026-2027",
+      "facets": [
+        { "scheme": "Glitter application", "id": "routine-surveillance", "label": "Surveillance and preparedness" },
+        { "scheme": "Glitter application", "id": "one-health", "label": "One Health" }
+      ],
+      "fundingOpportunity": {
+        "applicationUrl": "https://www.afro.who.int/call-for-applications-joint-who-afro-tdr-impact-grants-2026-2027",
+        "closes": "2026-09-15",
+        "status": "closed",
+        "eligibility": "Applicants and most of the research team must be based at an eligible institution in the WHO African Region.",
+        "geographicScope": ["WHO African Region"],
+        "amount": 15000,
+        "currency": "USD",
+        "lastChecked": "2026-09-24"
+      },
+      "sources": [{ "name": "WHO Regional Office for Africa", "sourceUrl": "https://www.afro.who.int/call-for-applications-joint-who-afro-tdr-impact-grants-2026-2027", "sourceRecordId": "2026–2027 call", "retrievedAt": "2026-09-24" }],
+      "status": "archived"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "https://w3id.org/glitter/assertion/sars-paper-describes-standard",
+      "subject": "https://doi.org/10.1093/gigascience/giac003",
+      "predicate": "describes",
+      "object": "https://github.com/pha4ge/SARS-CoV-2-Contextual-Data-Specification",
+      "evidence": [{ "source": "https://doi.org/10.1093/gigascience/giac003", "locator": "Title and abstract" }],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/dataharmonizer-paper-describes-software",
+      "subject": "https://doi.org/10.1099/mgen.0.000908",
+      "predicate": "describes",
+      "object": "https://github.com/cidgoh/DataHarmonizer",
+      "evidence": [{ "source": "https://github.com/cidgoh/DataHarmonizer", "locator": "README manuscript section" }],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/dataharmonizer-implements-sars-standard",
+      "subject": "https://github.com/cidgoh/DataHarmonizer",
+      "predicate": "implements",
+      "object": "https://github.com/pha4ge/SARS-CoV-2-Contextual-Data-Specification",
+      "evidence": [{ "source": "https://github.com/cidgoh/DataHarmonizer", "locator": "README Pathogen Genomics Templates" }],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/dataharmonizer-implements-mpox-standard",
+      "subject": "https://github.com/cidgoh/DataHarmonizer",
+      "predicate": "implements",
+      "object": "https://github.com/cidgoh/MPox_Contextual_Data_Specification",
+      "evidence": [{ "source": "https://github.com/cidgoh/DataHarmonizer", "locator": "README Pathogen Genomics Templates" }],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/hamron-paper-describes-software",
+      "subject": "https://doi.org/10.1101/2024.03.07.583950",
+      "predicate": "describes",
+      "object": "https://github.com/pha4ge/hAMRonization",
+      "evidence": [{ "source": "https://doi.org/10.1101/2024.03.07.583950", "locator": "Title and abstract" }],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/amrcolab-paper-mentions-hamronization",
+      "subject": "https://doi.org/10.1099/mgen.0.001308",
+      "predicate": "mentions",
+      "object": "https://github.com/pha4ge/hAMRonization",
+      "evidence": [{ "source": "https://pubmed.ncbi.nlm.nih.gov/39432417/", "locator": "Abstract" }],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/hamronization-maintained-by-pha4ge",
+      "subject": "https://github.com/pha4ge/hAMRonization",
+      "predicate": "maintainedBy",
+      "object": "https://pha4ge.org/",
+      "evidence": [{ "source": "https://github.com/pha4ge/hAMRonization", "locator": "Repository organisation" }],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/ipsn-grant-offered-by-who",
+      "subject": "https://www.who.int/news-room/articles-detail/catalytic-grant-fund-application-cycle-2026-2027",
+      "predicate": "offeredBy",
+      "object": "https://www.who.int/",
+      "evidence": [{ "source": "https://www.who.int/news-room/articles-detail/catalytic-grant-fund-application-cycle-2026-2027", "locator": "Call for submissions" }],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/afro-grant-offered-by-who-afro",
+      "subject": "https://www.afro.who.int/call-for-applications-joint-who-afro-tdr-impact-grants-2026-2027",
+      "predicate": "offeredBy",
+      "object": "https://www.afro.who.int/",
+      "evidence": [{ "source": "https://www.afro.who.int/call-for-applications-joint-who-afro-tdr-impact-grants-2026-2027", "locator": "Call for applications" }],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    }
+  ]
+}
