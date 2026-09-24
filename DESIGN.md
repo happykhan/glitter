@@ -15,7 +15,7 @@ colors:
   rule-line: "#dbe3e8"
   seashell-blue: "#acc0d3"
   peach: "#f6c992"
-  coral: "#f0525c"
+  coral: "#f96e81"
   rose: "#d396a6"
   teal: "#09a1a1"
   ocean-blue: "#5484a4"

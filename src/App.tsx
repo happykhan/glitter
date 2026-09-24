@@ -9,7 +9,7 @@ const PALETTE: Record<GraphKind, string> = {
   type: "#5484a4",
   target: "#09a1a1",
   method: "#d396a6",
-  application: "#f0525c",
+  application: "#f96e81",
   organization: "#acc0d3",
 };
 
@@ -50,7 +50,7 @@ function drawNode(node: GraphNode, context: CanvasRenderingContext2D, scale: num
   if (selectedId === node.id) {
     context.beginPath();
     context.arc(x, y, radius + 4.5, 0, Math.PI * 2);
-    context.strokeStyle = "#f0525c";
+    context.strokeStyle = "#f96e81";
     context.lineWidth = 2.2 / scale;
     context.stroke();
   }

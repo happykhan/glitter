@@ -15,7 +15,7 @@
   --blue: #5484a4;
   --orange: #f6c992;
   --purple: #d396a6;
-  --rose: #f0525c;
+  --rose: #f96e81;
 }
 
 * { box-sizing: border-box; }
@@ -92,7 +92,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .graph-help { display: flex; align-items: center; justify-content: space-between; padding: 0 10px; color: var(--muted); border-top: 1px solid var(--line); font-size: 10px; }
 .edge-key { display: flex; align-items: center; gap: 6px; }
 .edge-key i { width: 19px; height: 1px; background: #7d8b94; }
-.edge-key i:nth-of-type(2) { background: #f0525c; }
+.edge-key i:nth-of-type(2) { background: #f96e81; }
 
 .inspector { padding-bottom: 22px; }
 .inspector-empty { padding: 28px 24px; color: var(--muted); }
