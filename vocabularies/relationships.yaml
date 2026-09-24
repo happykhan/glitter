@@ -1,0 +1,93 @@
+version: 0.1.0
+status: discussion-draft
+relationships:
+  - id: mentions
+    label: mentions
+    description: The subject refers to the object in a way that is useful for discovery.
+    aligned_with: schema:mentions
+
+  - id: describes
+    label: describes
+    description: The subject provides a substantive description of the object.
+
+  - id: uses
+    label: uses
+    description: A protocol or workflow uses the software, standard or other resource represented by the object.
+
+  - id: acceptsInput
+    label: accepts input
+    description: Software, a protocol or a workflow accepts the data or format represented by the object.
+
+  - id: producesOutput
+    label: produces output
+    description: Software, a protocol or a workflow produces the data or format represented by the object.
+
+  - id: implements
+    label: implements
+    description: The subject provides an implementation of the method or standard represented by the object.
+
+  - id: conformsTo
+    label: conforms to
+    description: The subject claims conformance with the named specification or profile.
+    aligned_with: dcterms:conformsTo
+
+  - id: mapsTo
+    label: maps to
+    description: The subject provides a documented semantic or field mapping to the object.
+
+  - id: hasPart
+    label: has part
+    description: The object is a constituent part of the subject.
+    aligned_with: schema:hasPart
+
+  - id: supersedes
+    label: supersedes
+    description: The subject replaces the object for future use.
+
+  - id: isDocumentedBy
+    label: is documented by
+    description: The object is documentation for the subject.
+    aligned_with: datacite:IsDocumentedBy
+
+  - id: isSupplementTo
+    label: is supplement to
+    description: The subject supplements the object.
+    aligned_with: datacite:IsSupplementTo
+
+  - id: offeredBy
+    label: offered by
+    description: A funding opportunity is offered by the organisation represented by the object.
+    aligned_with: schema:funder
+
+  - id: teaches
+    label: teaches
+    description: A training resource teaches the tool, method, protocol or standard represented by the object.
+    aligned_with: schema:teaches
+
+  - id: authoredBy
+    label: authored by
+    description: The subject was authored by the person or organisation represented by the object.
+    aligned_with: schema:author
+
+  - id: maintainedBy
+    label: maintained by
+    description: The subject is maintained by the person or organisation represented by the object.
+    aligned_with: schema:maintainer
+
+  - id: publishedBy
+    label: published by
+    description: The subject was published by the organisation represented by the object.
+    aligned_with: schema:publisher
+
+  - id: cataloguedBy
+    label: catalogued by
+    description: The subject is included in a curated catalogue maintained by the organisation represented by the object.
+
+  - id: about
+    label: about
+    description: The subject is primarily about the object.
+    aligned_with: schema:about
+
+  - id: appliesToTaxon
+    label: applies to taxon
+    description: The subject is intended for or otherwise scoped to the taxon represented by the object.

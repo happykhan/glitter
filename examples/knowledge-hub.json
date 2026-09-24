@@ -1,0 +1,125 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://doi.org/10.0000/example.paper",
+      "types": ["Publication"],
+      "name": "Example public-health pathogen genomics paper",
+      "identifiers": [
+        {
+          "scheme": "DOI",
+          "value": "10.0000/example.paper",
+          "uri": "https://doi.org/10.0000/example.paper"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://example.org/software/example-tool",
+      "types": ["Software"],
+      "name": "Example Tool",
+      "landingPage": "https://example.org/software/example-tool",
+      "facets": [
+        {
+          "scheme": "Glitter method",
+          "id": "serotyping",
+          "label": "Serotyping"
+        },
+        {
+          "scheme": "NCBI Taxonomy",
+          "id": "590",
+          "label": "Salmonella",
+          "uri": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=590"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://doi.org/10.0000/example.protocol",
+      "types": ["Protocol"],
+      "name": "Example sequencing library preparation protocol",
+      "status": "active"
+    },
+    {
+      "id": "https://w3id.org/example/standards/pathogen-metadata",
+      "types": ["DataStandard"],
+      "name": "Example pathogen metadata standard",
+      "sources": [
+        {
+          "name": "IPSN PGS Data Standard Catalogue",
+          "sourceUrl": "https://who-collaboratory.github.io/collaboratory-pgs-data-standards-page/",
+          "sourceRecordId": "example-standard",
+          "sourceLicense": "https://creativecommons.org/licenses/by/4.0/",
+          "retrievedAt": "2026-09-24",
+          "sourceRevision": "proof-of-concept-stable"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://example.org/funding/pathogen-genomics-call",
+      "types": ["FundingOpportunity"],
+      "name": "Example pathogen genomics funding call",
+      "landingPage": "https://example.org/funding/pathogen-genomics-call",
+      "fundingOpportunity": {
+        "applicationUrl": "https://example.org/funding/pathogen-genomics-call/apply",
+        "opens": "2026-10-01",
+        "closes": "2027-01-31",
+        "status": "upcoming",
+        "eligibility": "Public-health laboratories and research organisations",
+        "geographicScope": ["Global"],
+        "amount": 250000,
+        "currency": "GBP",
+        "lastChecked": "2026-09-24"
+      },
+      "status": "active"
+    },
+    {
+      "id": "https://ror.org/000000000",
+      "types": ["Organization"],
+      "name": "Example funder"
+    },
+    {
+      "id": "https://orcid.org/0000-0000-0000-0000",
+      "types": ["Person"],
+      "name": "Example curator"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "https://example.org/assertions/paper-mentions-tool",
+      "subject": "https://doi.org/10.0000/example.paper",
+      "predicate": "mentions",
+      "object": "https://example.org/software/example-tool",
+      "evidence": [
+        {
+          "source": "https://doi.org/10.0000/example.paper",
+          "locator": "Methods"
+        }
+      ],
+      "assertedBy": "https://orcid.org/0000-0000-0000-0000",
+      "status": "proposed"
+    },
+    {
+      "id": "https://example.org/assertions/paper-mentions-protocol",
+      "subject": "https://doi.org/10.0000/example.paper",
+      "predicate": "mentions",
+      "object": "https://doi.org/10.0000/example.protocol",
+      "status": "proposed"
+    },
+    {
+      "id": "https://example.org/assertions/protocol-conforms-standard",
+      "subject": "https://doi.org/10.0000/example.protocol",
+      "predicate": "conformsTo",
+      "object": "https://w3id.org/example/standards/pathogen-metadata",
+      "status": "proposed"
+    },
+    {
+      "id": "https://example.org/assertions/call-offered-by-funder",
+      "subject": "https://example.org/funding/pathogen-genomics-call",
+      "predicate": "offeredBy",
+      "object": "https://ror.org/000000000",
+      "status": "proposed"
+    }
+  ]
+}

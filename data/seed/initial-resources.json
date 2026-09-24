@@ -1,0 +1,122 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://github.com/pha4ge/SARS-CoV-2-Contextual-Data-Specification",
+      "types": ["DataStandard"],
+      "name": "PHA4GE SARS-CoV-2 contextual data standard",
+      "landingPage": "https://github.com/pha4ge/SARS-CoV-2-Contextual-Data-Specification",
+      "facets": [{ "scheme": "Glitter target", "id": "sars-cov-2", "label": "SARS-CoV-2" }],
+      "sources": [{ "name": "IPSN PGS Data Standard Catalogue", "sourceUrl": "https://who-collaboratory.github.io/collaboratory-pgs-data-standards-page/", "sourceRecordId": "1", "sourceLicense": "https://creativecommons.org/licenses/by/4.0/", "retrievedAt": "2026-09-24", "sourceRevision": "792acc8860e5fee20edf1fca2d09533649ad7c15" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/GSCID-BRC-Metadata-Standard-WG/GSCID-BRC-Project-and-Sample-Application-Standard",
+      "types": ["DataStandard"],
+      "name": "GSCID/BRC Project and Sample Application Standard",
+      "landingPage": "https://github.com/GSCID-BRC-Metadata-Standard-WG/GSCID-BRC-Project-and-Sample-Application-Standard",
+      "facets": [{ "scheme": "Glitter target", "id": "pathogen-agnostic", "label": "Pathogen agnostic" }],
+      "sources": [{ "name": "IPSN PGS Data Standard Catalogue", "sourceUrl": "https://who-collaboratory.github.io/collaboratory-pgs-data-standards-page/", "sourceRecordId": "2", "sourceLicense": "https://creativecommons.org/licenses/by/4.0/", "retrievedAt": "2026-09-24", "sourceRevision": "792acc8860e5fee20edf1fca2d09533649ad7c15" }],
+      "status": "active"
+    },
+    {
+      "id": "https://w3id.org/mixs",
+      "types": ["DataStandard"],
+      "name": "MIxS - Minimum Information about any (x) Sequence",
+      "landingPage": "https://w3id.org/mixs",
+      "facets": [{ "scheme": "Glitter target", "id": "pathogen-agnostic", "label": "Pathogen agnostic" }],
+      "sources": [{ "name": "IPSN PGS Data Standard Catalogue", "sourceUrl": "https://who-collaboratory.github.io/collaboratory-pgs-data-standards-page/", "sourceRecordId": "3", "sourceLicense": "https://creativecommons.org/licenses/by/4.0/", "retrievedAt": "2026-09-24", "sourceRevision": "792acc8860e5fee20edf1fca2d09533649ad7c15" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.ncbi.nlm.nih.gov/biosample/docs/packages/MIGS.vi.host-associated.6.0/",
+      "types": ["DataStandard"],
+      "name": "MIGS: virus, host-associated; version 6.0 Package",
+      "landingPage": "https://www.ncbi.nlm.nih.gov/biosample/docs/packages/MIGS.vi.host-associated.6.0/",
+      "facets": [{ "scheme": "Glitter target", "id": "viruses", "label": "Viruses" }],
+      "sources": [{ "name": "IPSN PGS Data Standard Catalogue", "sourceUrl": "https://who-collaboratory.github.io/collaboratory-pgs-data-standards-page/", "sourceRecordId": "4", "sourceLicense": "https://creativecommons.org/licenses/by/4.0/", "retrievedAt": "2026-09-24", "sourceRevision": "792acc8860e5fee20edf1fca2d09533649ad7c15" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.protocols.io/view/c-sop-101-bacterial-genomic-dna-isolation-using-th-bq3ymypw",
+      "types": ["Protocol"],
+      "name": "Bacterial Genomic DNA Isolation using the Nexttec 1-step Kit",
+      "landingPage": "https://www.protocols.io/view/c-sop-101-bacterial-genomic-dna-isolation-using-th-bq3ymypw",
+      "facets": [{ "scheme": "Glitter method stage", "id": "dna-isolation", "label": "Genomic DNA isolation" }],
+      "sources": [{ "name": "GHRU Protocols", "sourceUrl": "https://www.pathogensurveillance.net/resources/protocols/", "sourceRecordId": "6298", "retrievedAt": "2026-09-24", "sourceUpdatedAt": "2022-05-20T14:51:25Z" }]
+    },
+    {
+      "id": "https://www.protocols.io/view/c-sop-201-genomic-dna-quantification-using-a-qubit-bq2bmyan",
+      "types": ["Protocol"],
+      "name": "Genomic DNA Quantification using a Qubit Fluorometer",
+      "landingPage": "https://www.protocols.io/view/c-sop-201-genomic-dna-quantification-using-a-qubit-bq2bmyan",
+      "facets": [{ "scheme": "Glitter method stage", "id": "dna-qc", "label": "Genomic DNA quality control" }],
+      "sources": [{ "name": "GHRU Protocols", "sourceUrl": "https://www.pathogensurveillance.net/resources/protocols/", "sourceRecordId": "6298", "retrievedAt": "2026-09-24", "sourceUpdatedAt": "2022-05-20T14:51:25Z" }]
+    },
+    {
+      "id": "https://www.protocols.io/view/c-sop-202-genomic-dna-purity-measurement-using-a-n-bq2tmyen",
+      "types": ["Protocol"],
+      "name": "Genomic DNA Purity Measurement using a Nanodrop Spectrophotometer",
+      "landingPage": "https://www.protocols.io/view/c-sop-202-genomic-dna-purity-measurement-using-a-n-bq2tmyen",
+      "facets": [{ "scheme": "Glitter method stage", "id": "dna-qc", "label": "Genomic DNA quality control" }],
+      "sources": [{ "name": "GHRU Protocols", "sourceUrl": "https://www.pathogensurveillance.net/resources/protocols/", "sourceRecordId": "6298", "retrievedAt": "2026-09-24", "sourceUpdatedAt": "2022-05-20T14:51:25Z" }]
+    },
+    {
+      "id": "https://www.protocols.io/view/c-sop-301-dna-library-preparation-using-the-nebnex-bq4cmysw",
+      "types": ["Protocol"],
+      "name": "DNA Library Preparation using the NEBNext Ultra II FS DNA Kit for Illumina",
+      "landingPage": "https://www.protocols.io/view/c-sop-301-dna-library-preparation-using-the-nebnex-bq4cmysw",
+      "facets": [{ "scheme": "Glitter method stage", "id": "library-preparation", "label": "DNA library preparation" }],
+      "sources": [{ "name": "GHRU Protocols", "sourceUrl": "https://www.pathogensurveillance.net/resources/protocols/", "sourceRecordId": "6298", "retrievedAt": "2026-09-24", "sourceUpdatedAt": "2022-05-20T14:51:25Z" }]
+    },
+    {
+      "id": "https://www.protocols.io/view/c-sop-401-quality-control-qc-of-dna-libraries-for-bq56my9e",
+      "types": ["Protocol"],
+      "name": "Quality Control (QC) of DNA Libraries for Whole Genome Sequencing",
+      "landingPage": "https://www.protocols.io/view/c-sop-401-quality-control-qc-of-dna-libraries-for-bq56my9e",
+      "facets": [{ "scheme": "Glitter method stage", "id": "library-qc", "label": "DNA library quality control" }],
+      "sources": [{ "name": "GHRU Protocols", "sourceUrl": "https://www.pathogensurveillance.net/resources/protocols/", "sourceRecordId": "6298", "retrievedAt": "2026-09-24", "sourceUpdatedAt": "2022-05-20T14:51:25Z" }]
+    },
+    {
+      "id": "https://www.protocols.io/view/c-sop-501-normalisation-and-pooling-of-dna-librari-bq7vmzn6",
+      "types": ["Protocol"],
+      "name": "Normalisation and Pooling of DNA Libraries for Illumina Whole Genome Sequencing",
+      "landingPage": "https://www.protocols.io/view/c-sop-501-normalisation-and-pooling-of-dna-librari-bq7vmzn6",
+      "facets": [{ "scheme": "Glitter method stage", "id": "library-pooling", "label": "Library normalisation and pooling" }],
+      "sources": [{ "name": "GHRU Protocols", "sourceUrl": "https://www.pathogensurveillance.net/resources/protocols/", "sourceRecordId": "6298", "retrievedAt": "2026-09-24", "sourceUpdatedAt": "2022-05-20T14:51:25Z" }]
+    },
+    {
+      "id": "https://www.protocols.io/view/c-sop-601-operation-of-the-illumina-miseq-for-whol-bq5hmy36",
+      "types": ["Protocol"],
+      "name": "Operation of the Illumina MiSeq for Whole Genome Sequencing",
+      "landingPage": "https://www.protocols.io/view/c-sop-601-operation-of-the-illumina-miseq-for-whol-bq5hmy36",
+      "facets": [{ "scheme": "Glitter method stage", "id": "sequencing", "label": "Whole-genome sequencing" }],
+      "sources": [{ "name": "GHRU Protocols", "sourceUrl": "https://www.pathogensurveillance.net/resources/protocols/", "sourceRecordId": "6298", "retrievedAt": "2026-09-24", "sourceUpdatedAt": "2022-05-20T14:51:25Z" }]
+    },
+    {
+      "id": "https://www.protocols.io/view/c-sop-901-preparation-of-dna-isolates-for-domestic-bqzdmx26",
+      "types": ["Protocol"],
+      "name": "Preparation of DNA Isolates for Domestic and Overseas Transport",
+      "landingPage": "https://www.protocols.io/view/c-sop-901-preparation-of-dna-isolates-for-domestic-bqzdmx26",
+      "facets": [{ "scheme": "Glitter method stage", "id": "sample-transport", "label": "DNA sample transport" }],
+      "sources": [{ "name": "GHRU Protocols", "sourceUrl": "https://www.pathogensurveillance.net/resources/protocols/", "sourceRecordId": "6298", "retrievedAt": "2026-09-24", "sourceUpdatedAt": "2022-05-20T14:51:25Z" }]
+    },
+    {
+      "id": "https://www.protocols.io/view/ghru-genomic-surveillance-of-antimicrobial-resista-bn4pmgvn",
+      "types": ["Protocol"],
+      "name": "GHRU genomic surveillance of antimicrobial resistance methods",
+      "landingPage": "https://www.protocols.io/view/ghru-genomic-surveillance-of-antimicrobial-resista-bn4pmgvn",
+      "facets": [{ "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }],
+      "sources": [{ "name": "GHRU Protocols", "sourceUrl": "https://www.pathogensurveillance.net/resources/protocols/", "sourceRecordId": "6298", "retrievedAt": "2026-09-24", "sourceUpdatedAt": "2022-05-20T14:51:25Z" }]
+    },
+    {
+      "id": "https://zenodo.org/record/4292128",
+      "types": ["TrainingResource"],
+      "name": "Bioinformatics Training Materials",
+      "landingPage": "https://zenodo.org/record/4292128",
+      "facets": [{ "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }],
+      "sources": [{ "name": "GHRU Protocols", "sourceUrl": "https://www.pathogensurveillance.net/resources/protocols/", "sourceRecordId": "6298", "retrievedAt": "2026-09-24", "sourceUpdatedAt": "2022-05-20T14:51:25Z" }]
+    }
+  ],
+  "relationships": []
+}

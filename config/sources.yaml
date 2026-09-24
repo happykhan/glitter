@@ -1,0 +1,37 @@
+version: 1
+
+sources:
+  - id: ipsn-pgs-data-standards
+    name: IPSN PGS Data Standard Catalogue
+    organisation: World Health Organization Collaboratory
+    kind: github-json
+    canonical_url: https://who-collaboratory.github.io/collaboratory-pgs-data-standards-page/
+    repository_url: https://github.com/WHO-Collaboratory/collaboratory-pgs-data-standards
+    data_url: https://raw.githubusercontent.com/WHO-Collaboratory/collaboratory-pgs-data-standards/refs/heads/proof-of-concept-stable/catalogue.json
+    branch: proof-of-concept-stable
+    entity_type: DataStandard
+    license: https://creativecommons.org/licenses/by/4.0/
+    import_mode: metadata
+    enabled: true
+
+  - id: cgps-ghru-protocols
+    name: GHRU Protocols
+    organisation: Centre for Genomic Pathogen Surveillance
+    kind: wordpress-post
+    canonical_url: https://www.pathogensurveillance.net/resources/protocols/
+    data_url: https://www.pathogensurveillance.net/wp-json/wp/v2/posts/6298
+    source_record_id: "6298"
+    import_mode: links-only
+    license_review: per-item
+    enabled: true
+
+  - id: pha4ge-guidance-and-standards
+    name: PHA4GE Guidance Documents & Standards
+    organisation: Public Health Alliance for Genomic Epidemiology
+    kind: wordpress-page
+    canonical_url: https://pha4ge.org/research/guidance-documents-standards/
+    data_url: https://pha4ge.org/wp-json/wp/v2/pages/10874
+    source_record_id: "10874"
+    import_mode: links-and-metadata
+    license_review: per-item
+    enabled: true

@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://w3id.org/glitter/schema/0.1.0",
+  "title": "Glitter resource graph",
+  "description": "Discussion draft for a public-health pathogen-genomics resource knowledgebase.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["standardVersion", "entities", "relationships"],
+  "properties": {
+    "standardVersion": { "const": "0.1.0" },
+    "entities": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entity" }
+    },
+    "relationships": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/relationship" }
+    }
+  },
+  "$defs": {
+    "uri": {
+      "type": "string",
+      "format": "uri"
+    },
+    "entityType": {
+      "type": "string",
+      "enum": [
+        "Publication",
+        "Software",
+        "ComputationalWorkflow",
+        "Protocol",
+        "Dataset",
+        "DataStandard",
+        "TrainingResource",
+        "GuidanceDocument",
+        "FundingOpportunity",
+        "Project",
+        "Database",
+        "StrainCollection",
+        "Instrument",
+        "Event",
+        "Person",
+        "Organization",
+        "Concept"
+      ]
+    },
+    "identifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scheme", "value"],
+      "properties": {
+        "scheme": { "type": "string", "minLength": 1 },
+        "value": { "type": "string", "minLength": 1 },
+        "uri": { "$ref": "#/$defs/uri" }
+      }
+    },
+    "facet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scheme", "id", "label"],
+      "properties": {
+        "scheme": { "type": "string", "minLength": 1 },
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "uri": { "$ref": "#/$defs/uri" }
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url"],
+      "properties": {
+        "url": { "$ref": "#/$defs/uri" },
+        "mediaType": { "type": "string" },
+        "format": { "type": "string" },
+        "access": {
+          "enum": ["open", "registered", "controlled", "restricted"]
+        }
+      }
+    },
+    "sourceProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "sourceUrl", "retrievedAt"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "sourceUrl": { "$ref": "#/$defs/uri" },
+        "sourceRecordId": { "type": "string", "minLength": 1 },
+        "sourceLicense": { "$ref": "#/$defs/uri" },
+        "retrievedAt": { "type": "string", "format": "date" },
+        "sourceUpdatedAt": { "type": "string", "format": "date-time" },
+        "sourceRevision": { "type": "string", "minLength": 1 }
+      }
+    },
+    "fundingOpportunity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applicationUrl", "status", "lastChecked"],
+      "properties": {
+        "applicationUrl": { "$ref": "#/$defs/uri" },
+        "opens": { "type": "string", "format": "date" },
+        "closes": { "type": "string", "format": "date" },
+        "status": { "enum": ["upcoming", "open", "rolling", "closed"] },
+        "eligibility": { "type": "string" },
+        "geographicScope": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "amount": { "type": "number", "minimum": 0 },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "lastChecked": { "type": "string", "format": "date" }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "types", "name"],
+      "properties": {
+        "id": { "$ref": "#/$defs/uri" },
+        "types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/entityType" }
+        },
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "datePublished": { "type": "string", "format": "date" },
+        "dateModified": { "type": "string", "format": "date" },
+        "identifiers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "landingPage": { "$ref": "#/$defs/uri" },
+        "distributions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/distribution" }
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sourceProvenance" }
+        },
+        "facets": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/facet" }
+        },
+        "status": {
+          "enum": ["draft", "active", "deprecated", "superseded", "archived"]
+        },
+        "fundingOpportunity": { "$ref": "#/$defs/fundingOpportunity" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "types": { "contains": { "const": "FundingOpportunity" } }
+            }
+          },
+          "then": { "required": ["fundingOpportunity"] }
+        }
+      ]
+    },
+    "predicate": {
+      "type": "string",
+      "enum": [
+        "mentions",
+        "describes",
+        "uses",
+        "acceptsInput",
+        "producesOutput",
+        "implements",
+        "conformsTo",
+        "mapsTo",
+        "hasPart",
+        "supersedes",
+        "isDocumentedBy",
+        "isSupplementTo",
+        "offeredBy",
+        "teaches",
+        "authoredBy",
+        "maintainedBy",
+        "publishedBy",
+        "cataloguedBy",
+        "about",
+        "appliesToTaxon"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source"],
+      "properties": {
+        "source": { "$ref": "#/$defs/uri" },
+        "locator": { "type": "string" },
+        "quote": { "type": "string" }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "subject", "predicate", "object"],
+      "properties": {
+        "id": { "$ref": "#/$defs/uri" },
+        "subject": { "$ref": "#/$defs/uri" },
+        "predicate": { "$ref": "#/$defs/predicate" },
+        "object": { "$ref": "#/$defs/uri" },
+        "role": { "type": "string" },
+        "description": { "type": "string" },
+        "evidence": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/evidence" }
+        },
+        "assertedBy": { "$ref": "#/$defs/uri" },
+        "assertedOn": { "type": "string", "format": "date" },
+        "status": { "enum": ["proposed", "verified", "disputed", "retracted"] }
+      }
+    }
+  }
+}

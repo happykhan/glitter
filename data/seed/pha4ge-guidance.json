@@ -1,0 +1,386 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://pha4ge.org/",
+      "types": [
+        "Organization"
+      ],
+      "name": "Public Health Alliance for Genomic Epidemiology",
+      "landingPage": "https://pha4ge.org/"
+    },
+    {
+      "id": "https://github.com/cidgoh/MPox_Contextual_Data_Specification",
+      "types": [
+        "DataStandard"
+      ],
+      "name": "MPox Contextual Data Specification",
+      "description": "The MPox Contextual Data Specification is an ontology-based, FAIR-aligned framework designed to standardize metadata collection for mpox genomic surveillance. Implemented through the DataHarmonizer platform, the package includes structured collection templates, field and term reference guides, and curation and new term request SOPs to support consistent, interoperable data sharing. Supporting both Canadian and international use cases, the specification enhances data quality, comparability, and collaborative pathogen surveillance across laboratories and public health agencies.",
+      "landingPage": "https://github.com/cidgoh/MPox_Contextual_Data_Specification",
+      "facets": [
+        {
+          "scheme": "Glitter target",
+          "id": "mpox-virus",
+          "label": "Mpox virus"
+        }
+      ],
+      "sources": [
+        {
+          "name": "PHA4GE Guidance Documents & Standards",
+          "sourceUrl": "https://pha4ge.org/research/guidance-documents-standards/",
+          "sourceRecordId": "10874",
+          "retrievedAt": "2026-09-24",
+          "sourceUpdatedAt": "2026-02-10T15:49:10Z",
+          "sourceRevision": "2026-02-10T17:49:10"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://pha4ge.github.io/wastewater-guidance/index.html",
+      "types": [
+        "GuidanceDocument"
+      ],
+      "name": "PHA4GE Wastewater Surveillance Guidance and Resources",
+      "description": "PHA4GE’s Wastewater Surveillance Working Group provides open guidance and standards addressing surveillance strategies, data analysis, data sharing, and ethical considerations. These living resources support the application of state-of-the-art wastewater surveillance methods in public health practice.",
+      "landingPage": "https://pha4ge.github.io/wastewater-guidance/index.html",
+      "facets": [
+        {
+          "scheme": "Glitter application",
+          "id": "wastewater-surveillance",
+          "label": "Wastewater surveillance"
+        }
+      ],
+      "sources": [
+        {
+          "name": "PHA4GE Guidance Documents & Standards",
+          "sourceUrl": "https://pha4ge.org/research/guidance-documents-standards/",
+          "sourceRecordId": "10874",
+          "retrievedAt": "2026-09-24",
+          "sourceUpdatedAt": "2026-02-10T15:49:10Z",
+          "sourceRevision": "2026-02-10T17:49:10"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/pha4ge/Wastewater_Contextual_Data_Specification",
+      "types": [
+        "DataStandard"
+      ],
+      "name": "PHA4GE Wastewater Contextual Data Specification",
+      "description": "PHA4GE has developed a wastewater contextual data specification to address challenges in harmonising, integrating, and reusing wastewater genomic surveillance data. The standard supports interoperable data exchange across surveillance systems and is extensible to broader environmental and One Health applications.",
+      "landingPage": "https://github.com/pha4ge/Wastewater_Contextual_Data_Specification",
+      "facets": [
+        {
+          "scheme": "Glitter application",
+          "id": "wastewater-surveillance",
+          "label": "Wastewater surveillance"
+        }
+      ],
+      "sources": [
+        {
+          "name": "PHA4GE Guidance Documents & Standards",
+          "sourceUrl": "https://pha4ge.org/research/guidance-documents-standards/",
+          "sourceRecordId": "10874",
+          "retrievedAt": "2026-09-24",
+          "sourceUpdatedAt": "2026-02-10T15:49:10Z",
+          "sourceRevision": "2026-02-10T17:49:10"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/pha4ge/public-health-pipeline-best-practices/blob/main/docs/pipeline-best-practices.md",
+      "types": [
+        "GuidanceDocument"
+      ],
+      "name": "Ten Best Practices for Public Health Bioinformatics Pipelines",
+      "description": "Bioinformatics pipelines are essential for routine genomic analysis in public health, yet the lack of domain-specific best practices has limited reproducibility and interoperability. PHA4GE’s Bioinformatics Pipelines & Visualization Working Group developed ten best practices to guide the development, testing, and maintenance of robust, sustainable pipelines for public health pathogen genomics.",
+      "landingPage": "https://github.com/pha4ge/public-health-pipeline-best-practices/blob/main/docs/pipeline-best-practices.md",
+      "facets": [
+        {
+          "scheme": "Glitter method stage",
+          "id": "bioinformatics",
+          "label": "Bioinformatics"
+        }
+      ],
+      "sources": [
+        {
+          "name": "PHA4GE Guidance Documents & Standards",
+          "sourceUrl": "https://pha4ge.org/research/guidance-documents-standards/",
+          "sourceRecordId": "10874",
+          "retrievedAt": "2026-09-24",
+          "sourceUpdatedAt": "2026-02-10T15:49:10Z",
+          "sourceRevision": "2026-02-10T17:49:10"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://pha4ge.org/resource/guidance/proposed-standards-for-public-health-bioinformatics-software/",
+      "types": [
+        "GuidanceDocument",
+        "DataStandard"
+      ],
+      "name": "Proposed Standards for Public Health Bioinformatics Software",
+      "description": "PHA4GE has developed software development standards to address gaps in reproducibility, interoperability, and sustainability in public health bioinformatics. These guidelines support best practice in the design, testing, and long-term maintenance of bioinformatics software for pathogen genomics.",
+      "landingPage": "https://pha4ge.org/resource/guidance/proposed-standards-for-public-health-bioinformatics-software/",
+      "facets": [
+        {
+          "scheme": "Glitter method stage",
+          "id": "bioinformatics",
+          "label": "Bioinformatics"
+        }
+      ],
+      "sources": [
+        {
+          "name": "PHA4GE Guidance Documents & Standards",
+          "sourceUrl": "https://pha4ge.org/research/guidance-documents-standards/",
+          "sourceRecordId": "10874",
+          "retrievedAt": "2026-09-24",
+          "sourceUpdatedAt": "2026-02-10T15:49:10Z",
+          "sourceRevision": "2026-02-10T17:49:10"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/pha4ge/hAMRonization",
+      "types": [
+        "Software",
+        "DataStandard"
+      ],
+      "name": "PHA4GE hAMRonization Tool",
+      "description": "PHA4GE has developed an AMR gene detection output standard to address inconsistencies across existing tools and reference databases. Supporting parsers and automated pipelines enable harmonised outputs, benchmarking, and improved reuse of AMR surveillance data.",
+      "landingPage": "https://github.com/pha4ge/hAMRonization",
+      "facets": [
+        {
+          "scheme": "Glitter application",
+          "id": "antimicrobial-resistance",
+          "label": "Antimicrobial resistance"
+        }
+      ],
+      "sources": [
+        {
+          "name": "PHA4GE Guidance Documents & Standards",
+          "sourceUrl": "https://pha4ge.org/research/guidance-documents-standards/",
+          "sourceRecordId": "10874",
+          "retrievedAt": "2026-09-24",
+          "sourceUpdatedAt": "2026-02-10T15:49:10Z",
+          "sourceRevision": "2026-02-10T17:49:10"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://pha4ge.org/resource/guidance/bioinformatics-solutions-for-monkeypox-genomic-analysis/",
+      "types": [
+        "GuidanceDocument"
+      ],
+      "name": "Bioinformatics Solutions for Mpox Genomic Analysis",
+      "description": "PHA4GE provides a community-driven, living guidance document for MPXV genomic analysis, identifying key challenges and open-source bioinformatics tools for public health use. The resource supports ongoing collaboration and updates as methods and tools evolve.",
+      "landingPage": "https://pha4ge.org/resource/guidance/bioinformatics-solutions-for-monkeypox-genomic-analysis/",
+      "facets": [
+        {
+          "scheme": "Glitter target",
+          "id": "mpox-virus",
+          "label": "Mpox virus"
+        }
+      ],
+      "sources": [
+        {
+          "name": "PHA4GE Guidance Documents & Standards",
+          "sourceUrl": "https://pha4ge.org/research/guidance-documents-standards/",
+          "sourceRecordId": "10874",
+          "retrievedAt": "2026-09-24",
+          "sourceUpdatedAt": "2026-02-10T15:49:10Z",
+          "sourceRevision": "2026-02-10T17:49:10"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://pha4ge.org/resource/guidance/identifying-sars-cov-2-recombinants/",
+      "types": [
+        "GuidanceDocument"
+      ],
+      "name": "Identifying SARS-CoV-2 Recombinants",
+      "description": "PHA4GE provides guidance on identifying and characterising recombinant SARS-CoV-2 genomes, addressing challenges in lineage assignment and breakpoint detection. The document highlights accessible bioinformatics resources to support consistent and systematic recombination surveillance.",
+      "landingPage": "https://pha4ge.org/resource/guidance/identifying-sars-cov-2-recombinants/",
+      "facets": [
+        {
+          "scheme": "Glitter target",
+          "id": "sars-cov-2",
+          "label": "SARS-CoV-2"
+        }
+      ],
+      "sources": [
+        {
+          "name": "PHA4GE Guidance Documents & Standards",
+          "sourceUrl": "https://pha4ge.org/research/guidance-documents-standards/",
+          "sourceRecordId": "10874",
+          "retrievedAt": "2026-09-24",
+          "sourceUpdatedAt": "2026-02-10T15:49:10Z",
+          "sourceRevision": "2026-02-10T17:49:10"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://docs.google.com/spreadsheets/d/17PuBcA0cCT-j9hV5tbwMFKtwWwKE-a_MYRqOOsIxj7c/edit#gid=136997361",
+      "types": [
+        "DataStandard"
+      ],
+      "name": "COVID-19 Metadata Standard (Template)",
+      "description": "PHA4GE developed a SARS-CoV-2 contextual data specification package, implemented through a structured collection template and supporting protocols, to harmonise and support submission of genomic and contextual data to public repositories. Adoption of the standard improves data interoperability, reuse, and integration, and is supported by NCBI’s BioSample database.",
+      "landingPage": "https://docs.google.com/spreadsheets/d/17PuBcA0cCT-j9hV5tbwMFKtwWwKE-a_MYRqOOsIxj7c/edit#gid=136997361",
+      "facets": [
+        {
+          "scheme": "Glitter target",
+          "id": "sars-cov-2",
+          "label": "SARS-CoV-2"
+        }
+      ],
+      "sources": [
+        {
+          "name": "PHA4GE Guidance Documents & Standards",
+          "sourceUrl": "https://pha4ge.org/research/guidance-documents-standards/",
+          "sourceRecordId": "10874",
+          "retrievedAt": "2026-09-24",
+          "sourceUpdatedAt": "2026-02-10T15:49:10Z",
+          "sourceRevision": "2026-02-10T17:49:10"
+        }
+      ],
+      "status": "active"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "https://w3id.org/glitter/assertion/pha4ge-catalogued-1",
+      "subject": "https://github.com/cidgoh/MPox_Contextual_Data_Specification",
+      "predicate": "cataloguedBy",
+      "object": "https://pha4ge.org/",
+      "evidence": [
+        {
+          "source": "https://pha4ge.org/research/guidance-documents-standards/",
+          "locator": "MPox Contextual Data Specification"
+        }
+      ],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/pha4ge-catalogued-2",
+      "subject": "https://pha4ge.github.io/wastewater-guidance/index.html",
+      "predicate": "cataloguedBy",
+      "object": "https://pha4ge.org/",
+      "evidence": [
+        {
+          "source": "https://pha4ge.org/research/guidance-documents-standards/",
+          "locator": "PHA4GE Wastewater Surveillance Guidance and Resources"
+        }
+      ],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/pha4ge-catalogued-3",
+      "subject": "https://github.com/pha4ge/Wastewater_Contextual_Data_Specification",
+      "predicate": "cataloguedBy",
+      "object": "https://pha4ge.org/",
+      "evidence": [
+        {
+          "source": "https://pha4ge.org/research/guidance-documents-standards/",
+          "locator": "PHA4GE Wastewater Contextual Data Specification"
+        }
+      ],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/pha4ge-catalogued-4",
+      "subject": "https://github.com/pha4ge/public-health-pipeline-best-practices/blob/main/docs/pipeline-best-practices.md",
+      "predicate": "cataloguedBy",
+      "object": "https://pha4ge.org/",
+      "evidence": [
+        {
+          "source": "https://pha4ge.org/research/guidance-documents-standards/",
+          "locator": "Ten Best Practices for Public Health Bioinformatics Pipelines"
+        }
+      ],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/pha4ge-catalogued-5",
+      "subject": "https://pha4ge.org/resource/guidance/proposed-standards-for-public-health-bioinformatics-software/",
+      "predicate": "cataloguedBy",
+      "object": "https://pha4ge.org/",
+      "evidence": [
+        {
+          "source": "https://pha4ge.org/research/guidance-documents-standards/",
+          "locator": "Proposed Standards for Public Health Bioinformatics Software"
+        }
+      ],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/pha4ge-catalogued-6",
+      "subject": "https://github.com/pha4ge/hAMRonization",
+      "predicate": "cataloguedBy",
+      "object": "https://pha4ge.org/",
+      "evidence": [
+        {
+          "source": "https://pha4ge.org/research/guidance-documents-standards/",
+          "locator": "PHA4GE hAMRonization Tool"
+        }
+      ],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/pha4ge-catalogued-7",
+      "subject": "https://pha4ge.org/resource/guidance/bioinformatics-solutions-for-monkeypox-genomic-analysis/",
+      "predicate": "cataloguedBy",
+      "object": "https://pha4ge.org/",
+      "evidence": [
+        {
+          "source": "https://pha4ge.org/research/guidance-documents-standards/",
+          "locator": "Bioinformatics Solutions for Mpox Genomic Analysis"
+        }
+      ],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/pha4ge-catalogued-8",
+      "subject": "https://pha4ge.org/resource/guidance/identifying-sars-cov-2-recombinants/",
+      "predicate": "cataloguedBy",
+      "object": "https://pha4ge.org/",
+      "evidence": [
+        {
+          "source": "https://pha4ge.org/research/guidance-documents-standards/",
+          "locator": "Identifying SARS-CoV-2 Recombinants"
+        }
+      ],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/pha4ge-catalogued-9",
+      "subject": "https://docs.google.com/spreadsheets/d/17PuBcA0cCT-j9hV5tbwMFKtwWwKE-a_MYRqOOsIxj7c/edit#gid=136997361",
+      "predicate": "cataloguedBy",
+      "object": "https://pha4ge.org/",
+      "evidence": [
+        {
+          "source": "https://pha4ge.org/research/guidance-documents-standards/",
+          "locator": "COVID-19 Metadata Standard (Template)"
+        }
+      ],
+      "assertedOn": "2026-09-24",
+      "status": "verified"
+    }
+  ]
+}

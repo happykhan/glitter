@@ -1,0 +1,62 @@
+# Glitter
+
+Glitter is a proposed open metadata standard and knowledgebase for discovering
+and connecting resources that help people undertake public-health pathogen
+genomics. It covers wet-lab and bioinformatics protocols, software, papers,
+standards, datasets, training, guidance and funding opportunities.
+
+The project is at the **v0.1 design stage**. The current files are a discussion
+draft, not a normative or production-ready standard.
+
+## Why a graph?
+
+A catalogue can say that a paper and a software tool exist. Glitter should also
+be able to connect the paper to the software, protocol or standard it discusses
+and connect tools to compatible inputs, outputs and workflows. These typed
+relationships make the collection explorable without attempting to reconstruct
+every analysis reported by every paper.
+
+## Design principles
+
+- Reuse established identifiers and vocabularies before creating new ones.
+- Separate resource **types** from browse **facets** such as method, application
+  and pathogen scope.
+- Treat software as a durable project-level resource rather than cataloguing
+  every release as a separate record.
+- Represent useful, evidence-backed relationships without modelling individual
+  laboratory or analysis runs.
+- Support a small mandatory core with richer type-specific profiles.
+- Keep the interchange format usable as ordinary JSON while allowing JSON-LD
+  export for linked-data systems.
+
+## Draft contents
+
+- [Conceptual model](docs/model.md)
+- [Relationship vocabulary](vocabularies/relationships.yaml)
+- [Draft JSON Schema](schema/glitter.schema.json)
+- [Worked knowledge-hub example](examples/knowledge-hub.json)
+- [Initial imported seed records](data/seed/initial-resources.json)
+- [PHA4GE guidance and standards seed](data/seed/pha4ge-guidance.json)
+- [Source-ingestion design](docs/source-ingestion.md)
+- [Initial source registry](config/sources.yaml)
+
+Refresh the PHA4GE seed from its public WordPress feed with:
+
+```sh
+node scripts/import-pha4ge.mjs
+```
+
+## Proposed standards stack
+
+Glitter should be a community profile and crosswalk, not a replacement for
+existing standards. The draft aligns with Schema.org and Bioschemas for web
+resource descriptions, CodeMeta and bio.tools/EDAM for research software,
+RO-Crate for connected research objects, DataCite for identifiers and
+research-output relationships, and MIxS/PHA4GE for linking to established
+pathogen-genomics contextual metadata standards.
+
+## Next decisions
+
+Before calling v0.1 stable, the community needs to agree the initial use cases,
+minimum required fields by resource type, relationship names, governance
+process, and two or three real interoperability pilots.

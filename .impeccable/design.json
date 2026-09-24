@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-24T21:56:32Z",
+  "title": "Design System: Glitter",
+  "extensions": {
+    "colorMeta": {
+      "atlas-paper": { "role": "neutral", "displayName": "Atlas Paper", "canonical": "#f4f0e6", "tonalRamp": ["oklch(15% 0.018 85)", "oklch(27% 0.018 85)", "oklch(39% 0.018 85)", "oklch(51% 0.018 85)", "oklch(63% 0.018 85)", "oklch(75% 0.018 85)", "oklch(87% 0.018 85)", "oklch(95% 0.018 85)"] },
+      "atlas-paper-deep": { "role": "neutral", "displayName": "Deep Atlas Paper", "canonical": "#e8e0cf", "tonalRamp": ["oklch(15% 0.022 85)", "oklch(27% 0.022 85)", "oklch(39% 0.022 85)", "oklch(51% 0.022 85)", "oklch(63% 0.022 85)", "oklch(75% 0.022 85)", "oklch(87% 0.022 85)", "oklch(95% 0.022 85)"] },
+      "atlas-ink": { "role": "neutral", "displayName": "Atlas Ink", "canonical": "#172b30", "tonalRamp": ["oklch(15% 0.025 205)", "oklch(27% 0.025 205)", "oklch(39% 0.025 205)", "oklch(51% 0.025 205)", "oklch(63% 0.025 205)", "oklch(75% 0.025 205)", "oklch(87% 0.025 205)", "oklch(95% 0.025 205)"] },
+      "evidence-muted": { "role": "neutral", "displayName": "Evidence Muted", "canonical": "#5c6867", "tonalRamp": ["oklch(15% 0.012 190)", "oklch(27% 0.012 190)", "oklch(39% 0.012 190)", "oklch(51% 0.012 190)", "oklch(63% 0.012 190)", "oklch(75% 0.012 190)", "oklch(87% 0.012 190)", "oklch(95% 0.012 190)"] },
+      "laboratory-teal": { "role": "primary", "displayName": "Laboratory Teal", "canonical": "#176c66", "tonalRamp": ["oklch(15% 0.075 185)", "oklch(27% 0.075 185)", "oklch(39% 0.075 185)", "oklch(51% 0.075 185)", "oklch(63% 0.075 185)", "oklch(75% 0.075 185)", "oklch(87% 0.075 185)", "oklch(95% 0.075 185)"] },
+      "laboratory-teal-dark": { "role": "primary", "displayName": "Deep Laboratory Teal", "canonical": "#104f4c", "tonalRamp": ["oklch(15% 0.065 185)", "oklch(27% 0.065 185)", "oklch(39% 0.065 185)", "oklch(51% 0.065 185)", "oklch(63% 0.065 185)", "oklch(75% 0.065 185)", "oklch(87% 0.065 185)", "oklch(95% 0.065 185)"] },
+      "route-rust": { "role": "secondary", "displayName": "Route Rust", "canonical": "#c9503d", "tonalRamp": ["oklch(15% 0.14 30)", "oklch(27% 0.14 30)", "oklch(39% 0.14 30)", "oklch(51% 0.14 30)", "oklch(63% 0.14 30)", "oklch(75% 0.14 30)", "oklch(87% 0.14 30)", "oklch(95% 0.14 30)"] },
+      "route-yellow": { "role": "secondary", "displayName": "Route Yellow", "canonical": "#d9b74a", "tonalRamp": ["oklch(15% 0.12 90)", "oklch(27% 0.12 90)", "oklch(39% 0.12 90)", "oklch(51% 0.12 90)", "oklch(63% 0.12 90)", "oklch(75% 0.12 90)", "oklch(87% 0.12 90)", "oklch(95% 0.12 90)"] },
+      "standard-blue": { "role": "tertiary", "displayName": "Standard Blue", "canonical": "#42678a", "tonalRamp": ["oklch(15% 0.075 245)", "oklch(27% 0.075 245)", "oklch(39% 0.075 245)", "oklch(51% 0.075 245)", "oklch(63% 0.075 245)", "oklch(75% 0.075 245)", "oklch(87% 0.075 245)", "oklch(95% 0.075 245)"] },
+      "rule-line": { "role": "neutral", "displayName": "Rule Line", "canonical": "#c9c1b2", "tonalRamp": ["oklch(15% 0.014 80)", "oklch(27% 0.014 80)", "oklch(39% 0.014 80)", "oklch(51% 0.014 80)", "oklch(63% 0.014 80)", "oklch(75% 0.014 80)", "oklch(87% 0.014 80)", "oklch(95% 0.014 80)"] },
+      "warm-white": { "role": "neutral", "displayName": "Warm White", "canonical": "#fffdf7", "tonalRamp": ["oklch(15% 0.008 85)", "oklch(27% 0.008 85)", "oklch(39% 0.008 85)", "oklch(51% 0.008 85)", "oklch(63% 0.008 85)", "oklch(75% 0.008 85)", "oklch(87% 0.008 85)", "oklch(95% 0.008 85)"] },
+      "pathway-surface": { "role": "neutral", "displayName": "Pathway Surface", "canonical": "#fbfaf5", "tonalRamp": ["oklch(15% 0.007 85)", "oklch(27% 0.007 85)", "oklch(39% 0.007 85)", "oklch(51% 0.007 85)", "oklch(63% 0.007 85)", "oklch(75% 0.007 85)", "oklch(87% 0.007 85)", "oklch(95% 0.007 85)"] },
+      "selected-surface": { "role": "neutral", "displayName": "Selected Surface", "canonical": "#efe8d8", "tonalRamp": ["oklch(15% 0.019 82)", "oklch(27% 0.019 82)", "oklch(39% 0.019 82)", "oklch(51% 0.019 82)", "oklch(63% 0.019 82)", "oklch(75% 0.019 82)", "oklch(87% 0.019 82)", "oklch(95% 0.019 82)"] },
+      "licence-unknown": { "role": "secondary", "displayName": "Licence Unknown", "canonical": "#9b3e30", "tonalRamp": ["oklch(15% 0.12 30)", "oklch(27% 0.12 30)", "oklch(39% 0.12 30)", "oklch(51% 0.12 30)", "oklch(63% 0.12 30)", "oklch(75% 0.12 30)", "oklch(87% 0.12 30)", "oklch(95% 0.12 30)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Atlas Display", "purpose": "The page thesis only." },
+      "headline": { "displayName": "Resource Headline", "purpose": "Selected-resource titles." },
+      "title": { "displayName": "Stage Title", "purpose": "Workflow stages and section headings." },
+      "body": { "displayName": "Evidence Body", "purpose": "Descriptions and supporting explanation." },
+      "control": { "displayName": "Control Text", "purpose": "Search and high-attention controls." },
+      "label": { "displayName": "Indexed Label", "purpose": "Uppercase metadata, stage and filter labels." }
+    },
+    "shadows": [
+      { "name": "mobile-navigation-lift", "value": "0 14px 24px rgba(23, 43, 48, 0.12)", "purpose": "Separates the expanded mobile navigation from the page." }
+    ],
+    "motion": [
+      { "name": "route-draw", "value": "760ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Draws the pathway once on entry; changes from horizontal scale to vertical scale on mobile." },
+      { "name": "selection-rail", "value": "180ms ease-out", "purpose": "Reveals the rust rail on the active resource node." },
+      { "name": "reduced-motion", "value": "0.01ms", "purpose": "Effectively removes transitions when reduced motion is requested; route drawing is disabled entirely." }
+    ],
+    "breakpoints": [
+      { "name": "compact-desktop", "value": "1050px" },
+      { "name": "mobile", "value": "760px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Resource Action",
+      "kind": "button",
+      "refersTo": "primary-action",
+      "description": "The single high-emphasis action that opens the canonical resource.",
+      "html": "<a class=\"ds-primary-action\" href=\"#\"><span>Open the resource</span><span aria-hidden=\"true\">↗</span></a>",
+      "css": ".ds-primary-action { min-height: 46px; display: flex; align-items: center; justify-content: space-between; padding: 0 13px; background: var(--ink, #172b30); color: var(--white, #fffdf7); text-decoration: none; font: 500 12px 'IBM Plex Sans', sans-serif; transition: background 180ms ease-out; } .ds-primary-action:hover { background: var(--teal-dark, #104f4c); } .ds-primary-action:focus-visible { outline: 3px solid var(--yellow, #d9b74a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "filter-chip",
+      "description": "A compact resource-form filter with an explicit selected state.",
+      "html": "<button class=\"ds-filter-chip\" type=\"button\" aria-pressed=\"false\">Protocol</button> <button class=\"ds-filter-chip ds-is-selected\" type=\"button\" aria-pressed=\"true\"><span aria-hidden=\"true\">✓</span> Guidance</button>",
+      "css": ".ds-filter-chip { border: 1px solid #9c9b91; background: transparent; color: var(--ink, #172b30); padding: 8px 11px; border-radius: 14px; cursor: pointer; font: 400 13px 'IBM Plex Sans', sans-serif; } .ds-filter-chip.ds-is-selected { background: var(--teal, #176c66); border-color: var(--teal, #176c66); color: var(--white, #fffdf7); } .ds-filter-chip:focus-visible { outline: 3px solid var(--yellow, #d9b74a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "A borderless search field embedded in the ruled atlas control band.",
+      "html": "<label class=\"ds-search\"><span aria-hidden=\"true\">⌕</span><span class=\"ds-sr-only\">Search resources</span><input type=\"search\" placeholder=\"Search methods, pathogens or resources\"></label>",
+      "css": ".ds-search { height: 65px; display: flex; align-items: center; gap: 12px; padding: 0 22px; border-bottom: 1px solid var(--ink, #172b30); color: var(--ink, #172b30); font-family: 'IBM Plex Sans', sans-serif; } .ds-search input { width: 100%; border: 0; outline: 0; background: transparent; color: inherit; font: 400 15px 'IBM Plex Sans', sans-serif; } .ds-search:focus-within { outline: 3px solid var(--yellow, #d9b74a); outline-offset: 3px; } .ds-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }"
+    },
+    {
+      "name": "Resource Node",
+      "kind": "card",
+      "description": "A selectable atlas record carrying type, name and source provenance without card chrome.",
+      "html": "<button class=\"ds-resource-node ds-is-active\" type=\"button\" aria-pressed=\"true\"><span class=\"ds-node-symbol\" aria-hidden=\"true\">⌁</span><span class=\"ds-node-copy\"><span class=\"ds-node-type\">Guidance</span><span class=\"ds-node-name\">Bioinformatics pipeline validation guidance</span></span><span class=\"ds-source-mark\" aria-label=\"Source: PHA4GE\">P4G</span></button>",
+      "css": ".ds-resource-node { width: 100%; border: 0; border-top: 1px solid var(--line, #c9c1b2); background: transparent; color: var(--ink, #172b30); min-height: 88px; text-align: left; display: grid; grid-template-columns: 26px minmax(0,1fr) auto; gap: 7px; padding: 12px 6px; cursor: pointer; align-items: start; position: relative; font-family: 'IBM Plex Sans', sans-serif; } .ds-resource-node::after { content: ''; position: absolute; left: -10px; inset-block: 0; width: 3px; transform: scaleY(0); background: var(--rust, #c9503d); transform-origin: bottom; transition: transform 180ms ease-out; } .ds-resource-node:hover { background: var(--paper, #f4f0e6); } .ds-resource-node.ds-is-active { background: #efe8d8; } .ds-resource-node.ds-is-active::after { transform: scaleY(1); } .ds-resource-node:focus-visible { outline: 3px solid var(--yellow, #d9b74a); outline-offset: 3px; } .ds-node-symbol { width: 25px; height: 25px; display: grid; place-items: center; border: 1px solid currentColor; color: var(--teal-dark, #104f4c); border-radius: 50%; } .ds-node-copy { min-width: 0; } .ds-node-type { display: block; margin: 1px 0 5px; color: var(--muted, #5c6867); font-size: 10px; text-transform: uppercase; letter-spacing: .07em; } .ds-node-name { display: block; font-size: 12px; line-height: 1.34; font-weight: 500; } .ds-source-mark { min-width: 34px; height: 20px; padding: 0 4px; display: grid; place-items: center; background: var(--ink, #172b30); color: var(--white, #fffdf7); font-size: 9px; font-weight: 600; border-radius: 2px; }"
+    },
+    {
+      "name": "Source Mark",
+      "kind": "chip",
+      "refersTo": "source-mark",
+      "description": "A terse, high-contrast catalogue identifier used beside every imported resource.",
+      "html": "<span class=\"ds-source-mark\" title=\"PHA4GE Guidance Documents &amp; Standards\" aria-label=\"Source: PHA4GE Guidance Documents &amp; Standards\">P4G</span>",
+      "css": ".ds-source-mark { min-width: 34px; height: 20px; padding: 0 4px; display: inline-grid; place-items: center; background: var(--ink, #172b30); color: var(--white, #fffdf7); font: 600 9px 'IBM Plex Sans', sans-serif; letter-spacing: .03em; border-radius: 2px; }"
+    },
+    {
+      "name": "Provenance Fact Rows",
+      "kind": "custom",
+      "description": "Label/value evidence rows that keep resource licence and source metadata licence distinct.",
+      "html": "<dl class=\"ds-facts\"><div><dt>Resource licence</dt><dd class=\"ds-unknown\">Not recorded</dd></div><div><dt>Source metadata licence</dt><dd>CC BY 4.0</dd></div><div><dt>Last retrieved</dt><dd>2026-09-24</dd></div></dl>",
+      "css": ".ds-facts { margin: 0; border-top: 1px solid var(--ink, #172b30); font: 400 11px 'IBM Plex Sans', sans-serif; } .ds-facts div { display: grid; grid-template-columns: 1fr 1.15fr; gap: 12px; border-bottom: 1px solid var(--line, #c9c1b2); padding: 10px 0; } .ds-facts dt { color: var(--muted, #5c6867); } .ds-facts dd { margin: 0; font-weight: 500; } .ds-facts .ds-unknown { color: #9b3e30; }"
+    },
+    {
+      "name": "Primary Navigation",
+      "kind": "nav",
+      "description": "Compact masthead navigation with a rust current-section rule.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary navigation\"><a class=\"ds-is-current\" href=\"#\">Resource atlas</a><a href=\"#\">About the standard</a><a href=\"#\">GitHub <span aria-hidden=\"true\">↗</span></a></nav>",
+      "css": ".ds-nav { height: 72px; display: flex; align-items: center; gap: 30px; color: var(--ink, #172b30); font: 500 13px 'IBM Plex Sans', sans-serif; } .ds-nav a { height: 100%; display: flex; align-items: center; gap: 4px; color: inherit; text-decoration: none; position: relative; } .ds-nav a.ds-is-current::after { content: ''; position: absolute; height: 3px; left: 0; right: 0; bottom: -1px; background: var(--rust, #c9503d); } .ds-nav a:focus-visible { outline: 3px solid var(--yellow, #d9b74a); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Working Pathway Atlas",
+    "overview": "Glitter should feel like a well-used scientific atlas laid open on a laboratory bench: warm paper, fine cartographic rules, purposeful annotations and a route that makes a complex field navigable. It is operational rather than promotional. Real resources, workflow stages and evidence occupy the interface from the first viewport.\n\nThe visual voice combines editorial authority with laboratory precision. Newsreader gives stage names and headlines a humane, reference-book character; IBM Plex Sans keeps search, filters, metadata and provenance compact and legible. Colour identifies landmarks, while words, icons, shapes and labels carry the meaning.",
+    "keyCharacteristics": [
+      "Warm atlas-paper surfaces with deep blue-green ink.",
+      "A continuous teal pathway, route stops and fine structural rules.",
+      "Editorial display type paired with compact scientific interface type.",
+      "Dense but calm evidence presentation with explicit source and licence language.",
+      "Flat, responsive surfaces that reveal detail without ornamental chrome."
+    ],
+    "rules": [
+      { "name": "The Meaning Beyond Colour Rule", "body": "Resource type, selection, status and provenance always retain a text label, icon, shape or rule treatment; colour is reinforcement, never the sole signal.", "section": "colors" },
+      { "name": "The Yellow Is Focus Rule", "body": "Reserve route yellow primarily for keyboard focus and text selection so it remains an unmistakable interaction cue.", "section": "colors" },
+      { "name": "The Two-Voice Rule", "body": "Newsreader names the place or idea; IBM Plex Sans operates it and records the evidence.", "section": "typography" },
+      { "name": "The Evidence Stays Small, Not Faint Rule", "body": "Metadata may be compact, but it keeps sufficient contrast and uses weight, case and spacing to remain scannable.", "section": "typography" },
+      { "name": "The Route Owns the Workspace Rule", "body": "Search and filters may change what is on the pathway, but stage order and route continuity remain visually stable.", "section": "layout" },
+      { "name": "The Flat Evidence Rule", "body": "Do not use card shadows to make metadata feel important; use hierarchy, rules and tonal fields.", "section": "elevation" },
+      { "name": "The Structural Corners Rule", "body": "Large containers and primary actions stay square; rounding is reserved for compact tags, controls and semantic marks.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do preserve the Plan → Prepare → Sequence → Analyse → Share route and keep real resource nodes visible early.",
+      "Do keep source catalogue, retrieval date, source-record identifier and licence uncertainty legible in the detail flow.",
+      "Do use the shared 3px yellow focus ring and return focus to the selected resource when the detail panel closes.",
+      "Do pair every resource colour with its icon shape and textual type label.",
+      "Do respect reduced-motion preferences by removing route drawing and collapsing transitions to effectively instantaneous changes."
+    ],
+    "donts": [
+      "Don't turn the atlas into a generic grid of floating cards or marketing panels.",
+      "Don't infer a resource licence from the licence attached to its source metadata.",
+      "Don't use colour alone to communicate resource type, selected state, provenance or licence status.",
+      "Don't introduce soft card shadows or large rounded containers into the flat, ruled evidence system.",
+      "Don't shrink the five desktop stages until their content becomes illegible; allow horizontal scrolling or switch to the mobile vertical route."
+    ]
+  }
+}
