@@ -8,6 +8,19 @@ standards, datasets, training, guidance and funding opportunities.
 The project is at the **v0.1 design stage**. The current files are a discussion
 draft, not a normative or production-ready standard.
 
+## Interactive prototype
+
+The website opens directly into an interactive knowledge graph. Resource
+records are connected to their resource form, pathogen scope, method,
+application and source catalogue, alongside explicit relationships asserted in
+the Glitter data. Selecting a node isolates its immediate neighbourhood and
+opens a provenance and licensing inspector.
+
+- Live site: <https://glitter-roan.vercel.app>
+- Frontend: React, TypeScript and `react-force-graph-2d`
+
+Run it locally with `npm install` followed by `npm run dev`.
+
 ## Why a graph?
 
 A catalogue can say that a paper and a software tool exist. Glitter should also
