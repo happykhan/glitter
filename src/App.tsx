@@ -4,13 +4,13 @@ import { ArrowUpRight, Check, ChevronRight, CircleDot, Crosshair, Github, Locate
 import { buildKnowledgeGraph, kindLabels, readableType, resources, type GraphKind, type GraphLink, type GraphNode } from "./data";
 
 const PALETTE: Record<GraphKind, string> = {
-  resource: "#17232f",
-  catalogue: "#d97721",
-  type: "#345aa8",
-  target: "#13756f",
-  method: "#8a4b97",
-  application: "#b13d54",
-  organization: "#d6a81d",
+  resource: "#25343d",
+  catalogue: "#f6c992",
+  type: "#5484a4",
+  target: "#09a1a1",
+  method: "#d396a6",
+  application: "#f0525c",
+  organization: "#acc0d3",
 };
 
 const graph = buildKnowledgeGraph();
@@ -50,12 +50,12 @@ function drawNode(node: GraphNode, context: CanvasRenderingContext2D, scale: num
   if (selectedId === node.id) {
     context.beginPath();
     context.arc(x, y, radius + 4.5, 0, Math.PI * 2);
-    context.strokeStyle = "#f0b429";
+    context.strokeStyle = "#f0525c";
     context.lineWidth = 2.2 / scale;
     context.stroke();
   }
   context.fillStyle = PALETTE[node.kind];
-  context.strokeStyle = "#f7f4ed";
+  context.strokeStyle = "#ffffff";
   context.lineWidth = 1.4 / scale;
   context.beginPath();
   if (node.kind === "catalogue") {
@@ -84,7 +84,7 @@ function drawNode(node: GraphNode, context: CanvasRenderingContext2D, scale: num
     const labelY = y + fontSize * 0.34;
     context.fillStyle = "rgba(247, 244, 237, 0.94)";
     context.fillRect(labelX - 1.5, labelY - fontSize + 1, width + 3, fontSize + 2);
-    context.fillStyle = "#17232f";
+    context.fillStyle = "#25343d";
     context.fillText(label, labelX, labelY);
   }
   context.restore();
@@ -105,7 +105,7 @@ function drawLinkPredicate(link: GraphLink, context: CanvasRenderingContext2D, s
   const width = context.measureText(label).width;
   context.fillStyle = "rgba(247,244,237,.96)";
   context.fillRect(x - width / 2 - 2, y - fontSize + 1, width + 4, fontSize + 3);
-  context.fillStyle = link.explicit ? "#a63f31" : "#4f5c64";
+  context.fillStyle = link.explicit ? "#b42f3a" : "#52636d";
   context.textAlign = "center";
   context.fillText(label, x, y + fontSize * .35);
   context.restore();
@@ -294,7 +294,7 @@ export default function App() {
               graphData={displayedGraph}
               width={size.width}
               height={size.height}
-              backgroundColor="#f7f4ed"
+              backgroundColor="#ffffff"
               nodeLabel={(node) => `${node.name} — ${kindLabels[node.kind]}`}
               nodeCanvasObject={(node, context, scale) => drawNode(node, context, scale, selectedId, hoveredId, visible, size.width < 600)}
               nodePointerAreaPaint={(node, color, context) => { context.fillStyle = color; context.beginPath(); context.arc(node.x ?? 0, node.y ?? 0, nodeRadius(node) + 4, 0, Math.PI * 2); context.fill(); }}

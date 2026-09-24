@@ -2,20 +2,23 @@
 name: Glitter Scientific Network Workbench
 description: A graph-first evidence workbench for pathogen-genomics resources and provenance.
 colors:
-  workbench-ink: "#17232f"
-  canvas-paper: "#f7f4ed"
-  panel-white: "#fffdf8"
-  evidence-muted: "#657079"
-  rule-line: "#ccd0cd"
-  rule-dark: "#9ba3a2"
-  focus-gold: "#f0b429"
-  catalogue-orange: "#d97721"
-  type-blue: "#345aa8"
-  target-teal: "#13756f"
-  method-purple: "#8a4b97"
-  application-rose: "#b13d54"
-  organization-gold: "#d6a81d"
-  verified-red: "#cb4a38"
+  workbench-ink: "#25343d"
+  canvas-white: "#ffffff"
+  evidence-muted: "#5b6972"
+  cool-surface: "#f3f6f8"
+  placeholder: "#737d82"
+  relationship-line: "#7d8b94"
+  body-strong: "#3e4d56"
+  error: "#a8303a"
+  teal-dark: "#087f80"
+  mobile-shadow: "rgba(37,52,61,.16)"
+  rule-line: "#dbe3e8"
+  seashell-blue: "#acc0d3"
+  peach: "#f6c992"
+  coral: "#f0525c"
+  rose: "#d396a6"
+  teal: "#09a1a1"
+  ocean-blue: "#5484a4"
   licence-unknown: "#a63f31"
 typography:
   headline: { fontFamily: "IBM Plex Sans, system-ui, sans-serif", fontSize: "24px", fontWeight: 600, lineHeight: 1.05, letterSpacing: "-0.035em" }
@@ -45,14 +48,14 @@ components:
 
 **Creative North Star: "The Scientific Network Workbench"**
 
-Glitter opens as the knowledge graph itself: a serious analysis surface closer to Cytoscape or Gephi than a catalogue landing page. A warm technical canvas, square institutional rails, compact controls and a persistent status line make it operational from the first viewport. The graph carries the story; there is no hero, workflow fiction or decorative prose.
+Glitter opens as the knowledge graph itself: a serious analysis surface closer to Cytoscape or Gephi than a catalogue landing page. A clean white canvas, square institutional rails, compact controls and a persistent status line make it operational from the first viewport. The graph carries the story; there is no hero, workflow fiction or decorative prose.
 
 Selection binds topology to evidence. Choosing a node recentres and zooms the graph, isolates its one-hop neighbourhood, reveals edge predicates and presents the same neighbours as keyboard-operable inspector controls. Provenance and licence uncertainty remain first-class facts.
 
 **Key Characteristics:**
 
 - Populated force-directed graph as the primary surface.
-- Square ruled rails around a warm dotted canvas.
+- Square ruled rails around a white dotted canvas.
 - IBM Plex Sans for every interface and evidence role.
 - Semantic node colours reinforced by shape and text.
 - Shared selection across graph, node index and inspector.
@@ -60,32 +63,31 @@ Selection binds topology to evidence. Choosing a node recentres and zooms the gr
 
 ## Colors
 
-Warm archival neutrals support crisp institutional colours assigned to graph semantics.
+White is the dominant surface. The supplied “Seashell garnet afternoon” palette provides crisp semantic colours without tinting the whole workspace.
 
 ### Primary
 
 - **Workbench Ink:** Text, resource nodes, strong rules and status bar.
-- **Target Teal:** Pathogen-scope nodes, inspector cue and resource-action hover.
+- **Teal:** Pathogen-scope nodes, focus and inspector cues.
 
 ### Secondary
 
-- **Catalogue Orange:** Source catalogues, paired with diamonds.
-- **Type Blue:** Resource forms, paired with squares.
-- **Method Purple, Application Rose and Organization Gold:** Labelled circular concept nodes.
-- **Verified Red:** Explicit assertions and their predicate labels.
-- **Focus Gold:** Keyboard focus, selected-node rings and selected index rails.
+- **Peach:** Source catalogues, paired with diamonds.
+- **Ocean Blue:** Resource forms, paired with squares.
+- **Rose, Coral and Seashell Blue:** Methods, applications and organisations as labelled circles.
+- **Coral:** Explicit assertions, selection rings and active navigation.
 
 ### Neutral
 
-- **Canvas Paper / Panel White:** Graph field and surrounding rails.
+- **White:** Graph field and surrounding rails.
 - **Evidence Muted:** Counts, labels and secondary copy.
 - **Rule Line / Rule Dark:** One-pixel structural separators.
 
-**The Semantic Pairing Rule.** Colour never identifies kind alone: catalogues are orange diamonds, resource types are blue squares, and other kinds are labelled circles.
+**The Semantic Pairing Rule.** Colour never identifies kind alone: catalogues are peach diamonds, resource types are blue squares, and other kinds are labelled circles.
 
-**The Evidence Red Rule.** Verified red is for explicit graph assertions; Licence Unknown is only for absent resource-licence evidence.
+**The Evidence Coral Rule.** Coral is for explicit graph assertions and active selection; Licence Unknown uses a darker accessible error tone.
 
-**The Gold Interaction Rule.** Reserve gold for focus and active selection, not decoration.
+**The Teal Focus Rule.** Reserve teal outlines for keyboard focus and coral for current selection.
 
 ## Typography
 
@@ -126,7 +128,7 @@ Desktop is flat: rules, tonal changes, node outlines and the dotted field create
 
 ## Shapes
 
-Rails, controls, panels and actions are square. Circular geometry is semantic and belongs to most node kinds, the brand mark and status dot. Catalogue diamonds and type squares interrupt the circular field. Nodes have a fine paper outline; resources are smallest, catalogues and organisations are anchors, and concept size can reflect connected-resource count. Selection adds an external gold ring without changing semantic fill.
+Rails, controls, panels and actions are square. Circular geometry is semantic and belongs to most node kinds, the brand mark and status dot. Catalogue diamonds and type squares interrupt the circular field. Nodes have a fine white outline; resources are smallest, catalogues and organisations are anchors, and concept size can reflect connected-resource count. Selection adds an external coral ring without changing semantic fill.
 
 **The Square-Rail Rule.** Never round structural containers, navigation cells, search bands, toolbars or primary actions.
 
@@ -138,11 +140,11 @@ Search is borderless within a 47px ruled band and matches names plus resource de
 
 ### Node Index
 
-Each ruled button carries a semantic mark, truncated name, uppercase kind and chevron. Hover and selection use a warm tonal field; selection adds a 3px inset gold rail. Rows remain keyboard operable.
+Each ruled button carries a semantic mark, truncated name, uppercase kind and chevron. Hover and selection use a pale blue-neutral field; selection adds a 3px inset coral rail. Rows remain keyboard operable.
 
 ### Graph Toolbar and Canvas
 
-The 39px toolbar exposes counts, zoom and fit controls as square cells. The warm canvas uses a 15px dotted grid. Selecting recentres over 550ms, zooms to 2.1, dims non-neighbours to 12% and outlines the node in gold. Background click clears isolation. Metadata edges are fine and neutral; explicit assertions are thicker red lines with arrows. Every selected edge shows direction, predicate and “verified” when explicit.
+The 39px toolbar exposes counts, zoom and fit controls as square cells. The white canvas uses a 15px pale-blue dotted grid. Selecting recentres over 550ms, zooms to 2.1, dims non-neighbours to 12% and outlines the node in coral. Background click clears isolation. Metadata edges are fine and neutral; explicit assertions are thicker coral lines with arrows. Every selected edge shows direction, predicate and “verified” when explicit.
 
 ### Inspector
 
@@ -154,7 +156,7 @@ Ruled fact rows keep resource form, resource licence, source metadata licence an
 
 ### Navigation, Status and Browser Surfaces
 
-The active Graph navigation cell combines a tonal field with a 3px gold underline. The 29px ink status bar reports prototype state, counts and traceability; mobile retains state and count. Scrollbars are thin (8px) with a dark neutral thumb, warm track and 2px inset track border. Text selection is ink on pale gold. Buttons, links and inputs share a 3px gold focus outline with 2px offset. Reduced motion collapses transitions to 0.01ms and disables smooth scrolling.
+The active Graph navigation cell combines a tonal field with a 3px coral underline. The 29px ink status bar reports prototype state, counts and traceability; mobile retains state and count. Scrollbars are thin (8px) with a seashell-blue thumb, cool-white track and 2px inset track border. Text selection is ink on peach. Buttons, links and inputs share a 3px teal focus outline with 2px offset. Reduced motion collapses transitions to 0.01ms and disables smooth scrolling.
 
 ## Do's and Don'ts
 
