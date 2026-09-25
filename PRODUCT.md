@@ -55,8 +55,9 @@ and move between standards, guidance, protocols, software and training.
 - A human-readable standards page explains the resource model, provenance,
   relationships and contribution route without requiring repository knowledge.
 - A separate API guide explains the versioned endpoints and response format.
-- Consumers can retrieve versioned static JSON through unauthenticated,
-  cross-origin API endpoints.
+- Consumers can search, retrieve records, and follow verified relationships
+  through unauthenticated, cross-origin API endpoints; full versioned static
+  JSON exports remain available.
 - Community resource pull requests are schema-validated before review.
 
 ## Evidence on Hand

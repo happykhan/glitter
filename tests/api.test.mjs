@@ -35,9 +35,18 @@ test("the complete API catalogue retains schema-valid top-level fields", () => {
 test("the API discovery document exposes every public endpoint", () => {
   const index = read("index.json");
   assert.equal(index.documentation, "/api");
-  for (const name of ["catalogue", "resources", "organizations", "concepts", "relationships", "schema", "openapi"]) {
+  for (const name of ["catalogue", "resources", "organizations", "concepts", "relationships", "search", "resource", "connections", "schema", "openapi"]) {
     assert.match(index.endpoints[name], /^\/api\/v1\//);
   }
+});
+
+test("OpenAPI offers callable discovery operations with their parameters", () => {
+  const openapi = read("openapi.json");
+  for (const [path, operation] of [["/api/v1/search", "searchResources"], ["/api/v1/resource", "getResource"], ["/api/v1/connections", "getConnections"]]) {
+    assert.equal(openapi.paths[path].get.operationId, operation);
+    assert.ok(openapi.paths[path].get.parameters.length);
+  }
+  assert.ok(openapi.paths["/api/v1/search"].get.parameters.some((param) => param.name === "target"));
 });
 
 test("the human-readable API page has its own route", () => {

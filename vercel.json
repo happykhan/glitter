@@ -2,6 +2,9 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "functions": {
+    "api/v1/*.js": { "includeFiles": "data/**" }
+  },
   "rewrites": [
     { "source": "/standard", "destination": "/index.html" },
     { "source": "/api", "destination": "/index.html" },

@@ -141,7 +141,8 @@ The `/standard` and `/api` surfaces are Read-mode extensions of the workbench.
 They retain the square application bar, ruled navigation, IBM Plex Sans and
 white canvas, then open into a wide editorial column with a sticky section
 index. The standard owns record structure and contribution guidance; the API
-guide owns endpoints, response fields and executable examples. Dense technical
+guide leads with search and connection operations, then assistant-tool import,
+exports, response fields and executable examples. Dense technical
 material is expressed through field ledgers, endpoint rows and dark code
 specimens rather than card grids.
 

@@ -1,0 +1,49 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { GET as search } from "../api/v1/search.js";
+import { GET as resource } from "../api/v1/resource.js";
+import { GET as connections } from "../api/v1/connections.js";
+
+const request = (route) => new Request(`https://glitter-roan.vercel.app${route}`);
+const json = async (response) => ({ status: response.status, body: await response.json() });
+
+test("search finds useful AMR software with stable identifiers and provenance", async () => {
+  const { status, body } = await json(search(request("/api/v1/search?q=amr&type=Software&connected=true")));
+  assert.equal(status, 200);
+  assert.equal(body.kind, "SearchResults");
+  assert.ok(body.items.some((item) => item.name === "AMRColab"));
+  assert.ok(body.items.every((item) => item.types.includes("Software") && item.id && item.sources?.length && item.verifiedConnectionCount > 0));
+  assert.ok(body.total >= body.items.length);
+});
+
+test("search filters facets and paginates without returning supporting concepts", async () => {
+  const { body } = await json(search(request("/api/v1/search?method=metadata%20harmonisation&limit=1&offset=0")));
+  assert.equal(body.limit, 1);
+  assert.equal(body.items.length, 1);
+  assert.ok(body.items[0].facets.some((facet) => facet.scheme === "Glitter method stage" && facet.label === "Metadata harmonisation"));
+  const all = (await json(search(request("/api/v1/search?limit=50")))).body;
+  assert.ok(all.items.every((item) => !item.types.includes("Concept") && !item.types.includes("Organization")));
+  assert.equal((await json(search(request("/api/v1/search?limit=51")))).status, 400);
+});
+
+test("resource lookup returns a full record and clear error for missing IDs", async () => {
+  const id = encodeURIComponent("https://github.com/cidgoh/DataHarmonizer");
+  const { status, body } = await json(resource(request(`/api/v1/resource?id=${id}`)));
+  assert.equal(status, 200);
+  assert.equal(body.resource.name, "DataHarmonizer");
+  assert.ok(body.resource.sources.length);
+  assert.ok(body.verifiedConnectionCount > 0);
+  assert.equal((await json(resource(request("/api/v1/resource")))).status, 400);
+  assert.equal((await json(resource(request("/api/v1/resource?id=unknown")))).status, 404);
+});
+
+test("connections expose evidence, direction and preparation warnings", async () => {
+  const id = encodeURIComponent("https://github.com/B-UMMI/chewBBACA");
+  const { status, body } = await json(connections(request(`/api/v1/connections?id=${id}`)));
+  assert.equal(status, 200);
+  assert.equal(body.kind, "Connections");
+  assert.ok(body.items.every((item) => item.status === "verified" && item.predicate !== "cataloguedBy" && item.evidence.length && item.neighbour?.id));
+  assert.ok(body.items.some((item) => item.predicate === "producesOutput" && /--t 0/.test(item.description)));
+  assert.equal((await json(connections(request(`/api/v1/connections?id=${id}&direction=in`)))).body.total, 0);
+  assert.equal((await json(connections(request(`/api/v1/connections?id=${id}&direction=sideways`)))).status, 400);
+});

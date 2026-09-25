@@ -19,6 +19,9 @@ const endpoints = {
   organizations: "/api/v1/organizations",
   concepts: "/api/v1/concepts",
   relationships: "/api/v1/relationships",
+  search: "/api/v1/search",
+  resource: "/api/v1/resource",
+  connections: "/api/v1/connections",
   schema: "/api/v1/schema",
   openapi: "/api/v1/openapi",
 };
@@ -31,23 +34,92 @@ const collection = (kind, items) => ({
   items,
 });
 
+const parameter = (name, description, schema = { type: "string" }, required = false) => ({ name, in: "query", description, required, schema });
+const jsonResponse = (description, schema = { type: "object" }) => ({ description, content: { "application/json": { schema } } });
+const ref = (name) => ({ $ref: `#/components/schemas/${name}` });
+
 const openapi = {
   openapi: "3.1.0",
   info: {
     title: "Glitter resource knowledgebase API",
     version: "1.0.0",
-    description: "Read-only JSON endpoints for public-health pathogen-genomics resources and their curated relationships.",
+    description: "Find public-health pathogen-genomics resources, inspect a record, and follow verified, cited relationships. Use searchResources first, then getResource or getConnections. Never infer compatibility from shared tags or catalogue provenance.",
   },
   servers: [{ url: "https://glitter-roan.vercel.app" }],
-  paths: Object.fromEntries([
-    [endpoints.index, "API discovery document"],
-    [endpoints.catalogue, "Complete schema-valid Glitter catalogue"],
-    [endpoints.resources, "Discoverable resources, excluding supporting organisations and concepts"],
-    [endpoints.organizations, "Organisation entities"],
-    [endpoints.concepts, "Supporting concepts used to join resources"],
-    [endpoints.relationships, "Curated directed relationships"],
-    [endpoints.schema, "Glitter JSON Schema"],
-  ].map(([endpoint, description]) => [endpoint, { get: { summary: description, responses: { "200": { description: "JSON response", content: { "application/json": { schema: { type: "object" } } } } } } }])),
+  components: { schemas: {
+    Entity: { type: "object", required: ["id", "types", "name"], properties: {
+      id: { type: "string", description: "Stable canonical URI." },
+      types: { type: "array", items: { type: "string" } },
+      name: { type: "string" },
+      description: { type: "string" },
+      landingPage: { type: "string", format: "uri" },
+      license: { type: "string", format: "uri", description: "Resource licence, not source-metadata licence. Missing when unknown." },
+      facets: { type: "array", items: { type: "object", properties: { scheme: { type: "string" }, id: { type: "string" }, label: { type: "string" } } } },
+      sources: { type: "array", items: { type: "object", properties: { name: { type: "string" }, sourceUrl: { type: "string", format: "uri" }, sourceLicense: { type: "string", format: "uri" }, retrievedAt: { type: "string", format: "date" } } } },
+      fundingOpportunity: { type: "object", description: "For calls that users can apply to; inspect opens, closes and lastChecked before treating as current." },
+      verifiedConnectionCount: { type: "integer", description: "Present on search results, not part of the Glitter entity standard." },
+    }, additionalProperties: true },
+    Connection: { type: "object", required: ["id", "subject", "predicate", "object", "direction", "status", "evidence", "neighbour"], properties: {
+      id: { type: "string" }, subject: { type: "string" }, predicate: { type: "string" }, object: { type: "string" },
+      direction: { type: "string", enum: ["in", "out"] }, status: { type: "string", enum: ["verified"] },
+      description: { type: ["string", "null"], description: "May contain a preparation or compatibility caveat." },
+      evidence: { type: "array", items: { type: "object", required: ["source"], properties: { source: { type: "string", format: "uri" }, locator: { type: "string" } } } },
+      neighbour: { type: "object", properties: { id: { type: "string" }, name: { type: "string" }, types: { type: "array", items: { type: "string" } }, landingPage: { type: "string", format: "uri" } } },
+    } },
+    SearchResults: { type: "object", required: ["kind", "total", "limit", "offset", "items"], properties: {
+      kind: { const: "SearchResults" }, query: { type: "string" }, filters: { type: "object" }, total: { type: "integer" }, limit: { type: "integer" }, offset: { type: "integer" }, items: { type: "array", items: ref("Entity") },
+    } },
+    ResourceResponse: { type: "object", required: ["kind", "resource"], properties: { kind: { const: "Resource" }, resource: ref("Entity"), verifiedConnectionCount: { type: "integer" } } },
+    ConnectionsResponse: { type: "object", required: ["kind", "resource", "total", "items"], properties: { kind: { const: "Connections" }, resource: { type: "object", properties: { id: { type: "string" }, name: { type: "string" } } }, total: { type: "integer" }, items: { type: "array", items: ref("Connection") } } },
+  } },
+  paths: {
+    [endpoints.search]: { get: {
+      operationId: "searchResources",
+      summary: "Search and filter pathogen-genomics resources",
+      description: "Use for questions like 'find Salmonella serotyping tools', 'show wet-lab protocols', or 'find open funding calls'. Search is lexical across titles, descriptions, identifiers and facets; it is not an LLM-generated answer. Returns full resource records with provenance and licence fields.",
+      parameters: [
+        parameter("q", "Words to find in resource name, description, identifiers, facets and source name; all words must match."),
+        parameter("type", "Resource form, for example Software, Protocol, DataStandard, Publication or FundingOpportunity."),
+        parameter("method", "Method-stage facet label or id, for example metadata harmonisation."),
+        parameter("application", "Application facet label or id, for example antimicrobial resistance."),
+        parameter("target", "Pathogen or target facet label or id, for example Salmonella."),
+        parameter("source", "Source catalogue name, for example GHRU Protocols."),
+        parameter("funding", "Current funding-call state, calculated from dates.", { type: "string", enum: ["open", "upcoming", "closed", "rolling"] }),
+        parameter("licenseKnown", "Set true to require a recorded resource licence; absence never means unrestricted use.", { type: "boolean" }),
+        parameter("connected", "Set true to require at least one verified non-catalogue connection.", { type: "boolean" }),
+        parameter("limit", "Page size, 1 to 50; default 10.", { type: "integer", minimum: 1, maximum: 50, default: 10 }),
+        parameter("offset", "Zero-based result offset; default 0.", { type: "integer", minimum: 0, maximum: 10000, default: 0 }),
+      ],
+      responses: { "200": jsonResponse("Ranked matching resources, total count and applied filters", ref("SearchResults")), "400": jsonResponse("Invalid query parameter") },
+    } },
+    [endpoints.resource]: { get: {
+      operationId: "getResource",
+      summary: "Get a resource by its canonical URI or identifier",
+      description: "Returns the complete record, including its source provenance, resource licence when known, and funding-call dates when applicable. The id parameter is a canonical URI or a recorded identifier value.",
+      parameters: [parameter("id", "Canonical entity URI or recorded identifier.", { type: "string" }, true)],
+      responses: { "200": jsonResponse("Complete resource record", ref("ResourceResponse")), "400": jsonResponse("Missing or invalid id"), "404": jsonResponse("Entity not found") },
+    } },
+    [endpoints.connections]: { get: {
+      operationId: "getConnections",
+      summary: "Get a resource's verified, evidenced relationships",
+      description: "Returns directed predicates, neighbour summaries, evidence URLs and any compatibility warning. By default excludes catalogue-provenance links and proposed or unverified assertions. Use this to explain how materials relate; do not mistake a shared facet for a relationship.",
+      parameters: [
+        parameter("id", "Canonical entity URI or recorded identifier.", { type: "string" }, true),
+        parameter("direction", "Outgoing, incoming or both kinds of edge.", { type: "string", enum: ["both", "out", "in"], default: "both" }),
+        parameter("includeCatalogue", "Set true to include verified cataloguedBy provenance edges.", { type: "boolean", default: false }),
+      ],
+      responses: { "200": jsonResponse("Verified connections with evidence and neighbour summaries", ref("ConnectionsResponse")), "400": jsonResponse("Invalid query parameter"), "404": jsonResponse("Entity not found") },
+    } },
+    ...Object.fromEntries([
+      [endpoints.index, "API discovery document"],
+      [endpoints.catalogue, "Complete schema-valid Glitter catalogue"],
+      [endpoints.resources, "Discoverable resources, excluding supporting organisations and concepts"],
+      [endpoints.organizations, "Organisation entities"],
+      [endpoints.concepts, "Supporting concepts used to join resources"],
+      [endpoints.relationships, "All curated directed relationships, including non-verified assertions"],
+      [endpoints.schema, "Glitter JSON Schema"],
+    ].map(([endpoint, description]) => [endpoint, { get: { summary: description, responses: { "200": jsonResponse("JSON response") } } }])),
+  },
 };
 
 const documents = {
@@ -55,7 +127,7 @@ const documents = {
     apiVersion: "1",
     standardVersion: catalogue.standardVersion,
     documentation: "/api",
-    note: "The API is read-only. Source provenance and licensing are retained on each entity.",
+    note: "Use search, resource and connections for discovery. The complete catalogue and collections remain available as exports. The API is read-only; source provenance and licensing are retained.",
     endpoints,
   },
   "catalogue.json": catalogue,
