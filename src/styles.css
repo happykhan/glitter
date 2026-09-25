@@ -22,6 +22,7 @@
 * { box-sizing: border-box; }
 html, body, #root { margin: 0; min-width: 320px; min-height: 100%; }
 body { overflow: hidden; }
+body:has(.app-shell.is-standard) { overflow: auto; }
 * { scrollbar-color: var(--line-dark) var(--cool); scrollbar-width: thin; }
 *::-webkit-scrollbar { width: 8px; height: 8px; }
 *::-webkit-scrollbar-track { background: var(--cool); }
@@ -178,8 +179,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .statusbar span:nth-child(2) { justify-self: center; font-variant-numeric: tabular-nums; }
 .status-dot { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--teal); }
 
-.app-shell.is-standard { grid-template-rows: 56px minmax(0, 1fr) 29px; }
-.standard-page { width: 100%; min-width: 0; max-width: 100%; min-height: 0; display: grid; grid-template-columns: 238px minmax(0, 1fr); overflow: auto; background: var(--white); scroll-behavior: smooth; }
+.app-shell.is-standard { height: auto; min-height: 100dvh; grid-template-rows: 56px auto 29px; }
+.standard-page { width: 100%; min-width: 0; max-width: 100%; min-height: 0; display: grid; grid-template-columns: 238px minmax(0, 1fr); overflow: visible; background: var(--white); }
 .standard-index { position: sticky; top: 0; align-self: start; min-height: calc(100dvh - 85px); padding: 26px 18px; border-right: 1px solid var(--ink); display: flex; flex-direction: column; background: var(--white); }
 .standard-index > strong { margin-bottom: 14px; font-size: 12px; }
 .standard-index > a { min-height: 35px; display: flex; align-items: center; padding: 0 7px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; text-decoration: none; }

@@ -371,6 +371,13 @@ export default function App() {
   useEffect(() => {
     document.title = `${{ resources: "Resources", graph: "Knowledge graph", standard: "Resource specification", api: "API guide" }[view]} — Glitter`;
   }, [view]);
+  useEffect(() => {
+    if (view !== "standard" && view !== "api") return;
+    const sectionId = window.location.hash.slice(1);
+    if (!sectionId) return;
+    const frame = window.requestAnimationFrame(() => document.getElementById(sectionId)?.scrollIntoView());
+    return () => window.cancelAnimationFrame(frame);
+  }, [view]);
 
   function clearDiscovery() { setQuery(""); setFilters(EMPTY_FILTERS); }
 
