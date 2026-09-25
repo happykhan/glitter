@@ -14,6 +14,15 @@ sources:
     import_mode: metadata
     enabled: true
 
+  - id: who-genomics-publications
+    name: World Health Organization genomics publications
+    organisation: World Health Organization
+    kind: curated-publication-pages
+    canonical_url: https://www.who.int/initiatives/genomic-surveillance-strategy
+    import_mode: selected-records
+    license_review: per-item
+    enabled: true
+
   - id: cgps-ghru-protocols
     name: GHRU Protocols
     organisation: Centre for Genomic Pathogen Surveillance

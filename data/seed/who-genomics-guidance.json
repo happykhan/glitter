@@ -1,0 +1,101 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://www.who.int/publications/i/item/9789240021228",
+      "types": ["GuidanceDocument"],
+      "name": "WHO foodborne WGS guide: module 1 — introductory module",
+      "description": "Minimum epidemiological, laboratory and food-safety capacity needed before introducing whole-genome sequencing for foodborne disease surveillance and response.",
+      "datePublished": "2023-10-19",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240021228" }],
+      "landingPage": "https://www.who.int/publications/i/item/9789240021228",
+      "facets": [{ "scheme": "Glitter application", "id": "foodborne-disease-surveillance", "label": "Foodborne disease surveillance" }, { "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240021228", "sourceRecordId": "9789240021228", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/publications/i/item/9789240021242",
+      "types": ["GuidanceDocument"],
+      "name": "WHO foodborne WGS guide: module 2 — outbreak investigations",
+      "description": "How whole-genome sequencing can support investigations of foodborne disease outbreaks detected by existing surveillance systems, for countries beginning laboratory-based surveillance of selected foodborne pathogens.",
+      "datePublished": "2023-10-19",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240021242" }],
+      "landingPage": "https://www.who.int/publications/i/item/9789240021242",
+      "facets": [{ "scheme": "Glitter application", "id": "foodborne-disease-surveillance", "label": "Foodborne disease surveillance" }, { "scheme": "Glitter application", "id": "outbreak-investigation", "label": "Outbreak investigation" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240021242", "sourceRecordId": "9789240021242", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/publications/i/item/9789240021266",
+      "types": ["GuidanceDocument"],
+      "name": "WHO foodborne WGS guide: module 3 — routine surveillance",
+      "description": "Using whole-genome sequencing for routine foodborne disease surveillance, outbreak detection, trend monitoring, and antimicrobial-resistance and virulence-factor monitoring.",
+      "datePublished": "2023-10-19",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240021266" }],
+      "landingPage": "https://www.who.int/publications/i/item/9789240021266",
+      "facets": [{ "scheme": "Glitter application", "id": "foodborne-disease-surveillance", "label": "Foodborne disease surveillance" }, { "scheme": "Glitter application", "id": "routine-surveillance", "label": "Routine surveillance" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240021266", "sourceRecordId": "9789240021266", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/publications/i/item/9789240046979",
+      "types": ["GuidanceDocument"],
+      "name": "WHO global genomic surveillance strategy for pathogens with pandemic and epidemic potential, 2022–2032",
+      "description": "An end-to-end framework for strengthening pathogen genomic surveillance, including sample collection, diagnostics, data sharing and analysis across disease programmes and surveillance networks.",
+      "datePublished": "2022-03-28",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240046979" }],
+      "landingPage": "https://www.who.int/publications/i/item/9789240046979",
+      "facets": [{ "scheme": "Glitter application", "id": "routine-surveillance", "label": "Pathogen genomic surveillance" }, { "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240046979", "sourceRecordId": "9789240046979", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/publications/i/item/9789240076563",
+      "types": ["GuidanceDocument"],
+      "name": "WHO guide to developing a national genomic surveillance strategy or action plan",
+      "description": "Step-by-step considerations for national and subnational stakeholders developing a genomic surveillance strategy or action plan for pathogens with pandemic and epidemic potential.",
+      "datePublished": "2023-08-18",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240076563" }],
+      "landingPage": "https://www.who.int/publications/i/item/9789240076563",
+      "facets": [{ "scheme": "Glitter application", "id": "routine-surveillance", "label": "Pathogen genomic surveillance" }, { "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240076563", "sourceRecordId": "9789240076563", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/publications/i/item/9789240061743",
+      "types": ["GuidanceDocument"],
+      "name": "WHO guiding principles for pathogen genome data sharing",
+      "description": "Principles for sharing pathogen genome data to support detection, response, endemic-disease monitoring and antimicrobial-resistance surveillance.",
+      "datePublished": "2022-11-08",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240061743" }],
+      "landingPage": "https://www.who.int/publications/i/item/9789240061743",
+      "facets": [{ "scheme": "Glitter method stage", "id": "data-sharing", "label": "Data sharing" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240061743", "sourceRecordId": "9789240061743", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/publications/i/item/9789240018440",
+      "types": ["GuidanceDocument"],
+      "name": "WHO guide to implementing SARS-CoV-2 genomic sequencing for public health",
+      "description": "Laboratory guidance on implementing SARS-CoV-2 genome sequencing for public-health impact, with relevance to emerging pathogens.",
+      "datePublished": "2021-01-08",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240018440" }],
+      "landingPage": "https://www.who.int/publications/i/item/9789240018440",
+      "facets": [{ "scheme": "Glitter target", "id": "sars-cov-2", "label": "SARS-CoV-2" }, { "scheme": "Glitter method stage", "id": "sequencing", "label": "Sequencing" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240018440", "sourceRecordId": "9789240018440", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "https://w3id.org/glitter/assertion/who-national-guide-supplements-global-strategy",
+      "subject": "https://www.who.int/publications/i/item/9789240076563",
+      "predicate": "isSupplementTo",
+      "object": "https://www.who.int/publications/i/item/9789240046979",
+      "description": "The national step-by-step guide supports development of country strategies under WHO's global genomic surveillance strategy.",
+      "evidence": [{ "source": "https://www.who.int/initiatives/genomic-surveillance-strategy", "locator": "National strategy development: step by step guide" }],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    }
+  ]
+}

@@ -26,8 +26,10 @@ Base URL: `https://glitter-roan.vercel.app/api/v1`
 | `/api/v1/openapi` | OpenAPI 3.1 tool definition, including query parameters and operation IDs |
 
 Search accepts `q`, `type`, `method`, `application`, `target`, `source`,
-`funding`, `licenseKnown`, `connected`, `limit` and `offset`. Query words must
-all match somewhere in a resource's searchable fields. Results are ranked by
+`funding`, `licenseKnown`, `connected`, `limit` and `offset`. Substantive query
+words must all match somewhere in a resource's searchable fields; common
+question words are ignored, and DNA extraction also matches DNA isolation.
+Results are ranked by
 field relevance; filtering is lexical and does not use an LLM or a live web
 search. `funding` is computed from the call's dates at request time. The
 default page size is 10, with a maximum of 50.
@@ -47,6 +49,10 @@ An AI assistant host that supports OpenAPI/HTTP tools can import
 record, then follow only verified relationships; cite each resource's
 `landingPage` and each relationship's `evidence` URL. An ordinary chat cannot
 call this API merely because someone pastes the URL into a prompt.
+
+For an assistant, pass concise topic terms in `q` and use the dedicated
+filters for resource type, pathogen, source and funding state. Treat zero
+results as a catalogue gap rather than evidence that no resource exists.
 
 The collection endpoints return an envelope containing `apiVersion`,
 `standardVersion`, `kind`, `total` and `items`. Use `/catalogue` when a consumer

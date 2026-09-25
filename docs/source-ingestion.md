@@ -38,6 +38,10 @@ For a reproducible production import, resolve that branch to a commit SHA and
 store the SHA in `sources[].sourceRevision`. The catalogue states a CC BY 4.0
 licence, which must be retained in each imported record.
 
+The selected branch currently contains four standards, all already represented
+in Glitter. The WHO Collaboratory catalogue is not a general IPSN resource
+feed. Do not label separately curated WHO publications as imports from that API.
+
 Proposed mapping:
 
 | IPSN field | Glitter destination |
@@ -55,6 +59,15 @@ Proposed mapping:
 
 Developer and supporting-material strings should not automatically become new
 entities without a stable identifier or curator review.
+
+## WHO genomics publications
+
+The WHO genomic surveillance initiative and WHO publication pages are curated
+separately from the Collaboratory standards feed. Each publication is checked
+against its own landing page and recorded with its own ISBN, date, description
+and source URL. The resource licence remains unset if that page does not
+establish a specific reuse licence. This is a selected-records workflow, not
+an automated IPSN API import.
 
 ## CGPS GHRU Protocols
 
@@ -97,8 +110,8 @@ Cards are classified according to what the resource represents:
 
 - contextual-data specifications and metadata templates are `DataStandard`;
 - best-practice and pathogen-analysis material is `GuidanceDocument`;
-- hAMRonization is both `Software` and `DataStandard` because the project
-  supplies software around a harmonised AMR result model;
+- the hAMRonization software and its AMR detection specification are separate
+  records, linked with an evidenced `implements` relationship;
 - the wastewater guidance collection is a `GuidanceDocument` landing resource.
 
 The source page's modification timestamp is retained as the source revision.

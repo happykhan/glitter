@@ -47,3 +47,26 @@ test("connections expose evidence, direction and preparation warnings", async ()
   assert.equal((await json(connections(request(`/api/v1/connections?id=${id}&direction=in`)))).body.total, 0);
   assert.equal((await json(connections(request(`/api/v1/connections?id=${id}&direction=sideways`)))).status, 400);
 });
+
+test("assistant-style questions retrieve WHO genomics guidance and existing wet-lab protocols", async () => {
+  const cases = [
+    ["foodborne WGS", "9789240021228"],
+    ["pathogen genome data sharing", "9789240061743"],
+    ["national genomic surveillance strategy", "9789240076563"],
+    ["DNA extraction protocol", "bq3ymypw"],
+    ["how do I implement WGS for foodborne outbreak investigations?", "9789240021242"],
+  ];
+  for (const [question, expectedIdPart] of cases) {
+    const { body } = await json(search(request(`/api/v1/search?q=${encodeURIComponent(question)}`)));
+    assert.ok(body.items.some((item) => item.id.includes(expectedIdPart)), `Missing ${expectedIdPart} for ${question}`);
+  }
+});
+
+test("WHO guidance retains provenance without claiming an unverified resource licence", async () => {
+  const id = encodeURIComponent("https://www.who.int/publications/i/item/9789240076563");
+  const result = (await json(resource(request(`/api/v1/resource?id=${id}`)))).body.resource;
+  assert.equal(result.sources[0].name, "World Health Organization publication");
+  assert.equal(result.license, undefined);
+  const links = (await json(connections(request(`/api/v1/connections?id=${id}`)))).body.items;
+  assert.ok(links.some((item) => item.predicate === "isSupplementTo" && item.evidence[0].source === "https://www.who.int/initiatives/genomic-surveillance-strategy"));
+});

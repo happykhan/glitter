@@ -76,9 +76,9 @@ const openapi = {
     [endpoints.search]: { get: {
       operationId: "searchResources",
       summary: "Search and filter pathogen-genomics resources",
-      description: "Use for questions like 'find Salmonella serotyping tools', 'show wet-lab protocols', or 'find open funding calls'. Search is lexical across titles, descriptions, identifiers and facets; it is not an LLM-generated answer. Returns full resource records with provenance and licence fields.",
+      description: "Use for questions about resources, protocols, standards or funding calls. Search is lexical across titles, descriptions, identifiers and facets; common question words are ignored. Prefer concise topic terms and explicit filters. It is not an LLM-generated answer. Returns full resource records with provenance and licence fields. If there are no results, say the catalogue has no match; do not invent a resource.",
       parameters: [
-        parameter("q", "Words to find in resource name, description, identifiers, facets and source name; all words must match."),
+        parameter("q", "Topic words to find in resource name, description, identifiers, facets and source name; all substantive words must match. Common question words are ignored. Use funding=open rather than the word open in q."),
         parameter("type", "Resource form, for example Software, Protocol, DataStandard, Publication or FundingOpportunity."),
         parameter("method", "Method-stage facet label or id, for example metadata harmonisation."),
         parameter("application", "Application facet label or id, for example antimicrobial resistance."),

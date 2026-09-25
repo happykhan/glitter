@@ -5,12 +5,15 @@ const aliases = {
   wgs: "whole genome sequencing",
   cgmlst: "core genome multilocus sequence typing",
   qc: "quality control",
+  extraction: "isolation",
+  extract: "isolation",
 };
+const stopWords = new Set(["a", "an", "and", "are", "can", "do", "does", "find", "for", "how", "i", "implement", "in", "is", "me", "of", "on", "show", "the", "to", "use", "using", "what", "which", "with"]);
 const normalise = (value) => String(value ?? "").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, " ").trim();
 const matches = (value, search) => normalise(value).includes(normalise(search));
 
 function score(entity, query) {
-  const words = normalise(query).split(/\s+/).filter(Boolean);
+  const words = normalise(query).split(/\s+/).filter((word) => word && !stopWords.has(word));
   if (!words.length) return 0;
   const fields = [
     [entity.name, 12],
