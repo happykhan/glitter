@@ -24,6 +24,24 @@ resource.
 graph because it says where a record was found, not how two scientific
 resources interoperate.
 
+## First curated paths
+
+- Contextual data: the DataHarmonizer paper describes the software; the
+  software implements the PHA4GE SARS-CoV-2, mpox and wastewater contextual
+  data specifications.
+- AMR: the AMRColab paper describes the AMRColab project; AMRColab uses
+  AMRFinderPlus and hAMRonization; hAMRonization implements its separately
+  identified AMR detection specification.
+- Typing: chewBBACA produces a cgMLST allele matrix that ReporTree accepts
+  **after** `ExtractCgMLST --t 0` replaces missing-call codes with zero. The
+  prepared matrix is a supporting format concept, not a claim that raw
+  chewBBACA output is directly compatible.
+
+These examples are stored in `data/seed/graph-paths.json` alongside their
+source URLs and locators. The map and resource inspector show verified
+connections by default. Proposed, disputed and retracted assertions remain
+available in the data API but are not drawn as established links.
+
 ## Evidence rule
 
 Every curated relationship should include:

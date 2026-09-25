@@ -42,5 +42,8 @@ test("funding calls include dates, status and freshness", () => {
 test("known software licences are recorded on the resource", () => {
   const software = entities.filter((entity) => entity.types.includes("Software"));
   assert.ok(software.length >= 2);
-  assert.ok(software.every((entity) => entity.license), "software licence missing");
+  for (const id of ["https://github.com/cidgoh/DataHarmonizer", "https://github.com/pha4ge/hAMRonization", "https://github.com/amrcolab/AMRColab", "https://github.com/ncbi/amr"]) {
+    assert.ok(software.find((entity) => entity.id === id)?.license, `known licence missing for ${id}`);
+  }
+  assert.equal(software.find((entity) => entity.id === "https://github.com/ncbi/amr")?.license, "https://github.com/ncbi/amr/blob/master/LICENSE");
 });

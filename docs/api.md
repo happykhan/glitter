@@ -14,8 +14,9 @@ Base URL: `https://glitter-roan.vercel.app/api/v1`
 |---|---|
 | `/api/v1` | API discovery document and endpoint links |
 | `/api/v1/catalogue` | Complete schema-valid Glitter document |
-| `/api/v1/resources` | Resource entities, excluding organisations |
+| `/api/v1/resources` | Discoverable resources, excluding supporting organisations and concepts |
 | `/api/v1/organizations` | Organisation entities |
+| `/api/v1/concepts` | Supporting formats and other concepts used to join resources |
 | `/api/v1/relationships` | Directed relationships and their evidence |
 | `/api/v1/schema` | JSON Schema for the resource specification |
 | `/api/v1/openapi` | OpenAPI 3.1 description of these endpoints |

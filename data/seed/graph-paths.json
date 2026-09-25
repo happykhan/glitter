@@ -1,0 +1,123 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://github.com/amrcolab/AMRColab",
+      "types": ["Software"],
+      "name": "AMRColab",
+      "description": "Google Colab-based suite for detecting and visualising antimicrobial-resistance determinants in bacterial genomes.",
+      "landingPage": "https://github.com/amrcolab/AMRColab",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "facets": [{ "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }],
+      "sources": [{ "name": "AMRColab repository", "sourceUrl": "https://github.com/amrcolab/AMRColab", "sourceRecordId": "amrcolab/AMRColab", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/ncbi/amr",
+      "types": ["Software"],
+      "name": "AMRFinderPlus",
+      "description": "NCBI software for identifying antimicrobial-resistance genes and point mutations in assembled bacterial sequences.",
+      "landingPage": "https://github.com/ncbi/amr",
+      "license": "https://github.com/ncbi/amr/blob/master/LICENSE",
+      "facets": [{ "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }],
+      "sources": [{ "name": "NCBI repository", "sourceUrl": "https://github.com/ncbi/amr", "sourceRecordId": "ncbi/amr", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/pha4ge/hAMRonization/blob/master/docs/hAMRonization_specification_details.csv",
+      "types": ["DataStandard"],
+      "name": "PHA4GE hAMRonization AMR detection specification",
+      "description": "Field definitions for a common structure for antimicrobial-resistance detection results, distinct from the hAMRonization parser software.",
+      "landingPage": "https://github.com/pha4ge/hAMRonization/blob/master/docs/hAMRonization_specification_details.csv",
+      "facets": [{ "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }],
+      "sources": [{ "name": "PHA4GE specification file", "sourceUrl": "https://github.com/pha4ge/hAMRonization/blob/master/docs/hAMRonization_specification_details.csv", "sourceRecordId": "hAMRonization_specification_details.csv", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "urn:glitter:format:cgmlst-allele-profile-tsv",
+      "types": ["Concept"],
+      "name": "ReporTree-ready cgMLST allele matrix",
+      "description": "Tab-separated allele profiles with missing-call codes converted to 0. A chewBBACA ExtractCgMLST step with --t 0 is needed before using the matrix in ReporTree.",
+      "landingPage": "https://github.com/insapathogenomics/ReporTree#are-you-using-chewbbaca-to-obtain-your-allele-matrix",
+      "facets": [{ "scheme": "Glitter method stage", "id": "microbial-typing", "label": "Microbial typing" }],
+      "sources": [{ "name": "ReporTree input guidance", "sourceUrl": "https://github.com/insapathogenomics/ReporTree", "sourceRecordId": "chewBBACA allele matrix guidance", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "https://w3id.org/glitter/assertion/amrcolab-paper-describes-software",
+      "subject": "https://doi.org/10.1099/mgen.0.001308",
+      "predicate": "describes",
+      "object": "https://github.com/amrcolab/AMRColab",
+      "evidence": [{ "source": "https://github.com/amrcolab/AMRColab", "locator": "README: citation and modules" }],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/amrcolab-uses-amrfinderplus",
+      "subject": "https://github.com/amrcolab/AMRColab",
+      "predicate": "uses",
+      "object": "https://github.com/ncbi/amr",
+      "evidence": [{ "source": "https://github.com/amrcolab/AMRColab", "locator": "README: modules" }],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/amrcolab-uses-hamronization",
+      "subject": "https://github.com/amrcolab/AMRColab",
+      "predicate": "uses",
+      "object": "https://github.com/pha4ge/hAMRonization",
+      "evidence": [{ "source": "https://github.com/amrcolab/AMRColab", "locator": "README: modules" }],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/hamronization-implements-specification",
+      "subject": "https://github.com/pha4ge/hAMRonization",
+      "predicate": "implements",
+      "object": "https://github.com/pha4ge/hAMRonization/blob/master/docs/hAMRonization_specification_details.csv",
+      "evidence": [{ "source": "https://github.com/pha4ge/hAMRonization", "locator": "README: implementation of the AMR detection specification" }],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/hamronization-paper-describes-specification",
+      "subject": "https://doi.org/10.1101/2024.03.07.583950",
+      "predicate": "describes",
+      "object": "https://github.com/pha4ge/hAMRonization/blob/master/docs/hAMRonization_specification_details.csv",
+      "evidence": [{ "source": "https://doi.org/10.1101/2024.03.07.583950", "locator": "Title and abstract" }],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/dataharmonizer-implements-wastewater-standard",
+      "subject": "https://github.com/cidgoh/DataHarmonizer",
+      "predicate": "implements",
+      "object": "https://github.com/pha4ge/Wastewater_Contextual_Data_Specification",
+      "evidence": [{ "source": "https://github.com/pha4ge/Wastewater_Contextual_Data_Specification", "locator": "README: Tooling and implementation" }],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/chewbbaca-produces-cgmlst-matrix",
+      "subject": "https://github.com/B-UMMI/chewBBACA",
+      "predicate": "producesOutput",
+      "object": "urn:glitter:format:cgmlst-allele-profile-tsv",
+      "description": "The ExtractCgMLST step with --t 0 produces an allele matrix with missing calls encoded as 0, suitable for ReporTree.",
+      "evidence": [{ "source": "https://github.com/insapathogenomics/ReporTree", "locator": "README: Are you using chewBBACA to obtain your allele matrix?" }],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/reportree-accepts-cgmlst-matrix",
+      "subject": "https://github.com/insapathogenomics/ReporTree",
+      "predicate": "acceptsInput",
+      "object": "urn:glitter:format:cgmlst-allele-profile-tsv",
+      "description": "Use chewBBACA ExtractCgMLST --t 0 to replace missing-call codes before loading the matrix in ReporTree.",
+      "evidence": [{ "source": "https://github.com/insapathogenomics/ReporTree", "locator": "README: Input files and chewBBACA allele matrix guidance" }],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    }
+  ]
+}

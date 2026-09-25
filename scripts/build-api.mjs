@@ -8,14 +8,16 @@ import { loadDatasets, mergeCatalogue } from "./catalogue-data.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.join(root, "public/api/v1");
 const catalogue = mergeCatalogue(loadDatasets(root));
-const resources = catalogue.entities.filter((entity) => !entity.types.includes("Organization"));
+const resources = catalogue.entities.filter((entity) => !entity.types.includes("Organization") && !entity.types.includes("Concept"));
 const organizations = catalogue.entities.filter((entity) => entity.types.includes("Organization"));
+const concepts = catalogue.entities.filter((entity) => entity.types.includes("Concept"));
 
 const endpoints = {
   index: "/api/v1",
   catalogue: "/api/v1/catalogue",
   resources: "/api/v1/resources",
   organizations: "/api/v1/organizations",
+  concepts: "/api/v1/concepts",
   relationships: "/api/v1/relationships",
   schema: "/api/v1/schema",
   openapi: "/api/v1/openapi",
@@ -40,8 +42,9 @@ const openapi = {
   paths: Object.fromEntries([
     [endpoints.index, "API discovery document"],
     [endpoints.catalogue, "Complete schema-valid Glitter catalogue"],
-    [endpoints.resources, "Resource entities, excluding organisations"],
+    [endpoints.resources, "Discoverable resources, excluding supporting organisations and concepts"],
     [endpoints.organizations, "Organisation entities"],
+    [endpoints.concepts, "Supporting concepts used to join resources"],
     [endpoints.relationships, "Curated directed relationships"],
     [endpoints.schema, "Glitter JSON Schema"],
   ].map(([endpoint, description]) => [endpoint, { get: { summary: description, responses: { "200": { description: "JSON response", content: { "application/json": { schema: { type: "object" } } } } } } }])),
@@ -58,6 +61,7 @@ const documents = {
   "catalogue.json": catalogue,
   "resources.json": collection("ResourceCollection", resources),
   "organizations.json": collection("OrganizationCollection", organizations),
+  "concepts.json": collection("ConceptCollection", concepts),
   "relationships.json": collection("RelationshipCollection", catalogue.relationships),
   "schema.json": JSON.parse(fs.readFileSync(path.join(root, "schema/glitter.schema.json"), "utf8")),
   "openapi.json": openapi,
@@ -68,4 +72,4 @@ for (const [name, document] of Object.entries(documents)) {
   fs.writeFileSync(path.join(output, name), `${JSON.stringify(document, null, 2)}\n`);
 }
 
-console.log(`Built API v1: ${resources.length} resources, ${organizations.length} organisations and ${catalogue.relationships.length} relationships.`);
+console.log(`Built API v1: ${resources.length} resources, ${organizations.length} organisations, ${concepts.length} concepts and ${catalogue.relationships.length} relationships.`);

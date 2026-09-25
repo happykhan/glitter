@@ -11,6 +11,7 @@
     { "source": "/api/v1/catalogue", "destination": "/api/v1/catalogue.json" },
     { "source": "/api/v1/resources", "destination": "/api/v1/resources.json" },
     { "source": "/api/v1/organizations", "destination": "/api/v1/organizations.json" },
+    { "source": "/api/v1/concepts", "destination": "/api/v1/concepts.json" },
     { "source": "/api/v1/relationships", "destination": "/api/v1/relationships.json" },
     { "source": "/api/v1/schema", "destination": "/api/v1/schema.json" },
     { "source": "/api/v1/openapi", "destination": "/api/v1/openapi.json" }

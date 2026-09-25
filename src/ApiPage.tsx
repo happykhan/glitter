@@ -6,8 +6,9 @@ const API_BASE = "https://glitter-roan.vercel.app/api/v1";
 const endpoints = [
   ["Discovery", "", "Start here for the version and links to every endpoint."],
   ["Catalogue", "/catalogue", "The complete Glitter document: entities and relationships together."],
-  ["Resources", "/resources", "Resource entities, excluding supporting organisations."],
+  ["Resources", "/resources", "Discoverable resources, excluding supporting organisations and concepts."],
   ["Organisations", "/organizations", "Supporting organisations named in the catalogue."],
+  ["Concepts", "/concepts", "Supporting formats and other concepts used to join resources."],
   ["Relationships", "/relationships", "Directed assertions, including catalogue provenance links."],
   ["JSON Schema", "/schema", "Validate a complete Glitter document against the draft record specification."],
   ["OpenAPI", "/openapi", "Machine-readable description of the read-only HTTP endpoints."],
@@ -63,7 +64,7 @@ export default function ApiPage() {
 
       <section id="responses" className="standard-section">
         <h2>Response format</h2>
-        <p>The resources, organisations and relationships endpoints return collections. Each collection has the same envelope; <code>items</code> contains the requested records.</p>
+        <p>The resources, organisations, concepts and relationships endpoints return collections. Each collection has the same envelope; <code>items</code> contains the requested records.</p>
         <table className="field-table">
           <caption>Collection response fields</caption>
           <thead><tr><th scope="col">Field</th><th scope="col">Type</th><th scope="col">Meaning</th></tr></thead>
@@ -72,7 +73,7 @@ export default function ApiPage() {
             <tr><th scope="row"><code>standardVersion</code></th><td>String</td><td>Version of the Glitter resource model used by these records.</td></tr>
             <tr><th scope="row"><code>kind</code></th><td>String</td><td>Which collection this is, such as <code>ResourceCollection</code>.</td></tr>
             <tr><th scope="row"><code>total</code></th><td>Number</td><td>Number of records in <code>items</code>.</td></tr>
-            <tr><th scope="row"><code>items</code></th><td>Array</td><td>The resources, organisations or relationships themselves.</td></tr>
+            <tr><th scope="row"><code>items</code></th><td>Array</td><td>The resources, organisations, concepts or relationships themselves.</td></tr>
           </tbody>
         </table>
         <p className="api-inline-note">The catalogue endpoint instead returns <code>standardVersion</code>, <code>entities</code> and <code>relationships</code>, matching the <a href="/standard#record">resource specification</a>.</p>
@@ -80,7 +81,7 @@ export default function ApiPage() {
 
       <section id="usage" className="standard-section">
         <h2>Use the data</h2>
-        <p>There is no server-side query, pagination or filtering endpoint in v1. Fetch a collection, then filter it in your own code. Stable entity URIs let you join <code>relationships[].subject</code> and <code>relationships[].object</code> back to resource identifiers.</p>
+        <p>There is no server-side query, pagination or filtering endpoint in v1. Fetch a collection, then filter it in your own code. Stable entity URIs let you join <code>relationships[].subject</code> and <code>relationships[].object</code> back to resources, organisations or supporting concepts.</p>
         <CodeExample label="Fetch and filter in JavaScript" children={javascriptExample} />
         <p>To show a connection responsibly, keep its <code>predicate</code>, <code>status</code> and <code>evidence</code>. A <code>cataloguedBy</code> link records provenance; it is not a scientific relationship.</p>
       </section>

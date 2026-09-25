@@ -1,4 +1,4 @@
-import { facetAxis, fundingState, readableType, resourceRelations, type Entity } from "./data";
+import { facetAxis, fundingState, isUsefulRelationship, readableType, resourceRelations, type Entity } from "./data";
 
 export type Filters = {
   types: string[];
@@ -51,7 +51,7 @@ export function matchesFilters(entity: Entity, query: string, filters: Filters) 
   if (filters.sources.length && !(entity.sources ?? []).some((source) => filters.sources.includes(source.name))) return false;
   if (filters.funding.length && !filters.funding.includes(fundingState(entity) ?? "not-funding")) return false;
   if (filters.licenceKnown && !entity.license) return false;
-  if (filters.connectedOnly && resourceRelations(entity.id).every((relation) => relation.predicate === "cataloguedBy")) return false;
+  if (filters.connectedOnly && !resourceRelations(entity.id).some(isUsefulRelationship)) return false;
   return true;
 }
 

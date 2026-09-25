@@ -88,7 +88,7 @@ for (const dataset of datasets) {
 
 export const entities = [...entityMap.values()];
 export const relationships = datasets.flatMap((dataset) => dataset.relationships as Relationship[]);
-export const resources = entities.filter((entity) => !entity.types.includes("Organization"));
+export const resources = entities.filter((entity) => !entity.types.includes("Organization") && !entity.types.includes("Concept"));
 export const organizations = entities.filter((entity) => entity.types.includes("Organization"));
 
 export const typeLabels: Record<string, string> = {
@@ -149,6 +149,10 @@ export function resourceRelations(id: string) {
   return relationships.filter((relationship) => relationship.subject === id || relationship.object === id);
 }
 
+export function isUsefulRelationship(relationship: Relationship) {
+  return relationship.status === "verified" && relationship.predicate !== "cataloguedBy";
+}
+
 export function fundingState(entity: Entity, today = new Date()) {
   const funding = entity.fundingOpportunity;
   if (!funding) return null;
@@ -160,7 +164,7 @@ export function fundingState(entity: Entity, today = new Date()) {
 }
 
 export function buildResourceGraph(visibleIds?: Set<string>, includeCatalogueLinks = false) {
-  const substantive = relationships.filter((relationship) => includeCatalogueLinks || relationship.predicate !== "cataloguedBy");
+  const substantive = relationships.filter((relationship) => relationship.status === "verified" && (includeCatalogueLinks || relationship.predicate !== "cataloguedBy"));
   const included = new Set<string>();
   if (visibleIds) {
     for (const id of visibleIds) included.add(id);
@@ -206,5 +210,6 @@ export function licenceLabel(url?: string) {
   if (/LGPL-3\.0/.test(url)) return "LGPL-3.0";
   if (/GPL-3\.0/.test(url)) return "GPL-3.0";
   if (/creativecommons\.org\/licenses\/by\/4\.0/.test(url)) return "CC BY 4.0";
+  if (/github\.com\/ncbi\/amr\/blob\/master\/LICENSE/.test(url)) return "Public domain notice";
   try { return new URL(url).hostname; } catch { return url; }
 }

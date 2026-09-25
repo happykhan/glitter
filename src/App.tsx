@@ -27,6 +27,7 @@ import {
   facetAxis,
   filterOptions,
   fundingState,
+  isUsefulRelationship,
   licenceLabel,
   predicateLabels,
   readableType,
@@ -135,7 +136,7 @@ function ActiveFilters({ filters, setFilters }: { filters: Filters; setFilters: 
 }
 
 function ResourceRow({ entity, selected, onSelect }: { entity: Entity; selected: boolean; onSelect: (entity: Entity) => void }) {
-  const relations = resourceRelations(entity.id).filter((relationship) => relationship.predicate !== "cataloguedBy");
+  const relations = resourceRelations(entity.id).filter(isUsefulRelationship);
   const funding = fundingState(entity);
   return <button className={`resource-row ${selected ? "is-selected" : ""}`} onClick={() => onSelect(entity)} aria-current={selected ? "true" : undefined}>
     <TypeMark entity={entity} />
@@ -154,17 +155,31 @@ function EmptyResults({ onClear }: { onClear: () => void }) {
   return <div className="empty-results"><Search size={25} /><h2>No matching resources</h2><p>Try a broader method, target, identifier or resource name.</p><button onClick={onClear}>Clear search and filters</button></div>;
 }
 
+const connectionGroups = ["Understand", "Use", "Interoperate", "Learn", "Stewardship", "Other"] as const;
+function connectionGroup(predicate: string) {
+  if (["describes", "mentions", "isDocumentedBy", "about", "isSupplementTo"].includes(predicate)) return "Understand";
+  if (["uses", "hasPart", "supersedes"].includes(predicate)) return "Use";
+  if (["implements", "conformsTo", "mapsTo", "acceptsInput", "producesOutput"].includes(predicate)) return "Interoperate";
+  if (predicate === "teaches") return "Learn";
+  if (["offeredBy", "maintainedBy", "publishedBy", "authoredBy"].includes(predicate)) return "Stewardship";
+  return "Other";
+}
+
 function Connections({ entity, onSelect }: { entity: Entity; onSelect: (entity: Entity) => void }) {
-  const connected = resourceRelations(entity.id).filter((relationship) => relationship.predicate !== "cataloguedBy").map((relationship) => {
+  const connected = resourceRelations(entity.id).filter(isUsefulRelationship).map((relationship) => {
     const outgoing = relationship.subject === entity.id;
     const other = entities.find((candidate) => candidate.id === (outgoing ? relationship.object : relationship.subject));
     return other ? { relationship, outgoing, other } : null;
   }).filter((item): item is NonNullable<typeof item> => item !== null);
   return <section className="detail-section"><h3>Connections <span>{connected.length}</span></h3>
-    {connected.length === 0 ? <p className="detail-empty">No reviewed resource-to-resource link has been recorded. This does not mean the resource has no real-world connections.</p> : <div className="connection-list">{connected.map(({ relationship, outgoing, other }) => <div className="connection-item" key={relationship.id}>
-      <button onClick={() => onSelect(other)}><TypeMark entity={other} /><span><strong>{other.name}</strong><small>{outgoing ? "→" : "←"} {predicateLabels[relationship.predicate] ?? relationship.predicate}{relationship.status ? ` · ${relationship.status}` : ""}</small></span><ChevronRight size={14} /></button>
-      {relationship.evidence?.map((evidence) => <a key={`${relationship.id}-${evidence.source}`} href={evidence.source} target="_blank" rel="noreferrer">View evidence{evidence.locator ? ` · ${evidence.locator}` : ""} <ArrowUpRight size={11} /></a>)}
-    </div>)}</div>}
+    {connected.length === 0 ? <p className="detail-empty">No verified resource link has been recorded. This does not mean the resource has no real-world connections.</p> : <div className="connection-list">{connectionGroups.map((group) => {
+      const items = connected.filter(({ relationship }) => connectionGroup(relationship.predicate) === group);
+      return items.length ? <div className="connection-group" key={group}><h4>{group}</h4>{items.map(({ relationship, outgoing, other }) => <div className="connection-item" key={relationship.id}>
+        <button onClick={() => onSelect(other)}><TypeMark entity={other} /><span><strong>{other.name}</strong><small>{outgoing ? "→" : "←"} {predicateLabels[relationship.predicate] ?? relationship.predicate} · verified</small></span><ChevronRight size={14} /></button>
+        {relationship.description && <p className="connection-note">{relationship.description}</p>}
+        {relationship.evidence?.map((evidence) => <a key={`${relationship.id}-${evidence.source}`} href={evidence.source} target="_blank" rel="noreferrer">View evidence{evidence.locator ? ` · ${evidence.locator}` : ""} <ArrowUpRight size={11} /></a>)}
+      </div>)}</div> : null;
+    })}</div>}
   </section>;
 }
 
@@ -225,6 +240,12 @@ function drawGraphNode(node: GraphNode, context: CanvasRenderingContext2D, scale
   context.restore();
 }
 
+const graphStartingPoints = [
+  { label: "Apply a contextual-data standard", id: "https://github.com/cidgoh/DataHarmonizer", detail: "Paper → tool → PHA4GE standards" },
+  { label: "Harmonise AMR results", id: "https://github.com/pha4ge/hAMRonization", detail: "AMRColab → parser → specification" },
+  { label: "Connect typing tools", id: "https://github.com/B-UMMI/chewBBACA", detail: "chewBBACA → prepared matrix → ReporTree" },
+] as const;
+
 function GraphView({ results, selected, onSelect, onClose, onClear, query, filters, setFilters, filtersOpen, setFiltersOpen }: { results: Entity[]; selected: Entity | null; onSelect: (entity: Entity) => void; onClose: () => void; onClear: () => void; query: string; filters: Filters; setFilters: React.Dispatch<React.SetStateAction<Filters>>; filtersOpen: boolean; setFiltersOpen: (open: boolean) => void }) {
   const graphRef = useRef<ForceGraphMethods<GraphNode, GraphLink>>();
   const graphWrapRef = useRef<HTMLDivElement>(null);
@@ -255,7 +276,8 @@ function GraphView({ results, selected, onSelect, onClose, onClear, query, filte
     }
     return values;
   }, [selectedId, graph.links]);
-  const predicates = [...new Set(relationships.filter((relation) => includeCatalogueLinks || relation.predicate !== "cataloguedBy").map((relation) => relation.predicate))].sort();
+  const predicates = [...new Set(relationships.filter((relation) => relation.status === "verified" && (includeCatalogueLinks || relation.predicate !== "cataloguedBy")).map((relation) => relation.predicate))].sort();
+  const suggestedStarts = !query.trim() && results.length === resources.length ? graphStartingPoints.map((item) => ({ ...item, entity: entities.find((entity) => entity.id === item.id) })).filter((item): item is typeof item & { entity: Entity } => !!item.entity) : [];
 
   useEffect(() => {
     const element = graphWrapRef.current; if (!element) return;
@@ -320,7 +342,7 @@ function GraphView({ results, selected, onSelect, onClose, onClear, query, filte
           maxZoom={7}
         />
         {!results.length && <div className="graph-state"><h2>No matching resources</h2><p>Broaden your search or filters to find a resource to explore.</p><button onClick={onClear}>Clear search and filters</button></div>}
-        {!!results.length && !selected && <div className="graph-guide"><strong>Explore a resource</strong><span>Select a node, or choose from the matching records below. The map will show its direct, reviewed connections.</span><div>{results.slice(0, 6).map((entity) => <button key={entity.id} onClick={() => onSelect(entity)}>{entity.name}<ChevronRight size={12} /></button>)}</div>{results.length > 6 && <small>Search to narrow {results.length} matching records.</small>}</div>}
+        {!!results.length && !selected && <div className="graph-guide"><strong>{suggestedStarts.length ? "Follow a verified path" : "Explore a resource"}</strong><span>{suggestedStarts.length ? "Choose a starting point, then follow the evidence-backed links in the details panel." : "Select a node, or choose from the matching records below. The map will show its direct, verified connections."}</span><div>{suggestedStarts.length ? suggestedStarts.map(({ id, label, detail, entity }) => <button key={id} onClick={() => onSelect(entity)}><span><b>{label}</b><small>{detail}</small></span><ChevronRight size={12} /></button>) : results.slice(0, 6).map((entity) => <button key={entity.id} onClick={() => onSelect(entity)}>{entity.name}<ChevronRight size={12} /></button>)}</div>{!suggestedStarts.length && results.length > 6 && <small>Search to narrow {results.length} matching records.</small>}</div>}
         {selected && graph.links.length === 0 && <div className="graph-guide graph-guide-isolated"><strong>No reviewed links yet</strong><span>{selected.name} is in the catalogue, but has no recorded {predicate === "all" ? "resource connection" : "connection of this type"}. This is an evidence gap, not a claim of isolation.</span></div>}
       </div>
       <div className="graph-help"><span>Only evidence-backed assertions are drawn. Shared tags do not create links.</span><span><i /> select a node to focus · evidence in details</span></div>
@@ -399,6 +421,6 @@ export default function App() {
       <button className="search-filter-button" onClick={() => setFiltersOpen(true)}><Filter size={15} /> Filters{activeFilterCount > 0 && <b>{activeFilterCount}</b>}</button>
     </section>}
     {view === "resources" ? <CatalogueView results={results} selected={selected} onSelect={select} onClose={() => setSelectedId(null)} onClear={clearDiscovery} query={query} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : view === "graph" ? <GraphView results={results} selected={selected} onSelect={select} onClose={() => setSelectedId(null)} onClear={clearDiscovery} query={query} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : view === "standard" ? <StandardPage /> : <ApiPage />}
-    <footer className="statusbar"><span><span className="status-dot" /> Public-health genomics resources</span><span>{resources.length} resources · {relationships.filter((relationship) => relationship.predicate !== "cataloguedBy").length} useful connections</span><span>Source provenance and licence uncertainty retained</span></footer>
+    <footer className="statusbar"><span><span className="status-dot" /> Public-health genomics resources</span><span>{resources.length} resources · {relationships.filter(isUsefulRelationship).length} verified connections</span><span>Source provenance and licence uncertainty retained</span></footer>
   </div>;
 }

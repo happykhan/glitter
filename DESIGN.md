@@ -159,7 +159,7 @@ Each ruled result carries a semantic mark, resource form, title, description, fa
 
 ### Graph Toolbar and Canvas
 
-The graph toolbar exposes resource and connection counts, relationship filtering, an optional catalogue-provenance layer, an all-records view, zoom and fit controls. The white canvas uses a 15px pale-blue dotted grid. Selecting recentres, zooms and limits the canvas to direct neighbours unless the all-records view is chosen. A compact keyboard-operable resource chooser supports discovery before selection. No-match and unlinked-resource states are explicit. Directed edges represent curated assertions; resource type, scope and source catalogue are not converted into default graph edges.
+The graph toolbar exposes resource and connection counts, relationship filtering, an optional catalogue-provenance layer, an all-records view, zoom and fit controls. The white canvas uses a 15px pale-blue dotted grid. Selecting recentres, zooms and limits the canvas to direct neighbours unless the all-records view is chosen. Three evidence-backed starting paths introduce practical interoperability questions; filtered searches still offer matching records. The inspector groups verified connections by Understand, Use, Interoperate, Learn and Stewardship, with any compatibility caveat directly on its edge. No-match and unlinked-resource states are explicit. Directed edges represent verified assertions; proposed links, resource type, scope and source catalogue are not converted into default graph edges.
 
 ### Inspector
 
