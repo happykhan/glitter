@@ -1,0 +1,107 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://www.who.int/publications/b/80650",
+      "types": ["GuidanceDocument"],
+      "name": "WHO attributes and principles for pathogen genomic data-sharing platforms",
+      "description": "Technical, governance and ethical attributes for platforms sharing pathogen genome data and associated metadata, including access, curation and equitable use.",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240113831" }],
+      "landingPage": "https://www.who.int/publications/b/80650",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/",
+      "facets": [{ "scheme": "Glitter method stage", "id": "data-sharing", "label": "Data sharing" }, { "scheme": "Glitter method stage", "id": "metadata-harmonisation", "label": "Metadata harmonisation" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/b/80650", "sourceRecordId": "80650", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://iris.who.int/handle/10665/385075",
+      "types": ["Software"],
+      "name": "WHO Genomics Costing Tool",
+      "description": "Excel-based interactive tool for estimating the costs of setting up, scaling and sustaining pathogen genomic sequencing and bioinformatics across viral and bacterial pathogens.",
+      "landingPage": "https://iris.who.int/handle/10665/385075",
+      "facets": [{ "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }, { "scheme": "Glitter application", "id": "costing", "label": "Genomics costing" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240118843", "sourceRecordId": "related Excel-based interactive costing tool", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/publications/i/item/9789240118843",
+      "types": ["GuidanceDocument"],
+      "name": "WHO Genomics Costing Tool user manual, second edition",
+      "description": "Step-by-step manual for collecting cost data, estimating expenditure and interpreting results for genomic surveillance infrastructure, workforce, biosafety and quality management.",
+      "datePublished": "2026-03-19",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240118843" }],
+      "landingPage": "https://www.who.int/publications/i/item/9789240118843",
+      "facets": [{ "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }, { "scheme": "Glitter application", "id": "costing", "label": "Genomics costing" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240118843", "sourceRecordId": "9789240118843", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/publications/m/item/epi-win-digest-52-the-utility-of-pathogen-genomics-spotlight-tb",
+      "types": ["GuidanceDocument"],
+      "name": "IPSN EPI-WIN digest: pathogen genomics for drug-resistant tuberculosis",
+      "description": "WHO/IPSN overview of sequencing approaches, implementation models and intelligence sharing for drug-resistant tuberculosis surveillance and clinical use.",
+      "datePublished": "2025-07-02",
+      "landingPage": "https://www.who.int/publications/m/item/epi-win-digest-52-the-utility-of-pathogen-genomics-spotlight-tb",
+      "facets": [{ "scheme": "Glitter target", "id": "mycobacterium-tuberculosis", "label": "Mycobacterium tuberculosis" }, { "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }],
+      "sources": [{ "name": "World Health Organization IPSN publication", "sourceUrl": "https://www.who.int/publications/m/item/epi-win-digest-52-the-utility-of-pathogen-genomics-spotlight-tb", "sourceRecordId": "EPI-WIN digest 52", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/publications/i/item/9789240011007",
+      "types": ["GuidanceDocument"],
+      "name": "WHO GLASS whole-genome sequencing for antimicrobial-resistance surveillance",
+      "description": "Technical guidance on the benefits, limits, laboratory requirements and surveillance uses of WGS for antimicrobial resistance, with country case studies.",
+      "datePublished": "2020-09-22",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240011007" }],
+      "landingPage": "https://www.who.int/publications/i/item/9789240011007",
+      "facets": [{ "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }, { "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240011007", "sourceRecordId": "9789240011007", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/publications/i/item/9789240086647",
+      "types": ["Protocol"],
+      "name": "WHO EGASP supplementary protocols, including gonococcal WGS framework",
+      "description": "Supplementary protocols for Neisseria gonorrhoeae antimicrobial-resistance surveillance, including a whole-genome sequencing framework alongside treatment-failure and extragenital-sampling protocols.",
+      "datePublished": "2024-01-24",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240086647" }],
+      "landingPage": "https://www.who.int/publications/i/item/9789240086647",
+      "facets": [{ "scheme": "Glitter target", "id": "neisseria-gonorrhoeae", "label": "Neisseria gonorrhoeae" }, { "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240086647", "sourceRecordId": "9789240086647", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.who.int/publications/i/item/9789240111547",
+      "types": ["GuidanceDocument"],
+      "name": "WHO RSV sequencing considerations for expanded GISRS surveillance",
+      "description": "Practical considerations for the scale and quality of respiratory syncytial virus sequencing, including NGS technologies suitable for whole-genome sequencing.",
+      "datePublished": "2025-06-13",
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240111547" }],
+      "landingPage": "https://www.who.int/publications/i/item/9789240111547",
+      "facets": [{ "scheme": "Glitter target", "id": "respiratory-syncytial-virus", "label": "Respiratory syncytial virus" }, { "scheme": "Glitter method stage", "id": "sequencing", "label": "Sequencing" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240111547", "sourceRecordId": "9789240111547", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "https://w3id.org/glitter/assertion/who-data-platform-attributes-supplement-sharing-principles",
+      "subject": "https://www.who.int/publications/b/80650",
+      "predicate": "isSupplementTo",
+      "object": "https://www.who.int/publications/i/item/9789240061743",
+      "description": "The platform-attributes document elaborates operational principles for repositories in the context of WHO's earlier pathogen-genome data-sharing principles.",
+      "evidence": [{ "source": "https://www.who.int/publications/b/80650", "locator": "Overview: sharing according to the guiding principles published in 2022" }],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/who-costing-tool-documented-by-manual",
+      "subject": "https://iris.who.int/handle/10665/385075",
+      "predicate": "isDocumentedBy",
+      "object": "https://www.who.int/publications/i/item/9789240118843",
+      "evidence": [{ "source": "https://www.who.int/publications/i/item/9789240118843", "locator": "Overview and Relation: related Excel-based interactive costing tool" }],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    }
+  ]
+}

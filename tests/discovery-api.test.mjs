@@ -70,3 +70,29 @@ test("WHO guidance retains provenance without claiming an unverified resource li
   const links = (await json(connections(request(`/api/v1/connections?id=${id}`)))).body.items;
   assert.ok(links.some((item) => item.predicate === "isSupplementTo" && item.evidence[0].source === "https://www.who.int/initiatives/genomic-surveillance-strategy"));
 });
+
+test("new WHO WGS materials are discoverable by use case", async () => {
+  const cases = [
+    ["genomics costing", "https://iris.who.int/handle/10665/385075"],
+    ["TB genomics", "epi-win-digest-52"],
+    ["gonococcal WGS", "9789240086647"],
+    ["RSV WGS", "9789240111547"],
+    ["AMR WGS", "9789240011007"],
+  ];
+  for (const [q, expectedIdPart] of cases) {
+    const { body } = await json(search(request(`/api/v1/search?q=${encodeURIComponent(q)}`)));
+    assert.ok(body.items.some((item) => item.id.includes(expectedIdPart)), `Missing ${expectedIdPart} for ${q}`);
+  }
+});
+
+test("the costing workbook and data-sharing principles have verified document links", async () => {
+  const tool = encodeURIComponent("https://iris.who.int/handle/10665/385075");
+  const toolLinks = (await json(connections(request(`/api/v1/connections?id=${tool}`)))).body.items;
+  assert.ok(toolLinks.some((item) => item.predicate === "isDocumentedBy" && item.neighbour.id.endsWith("9789240118843") && item.evidence.length));
+
+  const platform = encodeURIComponent("https://www.who.int/publications/b/80650");
+  const record = (await json(resource(request(`/api/v1/resource?id=${platform}`)))).body.resource;
+  assert.equal(record.license, "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/");
+  const links = (await json(connections(request(`/api/v1/connections?id=${platform}`)))).body.items;
+  assert.ok(links.some((item) => item.predicate === "isSupplementTo" && item.neighbour.id.endsWith("9789240061743") && item.evidence.length));
+});

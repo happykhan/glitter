@@ -69,6 +69,12 @@ and source URL. The resource licence remains unset if that page does not
 establish a specific reuse licence. This is a selected-records workflow, not
 an automated IPSN API import.
 
+The WHO publication pages link the Genomics Costing Tool workbook and its user
+manual as distinct resources; Glitter records their evidenced document link.
+WHO's 2025 data-sharing platform publication explicitly states CC BY-NC-SA
+3.0 IGO, so that resource has a licence URI. Do not transfer that licence to
+other WHO records without checking their own landing pages.
+
 ## CGPS GHRU Protocols
 
 The GHRU protocols page is available through the site's WordPress REST API as
