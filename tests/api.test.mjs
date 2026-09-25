@@ -30,7 +30,13 @@ test("the complete API catalogue retains schema-valid top-level fields", () => {
 
 test("the API discovery document exposes every public endpoint", () => {
   const index = read("index.json");
+  assert.equal(index.documentation, "/api");
   for (const name of ["catalogue", "resources", "organizations", "relationships", "schema", "openapi"]) {
     assert.match(index.endpoints[name], /^\/api\/v1\//);
   }
+});
+
+test("the human-readable API page has its own route", () => {
+  const vercel = JSON.parse(fs.readFileSync(path.join(root, "vercel.json"), "utf8"));
+  assert.ok(vercel.rewrites.some((rewrite) => rewrite.source === "/api" && rewrite.destination === "/index.html"));
 });

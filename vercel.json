@@ -4,6 +4,7 @@
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/standard", "destination": "/index.html" },
+    { "source": "/api", "destination": "/index.html" },
     { "source": "/graph", "destination": "/index.html" },
     { "source": "/api/v1", "destination": "/api/v1/index.json" },
     { "source": "/api/v1/", "destination": "/api/v1/index.json" },

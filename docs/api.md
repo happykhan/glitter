@@ -1,5 +1,9 @@
 # Glitter API v1
 
+The website has a [practical API guide](https://glitter-roan.vercel.app/api)
+with endpoints, response fields and copyable examples. This file records the
+same contract for repository users.
+
 The Glitter website publishes versioned, read-only JSON documents. They are
 static build artefacts: no authentication is required, responses can be cached,
 and cross-origin access is enabled.

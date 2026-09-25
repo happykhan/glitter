@@ -25,6 +25,7 @@ second view of the same filtered result set.
 - Live site: <https://glitter-roan.vercel.app>
 - Frontend: React, TypeScript and `react-force-graph-2d`
 - Resource specification: <https://glitter-roan.vercel.app/standard>
+- API guide: <https://glitter-roan.vercel.app/api>
 - Read-only JSON API: <https://glitter-roan.vercel.app/api/v1>
 
 Run it locally with `npm install` followed by `npm run dev`.

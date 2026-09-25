@@ -51,7 +51,7 @@ const documents = {
   "index.json": {
     apiVersion: "1",
     standardVersion: catalogue.standardVersion,
-    documentation: "/standard",
+    documentation: "/api",
     note: "The API is read-only. Source provenance and licensing are retained on each entity.",
     endpoints,
   },

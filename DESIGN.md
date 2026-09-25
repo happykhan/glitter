@@ -137,12 +137,13 @@ Rails, controls, panels and actions are square. Circular geometry is semantic an
 
 ### Resource Specification
 
-The `/standard` surface is a Read-mode extension of the workbench. It retains
-the square application bar, ruled navigation, IBM Plex Sans and white canvas,
-then opens into a wide editorial column with a sticky section index. Dense
-technical material is expressed through field ledgers, predicate lists and
-dark code specimens rather than card grids. API endpoints and contribution
-steps are operational links, not decorative documentation.
+The `/standard` and `/api` surfaces are Read-mode extensions of the workbench.
+They retain the square application bar, ruled navigation, IBM Plex Sans and
+white canvas, then open into a wide editorial column with a sticky section
+index. The standard owns record structure and contribution guidance; the API
+guide owns endpoints, response fields and executable examples. Dense technical
+material is expressed through field ledgers, endpoint rows and dark code
+specimens rather than card grids.
 
 On mobile the index becomes a compact two-column contents strip, the article
 uses the full viewport width, code specimens scroll internally, and endpoint

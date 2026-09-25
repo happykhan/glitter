@@ -1,58 +1,28 @@
-import { useState } from "react";
-import { ArrowUpRight, Check, Clipboard, Database, FileJson, GitPullRequest, Link2, ShieldCheck } from "lucide-react";
-
-const API_BASE = "https://glitter-roan.vercel.app/api/v1";
+import { ArrowUpRight, FileJson, GitPullRequest, Link2, ShieldCheck } from "lucide-react";
+import { CodeExample } from "./DocComponents";
 
 const entityExample = `{
-  "id": "https://doi.org/10.1099/mgen.0.001260",
+  "id": "https://doi.org/10.1099/mgen.0.001308",
   "types": ["Publication"],
-  "name": "AMRColab — a user-friendly antimicrobial resistance tool",
-  "landingPage": "https://doi.org/10.1099/mgen.0.001260",
+  "name": "AMRColab — a user-friendly antimicrobial resistance detection and visualization tool",
+  "landingPage": "https://doi.org/10.1099/mgen.0.001308",
   "facets": [
-    { "scheme": "Glitter application", "id": "amr", "label": "Antimicrobial resistance" }
+    { "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }
   ],
   "sources": [
-    { "name": "PubMed", "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38860884/", "retrievedAt": "2026-09-24" }
+    { "name": "PubMed", "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39432417/", "retrievedAt": "2026-09-24" }
   ]
 }`;
 
 const relationshipExample = `{
-  "id": "https://w3id.org/glitter/assertion/amrcolab-mentions-hamronization",
-  "subject": "https://doi.org/10.1099/mgen.0.001260",
+  "id": "https://w3id.org/glitter/assertion/amrcolab-paper-mentions-hamronization",
+  "subject": "https://doi.org/10.1099/mgen.0.001308",
   "predicate": "mentions",
   "object": "https://github.com/pha4ge/hAMRonization",
-  "evidence": [{ "source": "https://doi.org/10.1099/mgen.0.001260", "locator": "Methods" }],
+  "evidence": [{ "source": "https://pubmed.ncbi.nlm.nih.gov/39432417/", "locator": "Abstract" }],
   "assertedOn": "2026-09-24",
   "status": "verified"
 }`;
-
-const endpoints = [
-  ["Catalogue", "/catalogue", "One complete document that validates against the Glitter schema."],
-  ["Resources", "/resources", "All resource entities, excluding supporting organisations."],
-  ["Organisations", "/organizations", "Funders, maintainers, publishers and catalogue owners."],
-  ["Relationships", "/relationships", "Directed assertions with predicate, evidence and review status."],
-  ["JSON Schema", "/schema", "The machine-readable validation contract for Glitter 0.1.0."],
-  ["OpenAPI", "/openapi", "The OpenAPI 3.1 description of the read-only endpoints."],
-] as const;
-
-function CopyButton({ value, label = "Copy" }: { value: string; label?: string }) {
-  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
-  async function copy() {
-    try {
-      await navigator.clipboard.writeText(value);
-      setCopyState("copied");
-    } catch {
-      setCopyState("failed");
-    }
-    window.setTimeout(() => setCopyState("idle"), 2400);
-  }
-  const buttonLabel = copyState === "copied" ? "Copied" : copyState === "failed" ? "Select text" : label;
-  return <button className="copy-button" onClick={copy} aria-label={`${label}: ${value}`} aria-live="polite" title={copyState === "failed" ? "Clipboard access failed. Select and copy the adjacent text." : undefined}>{copyState === "copied" ? <Check size={14} /> : <Clipboard size={14} />}{buttonLabel}</button>;
-}
-
-function CodeExample({ children, label }: { children: string; label: string }) {
-  return <div className="code-example"><div><span>{label}</span><CopyButton value={children} /></div><pre><code>{children}</code></pre></div>;
-}
 
 export default function StandardPage() {
   return <main className="standard-page">
@@ -63,7 +33,6 @@ export default function StandardPage() {
       <a href="#types">Types and facets</a>
       <a href="#relationships">Relationships</a>
       <a href="#provenance">Provenance and licences</a>
-      <a href="#api">API</a>
       <a href="#contribute">Contribute</a>
       <div className="standard-version"><span>Current draft</span><b>0.1.0</b><small>JSON Schema 2020-12</small></div>
     </aside>
@@ -135,14 +104,6 @@ export default function StandardPage() {
         <h2>Provenance and licences stay distinct</h2>
         <p><code>license</code> describes the resource itself. <code>sources[].sourceLicense</code> describes metadata reused from a catalogue. One must never be inferred from the other. When either licence is unknown, the field is omitted and interfaces must say that it is not recorded.</p>
         <p>Every imported record can retain the source catalogue, source record identifier, retrieval date, upstream revision and upstream modification date. Multiple sources may support the same merged entity.</p>
-      </section>
-
-      <section id="api" className="standard-section standard-api">
-        <h2>Pull the catalogue through the API</h2>
-        <p>The API is versioned, read-only and requires no authentication. Responses are static JSON with cross-origin access enabled, making them suitable for scripts, notebooks, websites and scheduled imports.</p>
-        <div className="api-base"><Database size={18} /><code>{API_BASE}</code><CopyButton value={API_BASE} label="Copy base URL" /></div>
-        <div className="endpoint-list">{endpoints.map(([name, path, description]) => <div key={path}><div><strong>{name}</strong><code>GET {path}</code></div><p>{description}</p><a href={`${API_BASE}${path}`} target="_blank" rel="noreferrer" aria-label={`Open ${name} endpoint`}><ArrowUpRight size={16} /></a></div>)}</div>
-        <CodeExample label="Command line" children={`curl -s ${API_BASE}/resources | jq '.items[] | select(.types | index("Software"))'`} />
       </section>
 
       <section id="contribute" className="standard-section standard-contribute">
