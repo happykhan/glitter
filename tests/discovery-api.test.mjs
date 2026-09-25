@@ -110,3 +110,10 @@ test("WHO IRIS pathogen-genomics resources are searchable and their annexes link
   const links = (await json(connections(request(`/api/v1/connections?id=${annex}`)))).body.items;
   assert.ok(links.some((item) => item.predicate === "isSupplementTo" && item.neighbour.id.endsWith("9789240021242") && item.evidence[0].source.includes("iris.who.int/server/api/core/items/")));
 });
+
+test("course search distinguishes open enrolment from courses that are not running", async () => {
+  const harvard = (await json(search(request("/api/v1/search?q=sequencing%20strategies&type=TrainingResource")))).body.items;
+  assert.ok(harvard.some((item) => item.trainingCourse?.availability === "open" && item.trainingCourse.platform === "Harvard Medical School"));
+  const futurelearn = (await json(search(request("/api/v1/search?q=SARS-CoV-2%20whole%20genome%20sequencing&type=TrainingResource&source=FutureLearn")))).body.items;
+  assert.ok(futurelearn.some((item) => item.trainingCourse?.availability === "not-running"));
+});

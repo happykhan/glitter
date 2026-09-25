@@ -112,6 +112,16 @@
         "lastChecked": { "type": "string", "format": "date" }
       }
     },
+    "trainingCourse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "availability", "lastChecked"],
+      "properties": {
+        "platform": { "type": "string", "minLength": 1 },
+        "availability": { "enum": ["open", "upcoming", "not-running", "unknown"] },
+        "lastChecked": { "type": "string", "format": "date" }
+      }
+    },
     "entity": {
       "type": "object",
       "additionalProperties": false,
@@ -150,7 +160,8 @@
         "status": {
           "enum": ["draft", "active", "deprecated", "superseded", "archived"]
         },
-        "fundingOpportunity": { "$ref": "#/$defs/fundingOpportunity" }
+        "fundingOpportunity": { "$ref": "#/$defs/fundingOpportunity" },
+        "trainingCourse": { "$ref": "#/$defs/trainingCourse" }
       },
       "allOf": [
         {

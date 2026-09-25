@@ -21,6 +21,11 @@ export type FundingDetails = {
   currency?: string;
   lastChecked: string;
 };
+export type TrainingCourseDetails = {
+  platform: string;
+  availability: "open" | "upcoming" | "not-running" | "unknown";
+  lastChecked: string;
+};
 
 export type Entity = {
   id: string;
@@ -36,6 +41,7 @@ export type Entity = {
   sources?: Source[];
   status?: string;
   fundingOpportunity?: FundingDetails;
+  trainingCourse?: TrainingCourseDetails;
 };
 
 export type Evidence = { source: string; locator?: string; quote?: string };

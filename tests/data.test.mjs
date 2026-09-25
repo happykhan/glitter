@@ -47,3 +47,16 @@ test("known software licences are recorded on the resource", () => {
   }
   assert.equal(software.find((entity) => entity.id === "https://github.com/ncbi/amr")?.license, "https://github.com/ncbi/amr/blob/master/LICENSE");
 });
+
+test("online courses keep enrolment availability separate from catalogue status and licences", () => {
+  const courses = entities.filter((entity) => entity.trainingCourse);
+  assert.equal(courses.length, 8);
+  assert.equal(courses.filter((entity) => entity.trainingCourse.availability === "open").length, 4);
+  assert.equal(courses.filter((entity) => entity.trainingCourse.availability === "not-running").length, 4);
+  for (const course of courses) {
+    assert.ok(course.types.includes("TrainingResource"));
+    assert.equal(course.trainingCourse.lastChecked, "2026-09-25");
+    assert.equal(course.license, undefined);
+    assert.equal(course.sources[0].sourceUrl, course.landingPage);
+  }
+});

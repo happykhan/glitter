@@ -100,6 +100,17 @@ licence only when `dc.rights` states CC BY-NC-SA 3.0 IGO; the corresponding
 canonical licence URL is used because at least one IRIS `dc.rights.uri` is
 malformed. Recheck source rights and bibliographic dates during curation.
 
+## Online courses
+
+`data/seed/online-courses.json` contains a reviewed selection of pathogen-
+genomics courses from Harvard Medical School and FutureLearn. The catalogue
+records a course page even when enrolment is paused, but `trainingCourse`
+separately records its platform, availability and last-checked date. Refresh
+availability from the individual course page before promoting an enrolment
+link. A live page or a free course is not evidence of an open content licence;
+leave `license` unset unless reuse terms are explicit. Shared topic or provider
+alone is not grounds for a graph relationship.
+
 ## CGPS GHRU Protocols
 
 The GHRU protocols page is available through the site's WordPress REST API as

@@ -57,6 +57,7 @@ const openapi = {
       facets: { type: "array", items: { type: "object", properties: { scheme: { type: "string" }, id: { type: "string" }, label: { type: "string" } } } },
       sources: { type: "array", items: { type: "object", properties: { name: { type: "string" }, sourceUrl: { type: "string", format: "uri" }, sourceLicense: { type: "string", format: "uri" }, retrievedAt: { type: "string", format: "date" } } } },
       fundingOpportunity: { type: "object", description: "For calls that users can apply to; inspect opens, closes and lastChecked before treating as current." },
+      trainingCourse: { type: "object", description: "For online courses; availability is time-sensitive and must be read with lastChecked. Resource status active does not mean enrolment is open.", properties: { platform: { type: "string" }, availability: { type: "string", enum: ["open", "upcoming", "not-running", "unknown"] }, lastChecked: { type: "string", format: "date" } } },
       verifiedConnectionCount: { type: "integer", description: "Present on search results, not part of the Glitter entity standard." },
     }, additionalProperties: true },
     Connection: { type: "object", required: ["id", "subject", "predicate", "object", "direction", "status", "evidence", "neighbour"], properties: {

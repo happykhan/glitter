@@ -77,6 +77,11 @@ function formatMoney(entity: Entity) {
   return new Intl.NumberFormat("en-GB", { style: "currency", currency: funding.currency, maximumFractionDigits: 0 }).format(funding.amount);
 }
 
+function courseAvailability(entity: Entity) {
+  const availability = entity.trainingCourse?.availability;
+  return availability === "open" ? "Enrolment open" : availability === "not-running" ? "Not currently running" : availability === "upcoming" ? "Upcoming" : "Availability unconfirmed";
+}
+
 function toggleValue(values: string[], value: string) {
   return values.includes(value) ? values.filter((item) => item !== value) : [...values, value];
 }
@@ -141,7 +146,7 @@ function ResourceRow({ entity, selected, onSelect }: { entity: Entity; selected:
   return <button className={`resource-row ${selected ? "is-selected" : ""}`} onClick={() => onSelect(entity)} aria-current={selected ? "true" : undefined}>
     <TypeMark entity={entity} />
     <span className="resource-copy">
-      <span className="resource-kinds">{entity.types.map(readableType).join(" · ")}{funding && <b className={`funding-state state-${funding}`}>{funding}</b>}</span>
+      <span className="resource-kinds">{entity.types.map(readableType).join(" · ")}{funding && <b className={`funding-state state-${funding}`}>{funding}</b>}{entity.trainingCourse && <b className={`course-availability ${entity.trainingCourse.availability === "open" ? "is-open" : ""}`}>{courseAvailability(entity)}</b>}</span>
       <strong>{entity.name}</strong>
       {entity.description && <span className="resource-description">{entity.description}</span>}
       <span className="resource-tags">{(entity.facets ?? []).slice(0, 3).map((facet) => <span key={`${facet.scheme}-${facet.id}`}>{facet.label}</span>)}</span>
@@ -198,11 +203,13 @@ function Details({ entity, onSelect, onClose }: { entity: Entity | null; onSelec
       <div><dt>Resource licence</dt><dd className={entity.license ? "" : "unknown"}>{entity.license ? <a href={entity.license} target="_blank" rel="noreferrer">{licenceLabel(entity.license)} <ExternalLink size={11} /></a> : "Not recorded"}</dd></div>
       {source?.sourceLicense && <div><dt>Source metadata licence</dt><dd><a href={source.sourceLicense} target="_blank" rel="noreferrer">{licenceLabel(source.sourceLicense)} <ExternalLink size={11} /></a></dd></div>}
       {state && <div><dt>Funding state</dt><dd><span className={`funding-state state-${state}`}>{state}</span></dd></div>}
+      {entity.trainingCourse && <div><dt>Course availability</dt><dd>{courseAvailability(entity)}</dd></div>}
+      {entity.trainingCourse && <div><dt>Platform</dt><dd>{entity.trainingCourse.platform}</dd></div>}
       {funding?.opens && <div><dt>Opens</dt><dd>{formatDate(funding.opens)}</dd></div>}
       {funding?.closes && <div><dt>Closes</dt><dd>{formatDate(funding.closes)}</dd></div>}
       {formatMoney(entity) && <div><dt>Maximum award</dt><dd>{formatMoney(entity)}</dd></div>}
       {funding?.eligibility && <div><dt>Eligibility</dt><dd>{funding.eligibility}</dd></div>}
-      <div><dt>Last checked</dt><dd>{funding?.lastChecked ? formatDate(funding.lastChecked) : source?.retrievedAt ? formatDate(source.retrievedAt) : "Curated record"}</dd></div>
+      <div><dt>Last checked</dt><dd>{funding?.lastChecked ? formatDate(funding.lastChecked) : entity.trainingCourse?.lastChecked ? formatDate(entity.trainingCourse.lastChecked) : source?.retrievedAt ? formatDate(source.retrievedAt) : "Curated record"}</dd></div>
     </dl>
     {(entity.facets?.length ?? 0) > 0 && <section className="detail-section"><h3>Scope</h3><div className="detail-tags">{entity.facets?.map((facet) => <span key={`${facet.scheme}-${facet.id}`}><small>{facetAxis(facet)}</small>{facet.label}</span>)}</div></section>}
     <Connections entity={entity} onSelect={onSelect} />

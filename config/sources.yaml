@@ -36,6 +36,24 @@ sources:
     license_review: per-item
     enabled: true
 
+  - id: hms-pathogen-genomics-courses
+    name: Harvard Medical School pathogen genomics courses
+    organisation: Harvard Medical School
+    kind: curated-course-pages
+    canonical_url: https://learn.hms.harvard.edu/pathogen-genomics-public-health
+    import_mode: selected-records
+    license_review: per-item
+    enabled: true
+
+  - id: futurelearn-pathogen-genomics-courses
+    name: FutureLearn pathogen genomics courses
+    organisation: FutureLearn
+    kind: curated-course-pages
+    canonical_url: https://www.futurelearn.com/
+    import_mode: selected-records
+    license_review: per-item
+    enabled: true
+
   - id: cgps-ghru-protocols
     name: GHRU Protocols
     organisation: Centre for Genomic Pathogen Surveillance

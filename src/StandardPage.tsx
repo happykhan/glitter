@@ -104,6 +104,7 @@ export default function StandardPage() {
         <h2>Provenance and licences stay distinct</h2>
         <p><code>license</code> describes the resource itself. <code>sources[].sourceLicense</code> describes metadata reused from a catalogue. One must never be inferred from the other. When either licence is unknown, the field is omitted and interfaces must say that it is not recorded.</p>
         <p>Every imported record can retain the source catalogue, source record identifier, retrieval date, upstream revision and upstream modification date. Multiple sources may support the same merged entity.</p>
+        <p>Online courses may include <code>trainingCourse</code> with a platform, enrolment availability and <code>lastChecked</code> date. A course page marked <code>active</code> in the catalogue is not necessarily open for enrolment.</p>
       </section>
 
       <section id="contribute" className="standard-section standard-contribute">

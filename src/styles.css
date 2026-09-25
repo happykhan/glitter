@@ -102,6 +102,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .resource-meta span:last-child { display: flex; align-items: center; gap: 4px; }
 .resource-row > svg { align-self: center; color: var(--line-dark); }
 .funding-state { display: inline-flex; align-items: center; width: max-content; padding: 3px 6px; border: 1px solid currentColor; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: .045em; }
+.course-availability { display: inline-flex; align-items: center; width: max-content; padding: 3px 6px; border: 1px solid currentColor; color: var(--muted); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: .045em; }
+.course-availability.is-open { color: var(--teal-dark); }
 .state-open { color: var(--teal-dark); }
 .state-upcoming { color: var(--ink); background: var(--peach); }
 .state-rolling { color: var(--blue); }

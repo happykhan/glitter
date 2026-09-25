@@ -1,0 +1,94 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://learn.hms.harvard.edu/programs/foundations-i-conceptual-foundations-pathogen-genomics",
+      "types": ["TrainingResource"],
+      "name": "Foundations I: Conceptual Foundations of Pathogen Genomics",
+      "description": "Self-paced introduction to pathogen genomics, surveillance and outbreak response for public-health teams.",
+      "landingPage": "https://learn.hms.harvard.edu/programs/foundations-i-conceptual-foundations-pathogen-genomics",
+      "facets": [{ "scheme": "Glitter application", "id": "genomic-surveillance", "label": "Genomic surveillance" }],
+      "trainingCourse": { "platform": "Harvard Medical School", "availability": "open", "lastChecked": "2026-09-25" },
+      "sources": [{ "name": "Harvard Medical School course page", "sourceUrl": "https://learn.hms.harvard.edu/programs/foundations-i-conceptual-foundations-pathogen-genomics", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://learn.hms.harvard.edu/programs/foundations-ii-technical-introduction-pathogen-genomic-epidemiology",
+      "types": ["TrainingResource"],
+      "name": "Foundations II: Technical Introduction to Pathogen Genomic Epidemiology",
+      "description": "Self-paced course on mutation, transmission and phylogenetics in pathogen genomic epidemiology.",
+      "landingPage": "https://learn.hms.harvard.edu/programs/foundations-ii-technical-introduction-pathogen-genomic-epidemiology",
+      "facets": [{ "scheme": "Glitter application", "id": "genomic-surveillance", "label": "Genomic surveillance" }, { "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }],
+      "trainingCourse": { "platform": "Harvard Medical School", "availability": "open", "lastChecked": "2026-09-25" },
+      "sources": [{ "name": "Harvard Medical School course page", "sourceUrl": "https://learn.hms.harvard.edu/programs/foundations-ii-technical-introduction-pathogen-genomic-epidemiology", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://learn.hms.harvard.edu/programs/sequencing-strategies-pathogen-genomics",
+      "types": ["TrainingResource"],
+      "name": "Sequencing Strategies for Pathogen Genomics",
+      "description": "Self-paced course on selecting sequencing and library-construction strategies for public-health pathogen genomics.",
+      "landingPage": "https://learn.hms.harvard.edu/programs/sequencing-strategies-pathogen-genomics",
+      "facets": [{ "scheme": "Glitter method stage", "id": "sequencing", "label": "Sequencing" }, { "scheme": "Glitter application", "id": "genomic-surveillance", "label": "Genomic surveillance" }],
+      "trainingCourse": { "platform": "Harvard Medical School", "availability": "open", "lastChecked": "2026-09-25" },
+      "sources": [{ "name": "Harvard Medical School course page", "sourceUrl": "https://learn.hms.harvard.edu/programs/sequencing-strategies-pathogen-genomics", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://learn.hms.harvard.edu/programs/pathogen-genomics-epidemiology-interpretation",
+      "types": ["TrainingResource"],
+      "name": "Pathogen Genomics for Epidemiology: Interpretation",
+      "description": "Self-paced course on interpreting genomic outputs, distance matrices, networks and phylogenies in public-health investigations.",
+      "landingPage": "https://learn.hms.harvard.edu/programs/pathogen-genomics-epidemiology-interpretation",
+      "facets": [{ "scheme": "Glitter application", "id": "outbreak-investigation", "label": "Outbreak investigation" }, { "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }],
+      "trainingCourse": { "platform": "Harvard Medical School", "availability": "open", "lastChecked": "2026-09-25" },
+      "sources": [{ "name": "Harvard Medical School course page", "sourceUrl": "https://learn.hms.harvard.edu/programs/pathogen-genomics-epidemiology-interpretation", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.futurelearn.com/courses/pathogen-genomics-a-new-era-in-global-health-surveillance-and-strategy",
+      "types": ["TrainingResource"],
+      "name": "Pathogen Genomics: A New Era in Global Health Surveillance and Strategy",
+      "description": "Course on establishing genomic surveillance and using pathogen genomic evidence in public-health decisions.",
+      "landingPage": "https://www.futurelearn.com/courses/pathogen-genomics-a-new-era-in-global-health-surveillance-and-strategy",
+      "facets": [{ "scheme": "Glitter application", "id": "genomic-surveillance", "label": "Genomic surveillance" }],
+      "trainingCourse": { "platform": "FutureLearn", "availability": "not-running", "lastChecked": "2026-09-25" },
+      "sources": [{ "name": "FutureLearn course page", "sourceUrl": "https://www.futurelearn.com/courses/pathogen-genomics-a-new-era-in-global-health-surveillance-and-strategy", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.futurelearn.com/courses/a-practical-guide-for-sars-cov-2-whole-genome-sequencing",
+      "types": ["TrainingResource"],
+      "name": "A Practical Guide for SARS-CoV-2 Whole Genome Sequencing",
+      "description": "Course covering viral sample preparation, library preparation, sequencing, quality control and analysis.",
+      "landingPage": "https://www.futurelearn.com/courses/a-practical-guide-for-sars-cov-2-whole-genome-sequencing",
+      "facets": [{ "scheme": "Glitter target", "id": "sars-cov-2", "label": "SARS-CoV-2" }, { "scheme": "Glitter method stage", "id": "sequencing", "label": "Sequencing" }],
+      "trainingCourse": { "platform": "FutureLearn", "availability": "not-running", "lastChecked": "2026-09-25" },
+      "sources": [{ "name": "FutureLearn course page", "sourceUrl": "https://www.futurelearn.com/courses/a-practical-guide-for-sars-cov-2-whole-genome-sequencing", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.futurelearn.com/courses/making-sense-of-genomic-data-covid-19-web-based-bioinformatics",
+      "types": ["TrainingResource"],
+      "name": "Making Sense of Genomic Data: COVID-19 Web-based Bioinformatics",
+      "description": "Course on web-based SARS-CoV-2 sequence analysis, Galaxy workflows, phylogenetics and data sharing.",
+      "landingPage": "https://www.futurelearn.com/courses/making-sense-of-genomic-data-covid-19-web-based-bioinformatics",
+      "facets": [{ "scheme": "Glitter target", "id": "sars-cov-2", "label": "SARS-CoV-2" }, { "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }, { "scheme": "Glitter method stage", "id": "data-sharing", "label": "Data sharing" }],
+      "trainingCourse": { "platform": "FutureLearn", "availability": "not-running", "lastChecked": "2026-09-25" },
+      "sources": [{ "name": "FutureLearn course page", "sourceUrl": "https://www.futurelearn.com/courses/making-sense-of-genomic-data-covid-19-web-based-bioinformatics", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.futurelearn.com/courses/antimicrobial-databases-and-genotype-prediction-data-sharing-and-analysis",
+      "types": ["TrainingResource"],
+      "name": "Antimicrobial Databases and Genotype Prediction: Data Sharing and Analysis",
+      "description": "Course on pathogen AMR genotype-phenotype databases, prediction, output harmonisation and FAIR data sharing.",
+      "landingPage": "https://www.futurelearn.com/courses/antimicrobial-databases-and-genotype-prediction-data-sharing-and-analysis",
+      "facets": [{ "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }, { "scheme": "Glitter method stage", "id": "data-sharing", "label": "Data sharing" }],
+      "trainingCourse": { "platform": "FutureLearn", "availability": "not-running", "lastChecked": "2026-09-25" },
+      "sources": [{ "name": "FutureLearn course page", "sourceUrl": "https://www.futurelearn.com/courses/antimicrobial-databases-and-genotype-prediction-data-sharing-and-analysis", "retrievedAt": "2026-09-25" }],
+      "status": "active"
+    }
+  ],
+  "relationships": []
+}
