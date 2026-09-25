@@ -37,19 +37,9 @@ import {
   type GraphNode,
 } from "./data";
 import StandardPage from "./StandardPage";
+import { EMPTY_FILTERS, matchesFilters, readDiscoveryUrl, searchScore, writeDiscoveryUrl, type Filters } from "./discovery";
 
 type View = "resources" | "graph" | "standard";
-type Filters = {
-  types: string[];
-  facets: string[];
-  sources: string[];
-  funding: string[];
-  licenceKnown: boolean;
-  connectedOnly: boolean;
-};
-
-const EMPTY_FILTERS: Filters = { types: [], facets: [], sources: [], funding: [], licenceKnown: false, connectedOnly: false };
-
 const TYPE_COLOURS: Record<string, string> = {
   Publication: "#f96e81",
   Software: "#09a1a1",
@@ -84,25 +74,6 @@ function formatMoney(entity: Entity) {
   return new Intl.NumberFormat("en-GB", { style: "currency", currency: funding.currency, maximumFractionDigits: 0 }).format(funding.amount);
 }
 
-function matchesFilters(entity: Entity, query: string, filters: Filters) {
-  const needle = query.trim().toLowerCase();
-  const searchable = [
-    entity.name,
-    entity.description,
-    ...entity.types.map(readableType),
-    ...(entity.facets ?? []).flatMap((facet) => [facet.label, facetAxis(facet)]),
-    ...(entity.sources ?? []).map((source) => source.name),
-  ].filter(Boolean).join(" ").toLowerCase();
-  if (needle && !searchable.includes(needle)) return false;
-  if (filters.types.length && !entity.types.some((type) => filters.types.includes(type))) return false;
-  if (filters.facets.length && !(entity.facets ?? []).some((facet) => filters.facets.includes(`${facetAxis(facet)}|${facet.label}`))) return false;
-  if (filters.sources.length && !(entity.sources ?? []).some((source) => filters.sources.includes(source.name))) return false;
-  if (filters.funding.length && !filters.funding.includes(fundingState(entity) ?? "not-funding")) return false;
-  if (filters.licenceKnown && !entity.license) return false;
-  if (filters.connectedOnly && resourceRelations(entity.id).filter((relation) => relation.predicate !== "cataloguedBy").length === 0) return false;
-  return true;
-}
-
 function toggleValue(values: string[], value: string) {
   return values.includes(value) ? values.filter((item) => item !== value) : [...values, value];
 }
@@ -119,26 +90,27 @@ function FilterOption({ checked, label, count, onChange }: { checked: boolean; l
   return <label className="filter-option"><input type="checkbox" checked={checked} onChange={onChange} /><span className="check-box">{checked && <Check size={11} />}</span><span>{label}</span>{count !== undefined && <small>{count}</small>}</label>;
 }
 
-function FiltersPanel({ filters, setFilters, visible, onClose }: { filters: Filters; setFilters: React.Dispatch<React.SetStateAction<Filters>>; visible: boolean; onClose: () => void }) {
-  const typeCount = (type: string) => resources.filter((resource) => resource.types.includes(type)).length;
-  const facetCount = (value: string) => resources.filter((resource) => (resource.facets ?? []).some((facet) => `${facetAxis(facet)}|${facet.label}` === value)).length;
-  const sourceCount = (source: string) => resources.filter((resource) => (resource.sources ?? []).some((item) => item.name === source)).length;
+function FiltersPanel({ filters, setFilters, query, visible, onClose }: { filters: Filters; setFilters: React.Dispatch<React.SetStateAction<Filters>>; query: string; visible: boolean; onClose: () => void }) {
+  const count = (key: keyof Filters, value: string) => resources.filter((resource) => {
+    const withoutGroup = { ...filters, [key]: Array.isArray(filters[key]) ? [] : false } as Filters;
+    if (!matchesFilters(resource, query, withoutGroup)) return false;
+    if (key === "types") return resource.types.includes(value);
+    if (key === "facets") return (resource.facets ?? []).some((facet) => `${facetAxis(facet)}|${facet.label}` === value);
+    return (resource.sources ?? []).some((source) => source.name === value);
+  }).length;
   return <aside className={`filters-panel ${visible ? "is-open" : ""}`} aria-label="Filter resources">
     <div className="filters-title"><span><Filter size={15} /> Filters</span><button className="mobile-close" onClick={onClose} aria-label="Close filters"><X size={17} /></button></div>
     <FilterGroup title="Resource form">
-      {filterOptions.types.map((type) => <FilterOption key={type} checked={filters.types.includes(type)} label={readableType(type)} count={typeCount(type)} onChange={() => setFilters((current) => ({ ...current, types: toggleValue(current.types, type) }))} />)}
+      {filterOptions.types.map((type) => <FilterOption key={type} checked={filters.types.includes(type)} label={readableType(type)} count={count("types", type)} onChange={() => setFilters((current) => ({ ...current, types: toggleValue(current.types, type) }))} />)}
     </FilterGroup>
-    <FilterGroup title="Topic and scope">
-      {filterOptions.facets.map((value) => {
-        const [axis, label] = value.split("|");
-        return <FilterOption key={value} checked={filters.facets.includes(value)} label={`${label} · ${axis}`} count={facetCount(value)} onChange={() => setFilters((current) => ({ ...current, facets: toggleValue(current.facets, value) }))} />;
-      })}
-    </FilterGroup>
+    {["Method", "Application", "Target"].map((axis) => <FilterGroup key={axis} title={axis} open={axis === "Method"}>
+      {filterOptions.facets.filter((value) => value.startsWith(`${axis}|`)).map((value) => <FilterOption key={value} checked={filters.facets.includes(value)} label={value.split("|")[1]} count={count("facets", value)} onChange={() => setFilters((current) => ({ ...current, facets: toggleValue(current.facets, value) }))} />)}
+    </FilterGroup>)}
     <FilterGroup title="Funding state" open={false}>
       {["open", "upcoming", "rolling", "closed"].map((state) => <FilterOption key={state} checked={filters.funding.includes(state)} label={state[0].toUpperCase() + state.slice(1)} onChange={() => setFilters((current) => ({ ...current, funding: toggleValue(current.funding, state) }))} />)}
     </FilterGroup>
     <FilterGroup title="Source catalogue" open={false}>
-      {filterOptions.sources.map((source) => <FilterOption key={source} checked={filters.sources.includes(source)} label={source} count={sourceCount(source)} onChange={() => setFilters((current) => ({ ...current, sources: toggleValue(current.sources, source) }))} />)}
+      {filterOptions.sources.map((source) => <FilterOption key={source} checked={filters.sources.includes(source)} label={source} count={count("sources", source)} onChange={() => setFilters((current) => ({ ...current, sources: toggleValue(current.sources, source) }))} />)}
     </FilterGroup>
     <FilterGroup title="Record quality" open={false}>
       <FilterOption checked={filters.connectedOnly} label="Has curated connections" onChange={() => setFilters((current) => ({ ...current, connectedOnly: !current.connectedOnly }))} />
@@ -177,19 +149,20 @@ function ResourceRow({ entity, selected, onSelect }: { entity: Entity; selected:
 }
 
 function EmptyResults({ onClear }: { onClear: () => void }) {
-  return <div className="empty-results"><Search size={25} /><h2>No matching resources</h2><p>Remove a filter or try a broader method, pathogen or resource name.</p><button onClick={onClear}>Clear filters</button></div>;
+  return <div className="empty-results"><Search size={25} /><h2>No matching resources</h2><p>Try a broader method, target, identifier or resource name.</p><button onClick={onClear}>Clear search and filters</button></div>;
 }
 
 function Connections({ entity, onSelect }: { entity: Entity; onSelect: (entity: Entity) => void }) {
-  const connected = resourceRelations(entity.id).map((relationship) => {
+  const connected = resourceRelations(entity.id).filter((relationship) => relationship.predicate !== "cataloguedBy").map((relationship) => {
     const outgoing = relationship.subject === entity.id;
     const other = entities.find((candidate) => candidate.id === (outgoing ? relationship.object : relationship.subject));
     return other ? { relationship, outgoing, other } : null;
   }).filter((item): item is NonNullable<typeof item> => item !== null);
   return <section className="detail-section"><h3>Connections <span>{connected.length}</span></h3>
-    {connected.length === 0 ? <p className="detail-empty">No curated resource-to-resource connections yet.</p> : <div className="connection-list">{connected.map(({ relationship, outgoing, other }) => <button key={relationship.id} onClick={() => onSelect(other)}>
-      <TypeMark entity={other} /><span><strong>{other.name}</strong><small>{outgoing ? "→" : "←"} {predicateLabels[relationship.predicate] ?? relationship.predicate}{relationship.status ? ` · ${relationship.status}` : ""}</small></span><ChevronRight size={14} />
-    </button>)}</div>}
+    {connected.length === 0 ? <p className="detail-empty">No reviewed resource-to-resource link has been recorded. This does not mean the resource has no real-world connections.</p> : <div className="connection-list">{connected.map(({ relationship, outgoing, other }) => <div className="connection-item" key={relationship.id}>
+      <button onClick={() => onSelect(other)}><TypeMark entity={other} /><span><strong>{other.name}</strong><small>{outgoing ? "→" : "←"} {predicateLabels[relationship.predicate] ?? relationship.predicate}{relationship.status ? ` · ${relationship.status}` : ""}</small></span><ChevronRight size={14} /></button>
+      {relationship.evidence?.map((evidence) => <a key={`${relationship.id}-${evidence.source}`} href={evidence.source} target="_blank" rel="noreferrer">View evidence{evidence.locator ? ` · ${evidence.locator}` : ""} <ArrowUpRight size={11} /></a>)}
+    </div>)}</div>}
   </section>;
 }
 
@@ -221,15 +194,15 @@ function Details({ entity, onSelect, onClose }: { entity: Entity | null; onSelec
   </aside>;
 }
 
-function CatalogueView({ results, selected, onSelect, filters, setFilters, filtersOpen, setFiltersOpen }: { results: Entity[]; selected: Entity | null; onSelect: (entity: Entity) => void; filters: Filters; setFilters: React.Dispatch<React.SetStateAction<Filters>>; filtersOpen: boolean; setFiltersOpen: (open: boolean) => void }) {
+function CatalogueView({ results, selected, onSelect, onClose, onClear, query, filters, setFilters, filtersOpen, setFiltersOpen }: { results: Entity[]; selected: Entity | null; onSelect: (entity: Entity) => void; onClose: () => void; onClear: () => void; query: string; filters: Filters; setFilters: React.Dispatch<React.SetStateAction<Filters>>; filtersOpen: boolean; setFiltersOpen: (open: boolean) => void }) {
   return <main className="catalogue-workspace">
-    <FiltersPanel filters={filters} setFilters={setFilters} visible={filtersOpen} onClose={() => setFiltersOpen(false)} />
+    <FiltersPanel filters={filters} setFilters={setFilters} query={query} visible={filtersOpen} onClose={() => setFiltersOpen(false)} />
     <section className="results-panel" aria-label="Resource results">
       <div className="results-heading"><div><h1>Resources</h1><p>{results.length} of {resources.length} records</p></div><button className="mobile-filter" onClick={() => setFiltersOpen(true)}><Filter size={15} /> Filters</button></div>
       <ActiveFilters filters={filters} setFilters={setFilters} />
-      <div className="results-list">{results.length ? results.map((entity) => <ResourceRow key={entity.id} entity={entity} selected={selected?.id === entity.id} onSelect={onSelect} />) : <EmptyResults onClear={() => setFilters(EMPTY_FILTERS)} />}</div>
+      <div className="results-list">{results.length ? results.map((entity) => <ResourceRow key={entity.id} entity={entity} selected={selected?.id === entity.id} onSelect={onSelect} />) : <EmptyResults onClear={onClear} />}</div>
     </section>
-    <Details entity={selected} onSelect={onSelect} onClose={() => onSelect(selected!)} />
+    <Details entity={selected} onSelect={onSelect} onClose={onClose} />
   </main>;
 }
 
@@ -250,20 +223,25 @@ function drawGraphNode(node: GraphNode, context: CanvasRenderingContext2D, scale
   context.restore();
 }
 
-function GraphView({ results, selected, onSelect, filters, setFilters, filtersOpen, setFiltersOpen }: { results: Entity[]; selected: Entity | null; onSelect: (entity: Entity) => void; filters: Filters; setFilters: React.Dispatch<React.SetStateAction<Filters>>; filtersOpen: boolean; setFiltersOpen: (open: boolean) => void }) {
+function GraphView({ results, selected, onSelect, onClose, onClear, query, filters, setFilters, filtersOpen, setFiltersOpen }: { results: Entity[]; selected: Entity | null; onSelect: (entity: Entity) => void; onClose: () => void; onClear: () => void; query: string; filters: Filters; setFilters: React.Dispatch<React.SetStateAction<Filters>>; filtersOpen: boolean; setFiltersOpen: (open: boolean) => void }) {
   const graphRef = useRef<ForceGraphMethods<GraphNode, GraphLink>>();
   const graphWrapRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 800, height: 650 });
   const [predicate, setPredicate] = useState("all");
   const [includeCatalogueLinks, setIncludeCatalogueLinks] = useState(false);
-  const [showUnconnected, setShowUnconnected] = useState(false);
-  const resultIds = useMemo(() => new Set(results.map((entity) => entity.id)), [results]);
+  const [showAll, setShowAll] = useState(false);
+  const resultIds = useMemo(() => new Set([...results.map((entity) => entity.id), ...(selected ? [selected.id] : [])]), [results, selected]);
   const graph = useMemo(() => {
     const built = buildResourceGraph(resultIds, includeCatalogueLinks);
     const links = predicate === "all" ? built.links : built.links.filter((link) => link.relationship.predicate === predicate);
-    const ids = new Set(links.flatMap((link) => [endpointId(link.source), endpointId(link.target)]));
-    return { nodes: showUnconnected ? built.nodes : built.nodes.filter((node) => ids.has(node.id)), links };
-  }, [resultIds, includeCatalogueLinks, predicate, showUnconnected]);
+    const linkedIds = new Set(links.flatMap((link) => [endpointId(link.source), endpointId(link.target)]));
+    if (selected && !showAll) {
+      const focusLinks = links.filter((link) => endpointId(link.source) === selected.id || endpointId(link.target) === selected.id);
+      const focusIds = new Set([selected.id, ...focusLinks.flatMap((link) => [endpointId(link.source), endpointId(link.target)])]);
+      return { nodes: built.nodes.filter((node) => focusIds.has(node.id)), links: focusLinks };
+    }
+    return { nodes: built.nodes.filter((node) => showAll || linkedIds.has(node.id)), links };
+  }, [resultIds, includeCatalogueLinks, predicate, selected, showAll]);
   const selectedId = selected?.id ?? null;
   const neighbours = useMemo(() => {
     if (!selectedId) return null;
@@ -286,25 +264,25 @@ function GraphView({ results, selected, onSelect, filters, setFilters, filtersOp
     const forceGraph = graphRef.current;
     const charge = forceGraph?.d3Force("charge") as { strength?: (value: number) => unknown } | undefined;
     const link = forceGraph?.d3Force("link") as { distance?: (value: number) => unknown } | undefined;
-    charge?.strength?.(-55);
-    link?.distance?.(62);
+    charge?.strength?.(-105);
+    link?.distance?.(size.width < 600 ? 64 : 105);
     forceGraph?.d3ReheatSimulation();
-  }, [graph.nodes.length, graph.links.length]);
+  }, [graph.nodes.length, graph.links.length, size.width]);
   useEffect(() => { const timer = window.setTimeout(() => graphRef.current?.zoomToFit(600, size.width < 600 ? 70 : 54), 450); return () => window.clearTimeout(timer); }, [graph.nodes.length, graph.links.length, size.width]);
   useEffect(() => {
     const node = graph.nodes.find((item) => item.id === selectedId);
-    if (node && typeof node.x === "number" && typeof node.y === "number") { graphRef.current?.centerAt(node.x, node.y, 450); graphRef.current?.zoom(2, 450); }
-  }, [selectedId, graph.nodes]);
+    if (node && typeof node.x === "number" && typeof node.y === "number") { graphRef.current?.centerAt(node.x, node.y + (size.width < 600 ? 65 : 0), 450); graphRef.current?.zoom(size.width < 600 ? 1.3 : 2, 450); }
+  }, [selectedId, graph.nodes, size.width]);
 
   return <main className="graph-workspace">
-    <FiltersPanel filters={filters} setFilters={setFilters} visible={filtersOpen} onClose={() => setFiltersOpen(false)} />
+    <FiltersPanel filters={filters} setFilters={setFilters} query={query} visible={filtersOpen} onClose={() => setFiltersOpen(false)} />
     <section className="graph-stage" aria-label="Evidence-backed resource graph">
       <div className="graph-toolbar">
-        <div className="graph-count"><CircleDot size={15} /><span>{graph.nodes.length} nodes</span><span>{graph.links.length} curated connections</span></div>
+        <div className="graph-count"><CircleDot size={15} /><span>{selected && !showAll ? "Focused view" : "Connections overview"}</span><span>{graph.nodes.length} records · {graph.links.length} links</span></div>
         <div className="graph-controls">
           <label>Relationship<select value={predicate} onChange={(event) => setPredicate(event.target.value)}><option value="all">All useful relationships</option>{predicates.map((value) => <option key={value} value={value}>{predicateLabels[value] ?? value}</option>)}</select></label>
           <label className="catalogue-toggle"><input type="checkbox" checked={includeCatalogueLinks} onChange={(event) => setIncludeCatalogueLinks(event.target.checked)} /> Include catalogue links</label>
-          <label className="unconnected-toggle"><input type="checkbox" checked={showUnconnected} onChange={(event) => setShowUnconnected(event.target.checked)} /> Show unconnected</label>
+          <label className="unconnected-toggle"><input type="checkbox" checked={showAll} onChange={(event) => setShowAll(event.target.checked)} /> Show all records</label>
           <button onClick={() => graphRef.current?.zoom((graphRef.current?.zoom() ?? 1) * 1.25, 180)} aria-label="Zoom in"><Plus size={16} /></button>
           <button onClick={() => graphRef.current?.zoom((graphRef.current?.zoom() ?? 1) / 1.25, 180)} aria-label="Zoom out"><Minus size={16} /></button>
           <button onClick={() => graphRef.current?.zoomToFit(500, size.width < 600 ? 70 : 54)} aria-label="Fit graph"><LocateFixed size={16} /><span>Fit</span></button>
@@ -321,16 +299,16 @@ function GraphView({ results, selected, onSelect, filters, setFilters, filtersOp
           nodeLabel={(node) => `${node.name} — ${node.entity.types.map(readableType).join(", ")}`}
           nodeCanvasObject={(node, context, scale) => drawGraphNode(node, context, scale, selectedId, neighbours)}
           nodePointerAreaPaint={(node, colour, context) => { context.fillStyle = colour; context.beginPath(); context.arc(node.x ?? 0, node.y ?? 0, 11, 0, Math.PI * 2); context.fill(); }}
-          linkColor={(link) => !neighbours ? "rgba(84,132,164,.48)" : neighbours.has(endpointId(link.source)) && neighbours.has(endpointId(link.target)) ? "rgba(84,132,164,.78)" : "rgba(84,132,164,.06)"}
+          linkColor={(link) => !selectedId || !showAll ? "rgba(84,132,164,.70)" : neighbours?.has(endpointId(link.source)) && neighbours.has(endpointId(link.target)) ? "rgba(84,132,164,.78)" : "rgba(84,132,164,.09)"}
           linkWidth={(link) => selectedId && (endpointId(link.source) === selectedId || endpointId(link.target) === selectedId) ? 2 : 1}
           linkDirectionalArrowLength={4}
-          linkLabel={(link) => `${link.predicate} · ${link.relationship.status ?? "unreviewed"}`}
+          linkLabel={(link) => `${link.predicate} · ${link.relationship.status ?? "unreviewed"}${link.relationship.evidence?.length ? " · evidence in resource details" : ""}`}
           onNodeClick={(node) => onSelect(node.entity)}
           onEngineStop={() => {
             const node = graph.nodes.find((item) => item.id === selectedId);
             if (node && typeof node.x === "number" && typeof node.y === "number") {
-              graphRef.current?.centerAt(node.x, node.y, 400);
-              graphRef.current?.zoom(2, 400);
+              graphRef.current?.centerAt(node.x, node.y + (size.width < 600 ? 65 : 0), 400);
+              graphRef.current?.zoom(size.width < 600 ? 1.3 : 2, 400);
             } else graphRef.current?.zoomToFit(500, size.width < 600 ? 70 : 54);
           }}
           cooldownTicks={120}
@@ -339,22 +317,27 @@ function GraphView({ results, selected, onSelect, filters, setFilters, filtersOp
           minZoom={0.4}
           maxZoom={7}
         />
+        {!results.length && <div className="graph-state"><h2>No matching resources</h2><p>Broaden your search or filters to find a resource to explore.</p><button onClick={onClear}>Clear search and filters</button></div>}
+        {!!results.length && !selected && <div className="graph-guide"><strong>Explore a resource</strong><span>Select a node, or choose from the matching records below. The map will show its direct, reviewed connections.</span><div>{results.slice(0, 6).map((entity) => <button key={entity.id} onClick={() => onSelect(entity)}>{entity.name}<ChevronRight size={12} /></button>)}</div>{results.length > 6 && <small>Search to narrow {results.length} matching records.</small>}</div>}
+        {selected && graph.links.length === 0 && <div className="graph-guide graph-guide-isolated"><strong>No reviewed links yet</strong><span>{selected.name} is in the catalogue, but has no recorded {predicate === "all" ? "resource connection" : "connection of this type"}. This is an evidence gap, not a claim of isolation.</span></div>}
       </div>
-      <div className="graph-help"><span>Edges are curated assertions, not shared categories.</span><span><i /> directed relationship · select a node to isolate neighbours</span></div>
+      <div className="graph-help"><span>Only evidence-backed assertions are drawn. Shared tags do not create links.</span><span><i /> select a node to focus · evidence in details</span></div>
     </section>
-    <Details entity={selected} onSelect={onSelect} onClose={() => onSelect(selected!)} />
+    <Details entity={selected} onSelect={onSelect} onClose={onClose} />
   </main>;
 }
 
 export default function App() {
   const viewFromPath = (): View => window.location.pathname === "/standard" ? "standard" : window.location.pathname === "/graph" ? "graph" : "resources";
+  const initial = useRef(readDiscoveryUrl(window.location.search));
   const [view, setView] = useState<View>(viewFromPath);
-  const [query, setQuery] = useState("");
-  const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [query, setQuery] = useState(initial.current.query);
+  const [filters, setFilters] = useState<Filters>(initial.current.filters);
+  const [selectedId, setSelectedId] = useState<string | null>(initial.current.selectedId);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const selected = entities.find((entity) => entity.id === selectedId) ?? null;
   const results = useMemo(() => resources.filter((entity) => matchesFilters(entity, query, filters)).sort((a, b) => {
+    if (query.trim()) return searchScore(b, query) - searchScore(a, query) || a.name.localeCompare(b.name);
     const fundingA = fundingState(a); const fundingB = fundingState(b);
     if (fundingA === "open" && fundingB !== "open") return -1;
     if (fundingB === "open" && fundingA !== "open") return 1;
@@ -365,16 +348,26 @@ export default function App() {
   function select(entity: Entity) { setSelectedId((current) => current === entity.id ? null : entity.id); }
   function navigate(next: View) {
     const path = next === "resources" ? "/" : `/${next}`;
-    window.history.pushState({}, "", path);
+    window.history.pushState({}, "", `${path}${window.location.search}`);
     setView(next);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   useEffect(() => {
-    const onPopState = () => setView(viewFromPath());
+    const onPopState = () => {
+      const restored = readDiscoveryUrl(window.location.search);
+      setView(viewFromPath()); setQuery(restored.query); setFilters(restored.filters); setSelectedId(restored.selectedId);
+    };
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
+  useEffect(() => {
+    const search = writeDiscoveryUrl(query, filters, selectedId);
+    const url = `${window.location.pathname}${search ? `?${search}` : ""}`;
+    if (`${window.location.pathname}${window.location.search}` !== url) window.history.replaceState({}, "", url);
+  }, [query, filters, selectedId]);
+
+  function clearDiscovery() { setQuery(""); setFilters(EMPTY_FILTERS); }
 
   return <div className={`app-shell ${view === "standard" ? "is-standard" : ""}`}>
     <header className="topbar">
@@ -392,7 +385,7 @@ export default function App() {
       {query && <button onClick={() => setQuery("")} aria-label="Clear search"><X size={17} /></button>}
       <button className="search-filter-button" onClick={() => setFiltersOpen(true)}><Filter size={15} /> Filters{activeFilterCount > 0 && <b>{activeFilterCount}</b>}</button>
     </section>}
-    {view === "resources" ? <CatalogueView results={results} selected={selected} onSelect={select} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : view === "graph" ? <GraphView results={results} selected={selected} onSelect={select} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : <StandardPage />}
+    {view === "resources" ? <CatalogueView results={results} selected={selected} onSelect={select} onClose={() => setSelectedId(null)} onClear={clearDiscovery} query={query} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : view === "graph" ? <GraphView results={results} selected={selected} onSelect={select} onClose={() => setSelectedId(null)} onClear={clearDiscovery} query={query} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : <StandardPage />}
     <footer className="statusbar"><span><span className="status-dot" /> Public-health genomics resources</span><span>{resources.length} resources · {relationships.filter((relationship) => relationship.predicate !== "cataloguedBy").length} useful connections</span><span>Source provenance and licence uncertainty retained</span></footer>
   </div>;
 }

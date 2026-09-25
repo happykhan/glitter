@@ -1,0 +1,60 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://github.com/B-UMMI/chewBBACA",
+      "types": ["Software"],
+      "name": "chewBBACA",
+      "description": "Suite for creating and evaluating cgMLST and wgMLST schemas and calling alleles for microbial typing.",
+      "landingPage": "https://github.com/B-UMMI/chewBBACA",
+      "license": "https://spdx.org/licenses/GPL-3.0-only.html",
+      "facets": [
+        { "scheme": "Glitter method stage", "id": "microbial-typing", "label": "Microbial typing" },
+        { "scheme": "Glitter application", "id": "outbreak-investigation", "label": "Outbreak investigation" },
+        { "scheme": "Glitter target", "id": "pathogen-agnostic", "label": "Pathogen-agnostic" }
+      ],
+      "sources": [
+        { "name": "GMI Knowledge Hub", "sourceUrl": "https://globalmicrobialidentifier.org/hub/tools/index.html", "sourceRecordId": "chewBBACA", "retrievedAt": "2026-09-25" },
+        { "name": "GitHub repository", "sourceUrl": "https://github.com/B-UMMI/chewBBACA", "sourceRecordId": "B-UMMI/chewBBACA", "retrievedAt": "2026-09-25" }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/insapathogenomics/ReporTree",
+      "types": ["Software"],
+      "name": "ReporTree",
+      "description": "Produces genetic-cluster and surveillance reports from allele profiles, alignments, trees or distance matrices alongside epidemiological metadata.",
+      "landingPage": "https://github.com/insapathogenomics/ReporTree",
+      "license": "https://spdx.org/licenses/GPL-3.0-only.html",
+      "facets": [
+        { "scheme": "Glitter method stage", "id": "microbial-typing", "label": "Microbial typing" },
+        { "scheme": "Glitter application", "id": "outbreak-investigation", "label": "Outbreak investigation" },
+        { "scheme": "Glitter target", "id": "pathogen-agnostic", "label": "Pathogen-agnostic" }
+      ],
+      "sources": [
+        { "name": "GMI Knowledge Hub", "sourceUrl": "https://globalmicrobialidentifier.org/hub/tools/index.html", "sourceRecordId": "ReporTree", "retrievedAt": "2026-09-25" },
+        { "name": "GitHub repository", "sourceUrl": "https://github.com/insapathogenomics/ReporTree", "sourceRecordId": "insapathogenomics/ReporTree", "retrievedAt": "2026-09-25" }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/tseemann/shovill",
+      "types": ["Software"],
+      "name": "Shovill",
+      "description": "Assembles bacterial isolate genomes from Illumina paired-end short reads.",
+      "landingPage": "https://github.com/tseemann/shovill",
+      "license": "https://spdx.org/licenses/GPL-3.0-only.html",
+      "facets": [
+        { "scheme": "Glitter method stage", "id": "genome-assembly", "label": "Genome assembly" },
+        { "scheme": "Glitter method stage", "id": "read-processing", "label": "Read processing" },
+        { "scheme": "Glitter target", "id": "bacterial-isolates", "label": "Bacterial isolates" }
+      ],
+      "sources": [
+        { "name": "GMI Knowledge Hub", "sourceUrl": "https://globalmicrobialidentifier.org/hub/tools/index.html", "sourceRecordId": "Shovill", "retrievedAt": "2026-09-25" },
+        { "name": "GitHub repository", "sourceUrl": "https://github.com/tseemann/shovill", "sourceRecordId": "tseemann/shovill", "retrievedAt": "2026-09-25" }
+      ],
+      "status": "active"
+    }
+  ],
+  "relationships": []
+}

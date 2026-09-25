@@ -142,7 +142,7 @@ export function facetAxis(facet: Facet) {
   const scheme = facet.scheme.toLowerCase();
   if (scheme.includes("method")) return "Method";
   if (scheme.includes("application")) return "Application";
-  return "Pathogen";
+  return "Target";
 }
 
 export function resourceRelations(id: string) {
@@ -204,6 +204,7 @@ export function licenceLabel(url?: string) {
   if (!url) return "Not recorded";
   if (/spdx\.org\/licenses\/MIT/.test(url)) return "MIT";
   if (/LGPL-3\.0/.test(url)) return "LGPL-3.0";
+  if (/GPL-3\.0/.test(url)) return "GPL-3.0";
   if (/creativecommons\.org\/licenses\/by\/4\.0/.test(url)) return "CC BY 4.0";
   try { return new URL(url).hostname; } catch { return url; }
 }

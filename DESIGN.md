@@ -50,16 +50,16 @@ components:
 
 Glitter opens as a searchable resource directory with a graph view of the same filtered records. A clean white canvas, square institutional rails, compact controls and a persistent status line make it operational from the first viewport. Search and filters lead discovery; the graph explains useful evidence-backed connections. There is no hero, workflow fiction or decorative prose.
 
-Selection binds topology to evidence. Choosing a node recentres and zooms the graph, isolates its one-hop neighbourhood, reveals edge predicates and presents the same neighbours as keyboard-operable inspector controls. Provenance and licence uncertainty remain first-class facts.
+Selection binds topology to evidence. Choosing a node recentres and zooms the graph, limits it to its direct reviewed connections, and presents the same neighbours and evidence links as keyboard-operable inspector controls. Unlinked records stay discoverable and receive an explicit evidence-gap state. Provenance and licence uncertainty remain first-class facts.
 
 **Key Characteristics:**
 
-- Prominent search across titles, descriptions, types, facets and sources.
+- Relevance-ranked search across titles, identifiers, descriptions, types, facets and sources.
 - Faceted directory as the primary surface and force-directed graph as a peer view.
 - Square ruled rails around white list and graph canvases.
 - IBM Plex Sans for every interface and evidence role.
 - Semantic node colours reinforced by shape and text.
-- Shared selection across graph, node index and inspector.
+- Shared selection across graph, result list and inspector.
 - Deliberately themed focus, selection and scrollbar surfaces.
 
 ## Colors
@@ -150,7 +150,7 @@ rows collapse without widening the document.
 
 ### Search and Filters
 
-Search occupies a full-width 58px ruled band and matches names, descriptions, resource forms, facets and source catalogues. The filter rail separates resource form, topic/scope, funding state, source and record quality. Active filters appear as removable chips. On mobile the same controls move into a labelled drawer.
+Search occupies a full-width 58px ruled band and matches terms across names, identifiers, descriptions, resource forms, facets and source catalogues, with title and identifier matches ranked first. The filter rail separates resource form, method, application, target, funding state, source and record quality. Counts respond to search and the other selected groups. Active filters appear as removable chips; query, filters and selection are shareable in the URL. On mobile the same controls move into a labelled drawer.
 
 ### Resource Results
 
@@ -158,11 +158,11 @@ Each ruled result carries a semantic mark, resource form, title, description, fa
 
 ### Graph Toolbar and Canvas
 
-The graph toolbar exposes resource and connection counts, relationship filtering, an optional catalogue-provenance layer, zoom and fit controls. The white canvas uses a 15px pale-blue dotted grid. Selecting recentres, zooms and isolates one-hop neighbours. Directed edges represent curated assertions; resource type, scope and source catalogue are not converted into default graph edges.
+The graph toolbar exposes resource and connection counts, relationship filtering, an optional catalogue-provenance layer, an all-records view, zoom and fit controls. The white canvas uses a 15px pale-blue dotted grid. Selecting recentres, zooms and limits the canvas to direct neighbours unless the all-records view is chosen. A compact keyboard-operable resource chooser supports discovery before selection. No-match and unlinked-resource states are explicit. Directed edges represent curated assertions; resource type, scope and source catalogue are not converted into default graph edges.
 
 ### Inspector
 
-The square right rail contains kind, title, description, fact rows, provenance, connected nodes and optional canonical action. A populated inspector receives programmatic focus. On mobile it becomes the lifted bottom sheet.
+The square right rail contains kind, title, description, fact rows, provenance, connected nodes with direct evidence links, and optional canonical action. On mobile it becomes the lifted bottom sheet.
 
 ### Provenance and Licensing
 

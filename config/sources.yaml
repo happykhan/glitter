@@ -35,3 +35,12 @@ sources:
     import_mode: links-and-metadata
     license_review: per-item
     enabled: true
+
+  - id: gmi-knowledge-hub-tools
+    name: GMI Knowledge Hub
+    organisation: Global Microbial Identifier
+    kind: curated-web-index
+    canonical_url: https://globalmicrobialidentifier.org/hub/tools/index.html
+    import_mode: selected-records
+    license_review: per-item
+    enabled: true
