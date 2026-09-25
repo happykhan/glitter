@@ -75,6 +75,31 @@ WHO's 2025 data-sharing platform publication explicitly states CC BY-NC-SA
 3.0 IGO, so that resource has a licence URI. Do not transfer that licence to
 other WHO records without checking their own landing pages.
 
+## WHO IRIS pathogen-genomics import
+
+WHO IRIS exposes a public DSpace REST discovery API at
+`https://iris.who.int/server/api/discover/search/objects`, item metadata at
+`https://iris.who.int/server/api/core/items/{uuid}`, and an OAI-PMH feed at
+`https://iris.who.int/server/oai/request`. The latter supports date-based
+harvesting but does not replace editorial selection.
+
+`npm run import:who-iris` fetches the records in
+`config/who-iris-selected.json` and previews matches, warnings and new
+resources. `npm run import:who-iris -- --write` refreshes the published
+`data/seed/who-iris.json`. To inspect possible additions without loading them,
+run `npm run import:who-iris -- --discover "whole genome sequencing"` and then
+review each candidate before adding its UUID and expected handle to the
+allowlist. A broad IRIS search contains unrelated human-genomics and older
+news items, so search hits are never auto-published.
+
+The importer checks the expected handle, matches existing Glitter resources
+by handle, ISBN or DOI, and skips matches rather than creating duplicate nodes.
+It only turns `dc.relation` into a connection where the allowlist explicitly
+identifies the main document and the API record confirms it. It records a
+licence only when `dc.rights` states CC BY-NC-SA 3.0 IGO; the corresponding
+canonical licence URL is used because at least one IRIS `dc.rights.uri` is
+malformed. Recheck source rights and bibliographic dates during curation.
+
 ## CGPS GHRU Protocols
 
 The GHRU protocols page is available through the site's WordPress REST API as

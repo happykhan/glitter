@@ -96,3 +96,17 @@ test("the costing workbook and data-sharing principles have verified document li
   const links = (await json(connections(request(`/api/v1/connections?id=${platform}`)))).body.items;
   assert.ok(links.some((item) => item.predicate === "isSupplementTo" && item.neighbour.id.endsWith("9789240061743") && item.evidence.length));
 });
+
+test("WHO IRIS pathogen-genomics resources are searchable and their annexes link to the main guidance", async () => {
+  for (const [query, handle] of [
+    ["foodborne WGS landscape", "10665/272430"],
+    ["mpox genomic surveillance", "10665/384542"],
+    ["drug resistant tuberculosis sequencing", "10665/373419"],
+  ]) {
+    const { body } = await json(search(request(`/api/v1/search?q=${encodeURIComponent(query)}&source=WHO%20IRIS`)));
+    assert.ok(body.items.some((item) => item.id.endsWith(handle)), `Missing WHO IRIS ${handle} for ${query}`);
+  }
+  const annex = encodeURIComponent("https://iris.who.int/handle/10665/373521");
+  const links = (await json(connections(request(`/api/v1/connections?id=${annex}`)))).body.items;
+  assert.ok(links.some((item) => item.predicate === "isSupplementTo" && item.neighbour.id.endsWith("9789240021242") && item.evidence[0].source.includes("iris.who.int/server/api/core/items/")));
+});

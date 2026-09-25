@@ -1,0 +1,266 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://iris.who.int/handle/10665/272430",
+      "types": [
+        "GuidanceDocument"
+      ],
+      "name": "Whole genome sequencing for foodborne disease surveillance: landscape paper",
+      "description": "Landscape review of whole-genome sequencing for foodborne disease surveillance, including implementation considerations for public-health systems.",
+      "datePublished": "2018-04-30",
+      "identifiers": [
+        {
+          "scheme": "ISBN",
+          "value": "9789241513869"
+        }
+      ],
+      "landingPage": "https://iris.who.int/handle/10665/272430",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/",
+      "facets": [
+        {
+          "scheme": "Glitter application",
+          "id": "foodborne-disease-surveillance",
+          "label": "Foodborne disease surveillance"
+        }
+      ],
+      "sources": [
+        {
+          "name": "WHO IRIS",
+          "sourceUrl": "https://iris.who.int/server/api/core/items/f1cb3c06-0552-42e5-b2b6-43adb9eccd38",
+          "sourceRecordId": "f1cb3c06-0552-42e5-b2b6-43adb9eccd38",
+          "retrievedAt": "2026-09-25",
+          "sourceUpdatedAt": "2025-10-22T06:55:33.189+00:00"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://iris.who.int/handle/10665/373521",
+      "types": [
+        "GuidanceDocument"
+      ],
+      "name": "Whole genome sequencing as a tool to strengthen foodborne disease surveillance and response: module 2: whole genome sequencing in foodborne disease outbreak investigations: web annexes",
+      "description": "Web annexes accompanying WHO's foodborne WGS outbreak-investigation module.",
+      "datePublished": "2023-10-23",
+      "identifiers": [
+        {
+          "scheme": "ISBN",
+          "value": "9789240072411"
+        }
+      ],
+      "landingPage": "https://iris.who.int/handle/10665/373521",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/",
+      "facets": [
+        {
+          "scheme": "Glitter application",
+          "id": "outbreak-investigation",
+          "label": "Outbreak investigation"
+        },
+        {
+          "scheme": "Glitter application",
+          "id": "foodborne-disease-surveillance",
+          "label": "Foodborne disease surveillance"
+        }
+      ],
+      "sources": [
+        {
+          "name": "WHO IRIS",
+          "sourceUrl": "https://iris.who.int/server/api/core/items/dbaa24b0-4672-4f12-84d4-8e0d0b35466f",
+          "sourceRecordId": "dbaa24b0-4672-4f12-84d4-8e0d0b35466f",
+          "retrievedAt": "2026-09-25",
+          "sourceUpdatedAt": "2026-08-05T17:53:18.995+00:00"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://iris.who.int/handle/10665/373461",
+      "types": [
+        "GuidanceDocument"
+      ],
+      "name": "Whole genome sequencing as a tool to strengthen foodborne disease surveillance and response: module 3: whole genome sequencing in foodborne disease routine surveillance: web annexes",
+      "description": "Practical templates and checklists accompanying WHO's foodborne WGS routine-surveillance module.",
+      "datePublished": "2023-10-19",
+      "identifiers": [
+        {
+          "scheme": "ISBN",
+          "value": "9789240072428"
+        }
+      ],
+      "landingPage": "https://iris.who.int/handle/10665/373461",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/",
+      "facets": [
+        {
+          "scheme": "Glitter application",
+          "id": "routine-surveillance",
+          "label": "Routine surveillance"
+        },
+        {
+          "scheme": "Glitter application",
+          "id": "foodborne-disease-surveillance",
+          "label": "Foodborne disease surveillance"
+        }
+      ],
+      "sources": [
+        {
+          "name": "WHO IRIS",
+          "sourceUrl": "https://iris.who.int/server/api/core/items/032be2ba-1d70-4c13-8366-5ceccf4d850b",
+          "sourceRecordId": "032be2ba-1d70-4c13-8366-5ceccf4d850b",
+          "retrievedAt": "2026-09-25",
+          "sourceUpdatedAt": "2026-08-05T18:02:44.627+00:00"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://iris.who.int/handle/10665/339676",
+      "types": [
+        "GuidanceDocument"
+      ],
+      "name": "Operational considerations to expedite genomic sequencing component of GISRS surveillance of SARS-CoV-2, 16 February 2021",
+      "description": "Operational considerations for rapidly adding SARS-CoV-2 genomic sequencing to the Global Influenza Surveillance and Response System.",
+      "datePublished": "2021-02-17",
+      "landingPage": "https://iris.who.int/handle/10665/339676",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/",
+      "facets": [
+        {
+          "scheme": "Glitter target",
+          "id": "sars-cov-2",
+          "label": "SARS-CoV-2"
+        },
+        {
+          "scheme": "Glitter method stage",
+          "id": "sequencing",
+          "label": "Sequencing"
+        }
+      ],
+      "sources": [
+        {
+          "name": "WHO IRIS",
+          "sourceUrl": "https://iris.who.int/server/api/core/items/6d6199df-3e81-41d5-a9f4-e0c317becfc3",
+          "sourceRecordId": "6d6199df-3e81-41d5-a9f4-e0c317becfc3",
+          "retrievedAt": "2026-09-25",
+          "sourceUpdatedAt": "2025-10-21T20:14:17.168+00:00"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://iris.who.int/handle/10665/384542",
+      "types": [
+        "GuidanceDocument"
+      ],
+      "name": "Analytical considerations for genomic surveillance of mpox virus",
+      "description": "Analytical considerations for using mpox virus genomic data in public-health surveillance.",
+      "datePublished": "2025-12-18",
+      "identifiers": [
+        {
+          "scheme": "ISBN",
+          "value": "9789240118805"
+        },
+        {
+          "scheme": "ISBN",
+          "value": "9789240118812"
+        }
+      ],
+      "landingPage": "https://iris.who.int/handle/10665/384542",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/",
+      "facets": [
+        {
+          "scheme": "Glitter target",
+          "id": "mpox-virus",
+          "label": "Mpox virus"
+        },
+        {
+          "scheme": "Glitter method stage",
+          "id": "bioinformatics",
+          "label": "Bioinformatics"
+        }
+      ],
+      "sources": [
+        {
+          "name": "WHO IRIS",
+          "sourceUrl": "https://iris.who.int/server/api/core/items/98dd90b8-f521-4bab-b993-5b0bb90e1e69",
+          "sourceRecordId": "98dd90b8-f521-4bab-b993-5b0bb90e1e69",
+          "retrievedAt": "2026-09-25",
+          "sourceUpdatedAt": "2026-05-03T12:56:49.084+00:00"
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "https://iris.who.int/handle/10665/373419",
+      "types": [
+        "GuidanceDocument"
+      ],
+      "name": "The use of next-generation sequencing for the surveillance of drug-resistant tuberculosis: an implementation manual",
+      "description": "Implementation manual for using next-generation sequencing in surveillance of drug-resistant tuberculosis.",
+      "datePublished": "2023-10-17",
+      "identifiers": [
+        {
+          "scheme": "ISBN",
+          "value": "9789240078079"
+        },
+        {
+          "scheme": "ISBN",
+          "value": "9789240078086"
+        }
+      ],
+      "landingPage": "https://iris.who.int/handle/10665/373419",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/",
+      "facets": [
+        {
+          "scheme": "Glitter target",
+          "id": "mycobacterium-tuberculosis",
+          "label": "Mycobacterium tuberculosis"
+        },
+        {
+          "scheme": "Glitter application",
+          "id": "antimicrobial-resistance",
+          "label": "Antimicrobial resistance"
+        }
+      ],
+      "sources": [
+        {
+          "name": "WHO IRIS",
+          "sourceUrl": "https://iris.who.int/server/api/core/items/e7c6569f-a5d0-4f26-9f5f-d6bb4461ae15",
+          "sourceRecordId": "e7c6569f-a5d0-4f26-9f5f-d6bb4461ae15",
+          "retrievedAt": "2026-09-25",
+          "sourceUpdatedAt": "2026-05-24T08:48:28.437+00:00"
+        }
+      ],
+      "status": "active"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "https://w3id.org/glitter/assertion/who-iris-dbaa24b0-4672-4f12-84d4-8e0d0b35466f-supplements",
+      "subject": "https://iris.who.int/handle/10665/373521",
+      "predicate": "isSupplementTo",
+      "object": "https://www.who.int/publications/i/item/9789240021242",
+      "evidence": [
+        {
+          "source": "https://iris.who.int/server/api/core/items/dbaa24b0-4672-4f12-84d4-8e0d0b35466f",
+          "locator": "dc.relation: Related document (main document)"
+        }
+      ],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/who-iris-032be2ba-1d70-4c13-8366-5ceccf4d850b-supplements",
+      "subject": "https://iris.who.int/handle/10665/373461",
+      "predicate": "isSupplementTo",
+      "object": "https://www.who.int/publications/i/item/9789240021266",
+      "evidence": [
+        {
+          "source": "https://iris.who.int/server/api/core/items/032be2ba-1d70-4c13-8366-5ceccf4d850b",
+          "locator": "dc.relation: Related document (main document)"
+        }
+      ],
+      "assertedOn": "2026-09-25",
+      "status": "verified"
+    }
+  ]
+}

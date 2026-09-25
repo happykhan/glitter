@@ -1,0 +1,48 @@
+{
+  "items": [
+    {
+      "uuid": "f1cb3c06-0552-42e5-b2b6-43adb9eccd38",
+      "handle": "https://iris.who.int/handle/10665/272430",
+      "types": ["GuidanceDocument"],
+      "description": "Landscape review of whole-genome sequencing for foodborne disease surveillance, including implementation considerations for public-health systems.",
+      "facets": [{ "scheme": "Glitter application", "id": "foodborne-disease-surveillance", "label": "Foodborne disease surveillance" }]
+    },
+    {
+      "uuid": "dbaa24b0-4672-4f12-84d4-8e0d0b35466f",
+      "handle": "https://iris.who.int/handle/10665/373521",
+      "types": ["GuidanceDocument"],
+      "description": "Web annexes accompanying WHO's foodborne WGS outbreak-investigation module.",
+      "facets": [{ "scheme": "Glitter application", "id": "outbreak-investigation", "label": "Outbreak investigation" }, { "scheme": "Glitter application", "id": "foodborne-disease-surveillance", "label": "Foodborne disease surveillance" }],
+      "supplements": { "irisHandle": "https://iris.who.int/handle/10665/373460", "glitterId": "https://www.who.int/publications/i/item/9789240021242" }
+    },
+    {
+      "uuid": "032be2ba-1d70-4c13-8366-5ceccf4d850b",
+      "handle": "https://iris.who.int/handle/10665/373461",
+      "types": ["GuidanceDocument"],
+      "description": "Practical templates and checklists accompanying WHO's foodborne WGS routine-surveillance module.",
+      "facets": [{ "scheme": "Glitter application", "id": "routine-surveillance", "label": "Routine surveillance" }, { "scheme": "Glitter application", "id": "foodborne-disease-surveillance", "label": "Foodborne disease surveillance" }],
+      "supplements": { "irisHandle": "https://iris.who.int/handle/10665/373522", "glitterId": "https://www.who.int/publications/i/item/9789240021266" }
+    },
+    {
+      "uuid": "6d6199df-3e81-41d5-a9f4-e0c317becfc3",
+      "handle": "https://iris.who.int/handle/10665/339676",
+      "types": ["GuidanceDocument"],
+      "description": "Operational considerations for rapidly adding SARS-CoV-2 genomic sequencing to the Global Influenza Surveillance and Response System.",
+      "facets": [{ "scheme": "Glitter target", "id": "sars-cov-2", "label": "SARS-CoV-2" }, { "scheme": "Glitter method stage", "id": "sequencing", "label": "Sequencing" }]
+    },
+    {
+      "uuid": "98dd90b8-f521-4bab-b993-5b0bb90e1e69",
+      "handle": "https://iris.who.int/handle/10665/384542",
+      "types": ["GuidanceDocument"],
+      "description": "Analytical considerations for using mpox virus genomic data in public-health surveillance.",
+      "facets": [{ "scheme": "Glitter target", "id": "mpox-virus", "label": "Mpox virus" }, { "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }]
+    },
+    {
+      "uuid": "e7c6569f-a5d0-4f26-9f5f-d6bb4461ae15",
+      "handle": "https://iris.who.int/handle/10665/373419",
+      "types": ["GuidanceDocument"],
+      "description": "Implementation manual for using next-generation sequencing in surveillance of drug-resistant tuberculosis.",
+      "facets": [{ "scheme": "Glitter target", "id": "mycobacterium-tuberculosis", "label": "Mycobacterium tuberculosis" }, { "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }]
+    }
+  ]
+}

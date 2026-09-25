@@ -23,6 +23,19 @@ sources:
     license_review: per-item
     enabled: true
 
+  - id: who-iris-pathogen-genomics
+    name: WHO IRIS pathogen genomics
+    organisation: World Health Organization
+    kind: dspace-rest
+    canonical_url: https://iris.who.int/home
+    data_url: https://iris.who.int/server/api/discover/search/objects
+    item_url_template: https://iris.who.int/server/api/core/items/{uuid}
+    oai_url: https://iris.who.int/server/oai/request
+    selection_file: config/who-iris-selected.json
+    import_mode: reviewed-allowlist
+    license_review: per-item
+    enabled: true
+
   - id: cgps-ghru-protocols
     name: GHRU Protocols
     organisation: Centre for Genomic Pathogen Surveillance
