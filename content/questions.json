@@ -6,7 +6,7 @@
     "askFirst": "Which pathogens and pipelines, how many samples per week, what data-retention policy, and what local IT support?",
     "steps": [
       { "title": "Cost the complete service", "resourceIds": ["https://iris.who.int/handle/10665/385075", "https://www.who.int/publications/i/item/9789240118843"] },
-      { "title": "Review infrastructure and storage requirements", "resourceIds": ["https://www.who.int/publications/i/item/9789240011007", "https://pha4ge.org/working-groups/infrastructure/"] }
+      { "title": "Review infrastructure and storage requirements", "resourceIds": ["https://www.who.int/publications/i/item/9789240011007", "https://github.com/pha4ge/infrastructure-resources", "https://doi.org/10.1099/mgen.0.001051"] }
     ],
     "gap": "Missing: current, comparable pipeline benchmarks and example specifications at different throughput levels. No buying recommendation is implied."
   },
@@ -29,7 +29,7 @@
     "steps": [
       { "title": "Assess readiness", "resourceIds": ["https://www.who.int/publications/i/item/9789240021228"] },
       { "title": "Choose an initial use", "resourceIds": ["https://www.who.int/publications/i/item/9789240021242", "https://www.who.int/publications/i/item/9789240021266"] },
-      { "title": "Plan national integration and costs", "resourceIds": ["https://www.who.int/publications/i/item/9789240076563", "https://iris.who.int/handle/10665/385075"] }
+      { "title": "Plan national integration and costs", "resourceIds": ["https://www.who.int/publications/i/item/9789240076563", "https://iris.who.int/handle/10665/385075", "https://www.ecdc.europa.eu/en/publications-data/expert-opinion-introduction-next-generation-typing-methods-food-and-waterborne"] }
     ],
     "gap": "Glitter does not replace local food-safety governance, procurement, validation or implementation planning."
   },
@@ -62,7 +62,7 @@
     "askFirst": "In which jurisdiction, for which service and test scope, and who will use the result?",
     "steps": [
       { "title": "Identify the laboratory context", "resourceIds": ["https://www.iso.org/standard/76677.html", "https://www.iso.org/standard/66912.html"] },
-      { "title": "Connect quality to workforce practice", "resourceIds": ["https://www.cdc.gov/mmwr/preview/mmwrhtml/su6401a1.htm"] }
+      { "title": "Connect quality to workforce practice", "resourceIds": ["https://doi.org/10.1099/mgen.0.001097", "https://www.cdc.gov/mmwr/preview/mmwrhtml/su6401a1.htm"] }
     ],
     "gap": "Glitter does not yet catalogue country-specific accreditation-body rules or test-scope guidance. Confirm the route with the relevant authority."
   }

@@ -1,0 +1,107 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://github.com/pha4ge/infrastructure-resources",
+      "types": ["GuidanceDocument"],
+      "name": "PHA4GE infrastructure working group resources",
+      "description": "Living repository of PHA4GE-developed guidance and resources on bioinformatics infrastructure for public-health genomics. Use its individual documents to frame local requirements; it is not a hardware purchasing specification.",
+      "landingPage": "https://github.com/pha4ge/infrastructure-resources",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "facets": [{ "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }, { "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }],
+      "sources": [{ "name": "PHA4GE infrastructure repository", "sourceUrl": "https://github.com/pha4ge/infrastructure-resources", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.gov.uk/government/publications/implementing-pathogen-genomics-a-case-study",
+      "types": ["GuidanceDocument"],
+      "name": "Implementing pathogen genomics: a Public Health England case study",
+      "description": "Case study of establishing a central WGS service and moving a national bacteriology reference laboratory to genomics-led workflows, including surveillance and outbreak investigation. Describes a 2018 implementation rather than a current procurement template.",
+      "datePublished": "2018-08-02",
+      "landingPage": "https://www.gov.uk/government/publications/implementing-pathogen-genomics-a-case-study",
+      "facets": [{ "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }, { "scheme": "Glitter application", "id": "routine-surveillance", "label": "Routine surveillance" }],
+      "sources": [{ "name": "Public Health England publication", "sourceUrl": "https://www.gov.uk/government/publications/implementing-pathogen-genomics-a-case-study", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://aphl.org/docs/default-source/technical/ID-NGS-Implementation-Guide102016.pdf",
+      "types": ["GuidanceDocument"],
+      "name": "APHL Next Generation Sequencing Implementation Guide",
+      "description": "Public-health laboratory guide to planning NGS implementation, including facilities, workforce, workflows and programme needs. Published in 2016; equipment examples and costs should not be treated as current.",
+      "landingPage": "https://aphl.org/docs/default-source/technical/ID-NGS-Implementation-Guide102016.pdf",
+      "facets": [{ "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }, { "scheme": "Glitter method stage", "id": "sequencing", "label": "Sequencing" }],
+      "sources": [{ "name": "Association of Public Health Laboratories", "sourceUrl": "https://aphl.org/focus-areas/infectious-diseases/cross-cutting/advanced-molecular-detection", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.ecdc.europa.eu/en/publications-data/expert-opinion-whole-genome-sequencing-public-health-surveillance",
+      "types": ["GuidanceDocument"],
+      "name": "ECDC expert opinion on WGS for public-health surveillance",
+      "description": "2016 assessment of WGS-based typing, inter-laboratory comparability, bioinformatics harmonisation and integration with epidemiological surveillance in Europe. Useful for programme history and design questions, not as current technical guidance.",
+      "datePublished": "2016-08-15",
+      "identifiers": [{ "scheme": "DOI", "value": "10.2900/12442", "uri": "https://doi.org/10.2900/12442" }, { "scheme": "ISBN", "value": "9789291938889" }],
+      "landingPage": "https://www.ecdc.europa.eu/en/publications-data/expert-opinion-whole-genome-sequencing-public-health-surveillance",
+      "facets": [{ "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }, { "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }],
+      "sources": [{ "name": "European Centre for Disease Prevention and Control", "sourceUrl": "https://www.ecdc.europa.eu/en/publications-data/expert-opinion-whole-genome-sequencing-public-health-surveillance", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.ecdc.europa.eu/en/publications-data/expert-opinion-introduction-next-generation-typing-methods-food-and-waterborne",
+      "types": ["GuidanceDocument"],
+      "name": "ECDC expert opinion on next-generation typing for food- and waterborne diseases",
+      "description": "2015 country-level implementation guide covering sampling, sequencing, analysis, storage and interagency collaboration for Salmonella, Listeria, VTEC and Campylobacter surveillance. Its technical assumptions require current local review.",
+      "datePublished": "2015-10-20",
+      "landingPage": "https://www.ecdc.europa.eu/en/publications-data/expert-opinion-introduction-next-generation-typing-methods-food-and-waterborne",
+      "facets": [{ "scheme": "Glitter application", "id": "foodborne-disease-surveillance", "label": "Foodborne disease surveillance" }, { "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }],
+      "sources": [{ "name": "European Centre for Disease Prevention and Control", "sourceUrl": "https://www.ecdc.europa.eu/en/publications-data/expert-opinion-introduction-next-generation-typing-methods-food-and-waterborne", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://doi.org/10.1099/mgen.0.001097",
+      "types": ["Publication"],
+      "name": "Public health implementation of pathogen genomics: accreditation and ISO standards",
+      "description": "Ballard and colleagues explain quality systems, test validation and accreditation considerations when moving pathogen genomics into public-health practice.",
+      "datePublished": "2023-08-17",
+      "identifiers": [{ "scheme": "DOI", "value": "10.1099/mgen.0.001097", "uri": "https://doi.org/10.1099/mgen.0.001097" }],
+      "landingPage": "https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.001097",
+      "facets": [{ "scheme": "Glitter application", "id": "quality-management", "label": "Quality management" }, { "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }],
+      "sources": [{ "name": "Microbiology Society article", "sourceUrl": "https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.001097", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://doi.org/10.1099/mgen.0.001051",
+      "types": ["Publication"],
+      "name": "Accelerating bioinformatics implementation in public health",
+      "description": "Libuit and colleagues describe one operational approach to reproducible, auditable and scalable pathogen-genomics analysis in public-health laboratories, using open workflows and a cloud analysis platform. It is an example, not a vendor-neutral prescription.",
+      "datePublished": "2023-07-10",
+      "identifiers": [{ "scheme": "DOI", "value": "10.1099/mgen.0.001051", "uri": "https://doi.org/10.1099/mgen.0.001051" }],
+      "landingPage": "https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.001051",
+      "facets": [{ "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }, { "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }],
+      "sources": [{ "name": "Microbiology Society article", "sourceUrl": "https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.001051", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.gov.uk/government/publications/ukhsa-pathogen-genomics-strategy",
+      "types": ["GuidanceDocument"],
+      "name": "UKHSA Pathogen Genomics Strategy",
+      "description": "UK public-health strategy for accredited and resilient pathogen-genomics services, shared infrastructure, workforce, governance and public-health impact. A national example, not a universal implementation standard.",
+      "datePublished": "2024-01-24",
+      "landingPage": "https://www.gov.uk/government/publications/ukhsa-pathogen-genomics-strategy",
+      "facets": [{ "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }, { "scheme": "Glitter application", "id": "routine-surveillance", "label": "Routine surveillance" }],
+      "sources": [{ "name": "UK Health Security Agency publication", "sourceUrl": "https://www.gov.uk/government/publications/ukhsa-pathogen-genomics-strategy", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.cdc.gov.au/resources/publications/national-microbial-genomics-framework-public-health-2025-2027",
+      "types": ["GuidanceDocument"],
+      "name": "Australian National Microbial Genomics Framework for Public Health 2025–2027",
+      "description": "National strategic framework and implementation activities for integrating microbial genomics into Australia's public-health system.",
+      "datePublished": "2025-03-07",
+      "landingPage": "https://www.cdc.gov.au/resources/publications/national-microbial-genomics-framework-public-health-2025-2027",
+      "facets": [{ "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }, { "scheme": "Glitter application", "id": "routine-surveillance", "label": "Routine surveillance" }],
+      "sources": [{ "name": "Australian Centre for Disease Control", "sourceUrl": "https://www.cdc.gov.au/resources/publications/national-microbial-genomics-framework-public-health-2025-2027", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    }
+  ],
+  "relationships": []
+}

@@ -55,7 +55,7 @@
       "name": "WHO guide to developing a national genomic surveillance strategy or action plan",
       "description": "Step-by-step considerations for national and subnational stakeholders developing a genomic surveillance strategy or action plan for pathogens with pandemic and epidemic potential.",
       "datePublished": "2023-08-18",
-      "identifiers": [{ "scheme": "ISBN", "value": "9789240076563" }],
+      "identifiers": [{ "scheme": "ISBN", "value": "9789240076563" }, { "scheme": "WHO IRIS handle", "value": "10665/372390", "uri": "https://iris.who.int/handle/10665/372390" }],
       "landingPage": "https://www.who.int/publications/i/item/9789240076563",
       "facets": [{ "scheme": "Glitter application", "id": "routine-surveillance", "label": "Pathogen genomic surveillance" }, { "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }],
       "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/i/item/9789240076563", "sourceRecordId": "9789240076563", "retrievedAt": "2026-09-25" }],

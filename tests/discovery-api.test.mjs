@@ -71,6 +71,30 @@ test("WHO guidance retains provenance without claiming an unverified resource li
   assert.ok(links.some((item) => item.predicate === "isSupplementTo" && item.evidence[0].source === "https://www.who.int/initiatives/genomic-surveillance-strategy"));
 });
 
+test("a WHO IRIS handle resolves to the existing national strategy record", async () => {
+  const alias = encodeURIComponent("https://iris.who.int/handle/10665/372390");
+  const { status, body } = await json(resource(request(`/api/v1/resource?id=${alias}`)));
+  assert.equal(status, 200);
+  assert.equal(body.resource.id, "https://www.who.int/publications/i/item/9789240076563");
+});
+
+test("implementation resources answer concrete planning and accreditation queries", async () => {
+  const cases = [
+    ["bioinformatics infrastructure", "https://github.com/pha4ge/infrastructure-resources"],
+    ["NGS implementation guide", "https://aphl.org/docs/default-source/technical/ID-NGS-Implementation-Guide102016.pdf"],
+    ["pathogen genomics accreditation", "https://doi.org/10.1099/mgen.0.001097"],
+    ["foodborne typing implementation", "https://www.ecdc.europa.eu/en/publications-data/expert-opinion-introduction-next-generation-typing-methods-food-and-waterborne"],
+  ];
+  for (const [q, id] of cases) {
+    const { body } = await json(search(request(`/api/v1/search?q=${encodeURIComponent(q)}&limit=50`)));
+    assert.ok(body.items.some((item) => item.id === id), `Missing ${id} for ${q}`);
+  }
+  const pha4ge = (await json(resource(request(`/api/v1/resource?id=${encodeURIComponent(cases[0][1])}`)))).body.resource;
+  assert.equal(pha4ge.license, "https://www.apache.org/licenses/LICENSE-2.0");
+  const ballard = (await json(resource(request(`/api/v1/resource?id=${encodeURIComponent(cases[2][1])}`)))).body.resource;
+  assert.equal(ballard.license, undefined);
+});
+
 test("new WHO WGS materials are discoverable by use case", async () => {
   const cases = [
     ["genomics costing", "https://iris.who.int/handle/10665/385075"],
