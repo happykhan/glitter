@@ -40,9 +40,10 @@ import {
 } from "./data";
 import StandardPage from "./StandardPage";
 import ApiPage from "./ApiPage";
+import QuestionsPage from "./QuestionsPage";
 import { EMPTY_FILTERS, matchesFilters, readDiscoveryUrl, searchScore, writeDiscoveryUrl, type Filters } from "./discovery";
 
-type View = "resources" | "graph" | "standard" | "api";
+type View = "resources" | "graph" | "questions" | "standard" | "api";
 const TYPE_COLOURS: Record<string, string> = {
   Publication: "#f96e81",
   Software: "#09a1a1",
@@ -359,7 +360,7 @@ function GraphView({ results, selected, onSelect, onClose, onClear, query, filte
 }
 
 export default function App() {
-  const viewFromPath = (): View => window.location.pathname === "/api" ? "api" : window.location.pathname === "/standard" ? "standard" : window.location.pathname === "/graph" ? "graph" : "resources";
+  const viewFromPath = (): View => window.location.pathname === "/api" ? "api" : window.location.pathname === "/standard" ? "standard" : window.location.pathname === "/graph" ? "graph" : window.location.pathname === "/questions" ? "questions" : "resources";
   const initial = useRef(readDiscoveryUrl(window.location.search));
   const [view, setView] = useState<View>(viewFromPath);
   const [query, setQuery] = useState(initial.current.query);
@@ -398,7 +399,7 @@ export default function App() {
     if (`${window.location.pathname}${window.location.search}` !== url) window.history.replaceState({}, "", url);
   }, [query, filters, selectedId]);
   useEffect(() => {
-    document.title = `${{ resources: "Resources", graph: "Knowledge graph", standard: "Resource specification", api: "API guide" }[view]} — Glitter`;
+    document.title = `${{ resources: "Resources", graph: "Knowledge graph", questions: "Practical questions", standard: "Resource specification", api: "API guide" }[view]} — Glitter`;
   }, [view]);
   useEffect(() => {
     if (view !== "standard" && view !== "api") return;
@@ -410,11 +411,12 @@ export default function App() {
 
   function clearDiscovery() { setQuery(""); setFilters(EMPTY_FILTERS); }
 
-  return <div className={`app-shell ${view === "standard" || view === "api" ? "is-standard" : ""}`}>
+  return <div className={`app-shell ${view === "standard" || view === "api" || view === "questions" ? "is-standard" : ""}`}>
     <header className="topbar">
       <a className="brand" href="/" onClick={(event) => { event.preventDefault(); navigate("resources"); }} aria-label="Glitter resource knowledgebase"><span className="brand-mark"><i /><i /><i /></span><strong>glitter</strong><span>pathogen genomics knowledgebase</span></a>
       <nav aria-label="Primary navigation">
         <button className={view === "resources" ? "is-active" : ""} onClick={() => navigate("resources")}><List size={15} /> Resources</button>
+        <button className={view === "questions" ? "is-active" : ""} onClick={() => navigate("questions")}><Search size={15} /> Questions</button>
         <button className={view === "graph" ? "is-active" : ""} onClick={() => navigate("graph")}><Network size={15} /> Graph</button>
         <button className={view === "standard" ? "is-active" : ""} onClick={() => navigate("standard")}><FileText size={15} /> Standard</button>
         <button className={view === "api" ? "is-active" : ""} onClick={() => navigate("api")}><Braces size={15} /> API</button>
@@ -427,7 +429,7 @@ export default function App() {
       {query && <button onClick={() => setQuery("")} aria-label="Clear search"><X size={17} /></button>}
       <button className="search-filter-button" onClick={() => setFiltersOpen(true)}><Filter size={15} /> Filters{activeFilterCount > 0 && <b>{activeFilterCount}</b>}</button>
     </section>}
-    {view === "resources" ? <CatalogueView results={results} selected={selected} onSelect={select} onClose={() => setSelectedId(null)} onClear={clearDiscovery} query={query} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : view === "graph" ? <GraphView results={results} selected={selected} onSelect={select} onClose={() => setSelectedId(null)} onClear={clearDiscovery} query={query} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : view === "standard" ? <StandardPage /> : <ApiPage />}
+    {view === "resources" ? <CatalogueView results={results} selected={selected} onSelect={select} onClose={() => setSelectedId(null)} onClear={clearDiscovery} query={query} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : view === "graph" ? <GraphView results={results} selected={selected} onSelect={select} onClose={() => setSelectedId(null)} onClear={clearDiscovery} query={query} filters={filters} setFilters={setFilters} filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} /> : view === "questions" ? <QuestionsPage onOpenResource={(entity) => { setQuery(""); setFilters(EMPTY_FILTERS); setSelectedId(entity.id); navigate("resources"); }} /> : view === "standard" ? <StandardPage /> : <ApiPage />}
     <footer className="statusbar"><span><span className="status-dot" /> Public-health genomics resources</span><span>{resources.length} resources · {relationships.filter(isUsefulRelationship).length} verified connections</span><span>Source provenance and licence uncertainty retained</span></footer>
   </div>;
 }

@@ -9,6 +9,7 @@
     { "source": "/standard", "destination": "/index.html" },
     { "source": "/api", "destination": "/index.html" },
     { "source": "/graph", "destination": "/index.html" },
+    { "source": "/questions", "destination": "/index.html" },
     { "source": "/api/v1", "destination": "/api/v1/index.json" },
     { "source": "/api/v1/", "destination": "/api/v1/index.json" },
     { "source": "/api/v1/catalogue", "destination": "/api/v1/catalogue.json" },
@@ -16,6 +17,7 @@
     { "source": "/api/v1/organizations", "destination": "/api/v1/organizations.json" },
     { "source": "/api/v1/concepts", "destination": "/api/v1/concepts.json" },
     { "source": "/api/v1/relationships", "destination": "/api/v1/relationships.json" },
+    { "source": "/api/v1/questions", "destination": "/api/v1/questions.json" },
     { "source": "/api/v1/schema", "destination": "/api/v1/schema.json" },
     { "source": "/api/v1/openapi", "destination": "/api/v1/openapi.json" }
   ],

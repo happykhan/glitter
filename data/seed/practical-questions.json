@@ -1,0 +1,90 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://www.who.int/publications/m/item/wastewater-and-environmental-surveillance-for-one-or-more-pathogens--guidance-on-prioritization--implementation-and-integration",
+      "types": ["GuidanceDocument"],
+      "name": "WHO wastewater and environmental surveillance implementation guidance",
+      "description": "Pilot framework for choosing pathogen targets and integrating wastewater surveillance with other public-health surveillance. It is programme guidance, not a universal sequencing protocol.",
+      "datePublished": "2024-12-06",
+      "landingPage": "https://www.who.int/publications/m/item/wastewater-and-environmental-surveillance-for-one-or-more-pathogens--guidance-on-prioritization--implementation-and-integration",
+      "facets": [{ "scheme": "Glitter application", "id": "wastewater-surveillance", "label": "Wastewater surveillance" }, { "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }],
+      "sources": [{ "name": "World Health Organization publication", "sourceUrl": "https://www.who.int/publications/m/item/wastewater-and-environmental-surveillance-for-one-or-more-pathogens--guidance-on-prioritization--implementation-and-integration", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://training.pha4ge.org/courses/wastewater-bioinformatics-training-course/",
+      "types": ["TrainingResource"],
+      "name": "PHA4GE Wastewater Bioinformatics Training Course",
+      "description": "Training in wastewater surveillance bioinformatics, data standardisation, sharing, storage and associated protocols. Check the provider for current access to individual lessons.",
+      "landingPage": "https://training.pha4ge.org/courses/wastewater-bioinformatics-training-course/",
+      "facets": [{ "scheme": "Glitter application", "id": "wastewater-surveillance", "label": "Wastewater surveillance" }, { "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }],
+      "trainingCourse": { "platform": "PHA4GE Training", "availability": "unknown", "lastChecked": "2026-09-26" },
+      "sources": [{ "name": "PHA4GE Training", "sourceUrl": "https://training.pha4ge.org/courses/wastewater-bioinformatics-training-course/", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://pha4ge.org/working-groups/infrastructure/",
+      "types": ["Project"],
+      "name": "PHA4GE Infrastructure Working Group",
+      "description": "Community work on scalable, secure computational infrastructure for public-health genomics; a starting point for requirements, not a server specification or purchasing recommendation.",
+      "landingPage": "https://pha4ge.org/working-groups/infrastructure/",
+      "facets": [{ "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }, { "scheme": "Glitter method stage", "id": "implementation-planning", "label": "Implementation planning" }],
+      "sources": [{ "name": "PHA4GE", "sourceUrl": "https://pha4ge.org/working-groups/infrastructure/", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.cdc.gov/mmwr/preview/mmwrhtml/su6401a1.htm",
+      "types": ["GuidanceDocument"],
+      "name": "CDC–APHL public-health laboratory competency guidelines",
+      "description": "Competencies at beginner through expert levels across bioinformatics, informatics, surveillance, microbiology and quality management. Published in 2015; adapt to the role and jurisdiction.",
+      "datePublished": "2015-05-15",
+      "landingPage": "https://www.cdc.gov/mmwr/preview/mmwrhtml/su6401a1.htm",
+      "facets": [{ "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }, { "scheme": "Glitter application", "id": "workforce-development", "label": "Workforce development" }],
+      "sources": [{ "name": "CDC MMWR", "sourceUrl": "https://www.cdc.gov/mmwr/preview/mmwrhtml/su6401a1.htm", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://pubmlst.org/multilocus-sequence-typing",
+      "types": ["GuidanceDocument"],
+      "name": "PubMLST introduction to multilocus sequence typing",
+      "description": "Explains conventional MLST using sequence variants at a small number of housekeeping loci, usually seven, to assign bacterial sequence types.",
+      "landingPage": "https://pubmlst.org/multilocus-sequence-typing",
+      "facets": [{ "scheme": "Glitter method stage", "id": "typing", "label": "Typing" }],
+      "sources": [{ "name": "PubMLST", "sourceUrl": "https://pubmlst.org/multilocus-sequence-typing", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.cgmlst.org/ncs",
+      "types": ["GuidanceDocument"],
+      "name": "cgMLST.org core-genome typing scheme overview",
+      "description": "Introduces core-genome MLST as allele-based typing over a defined, species-specific set of core genes. Scheme choice and allele nomenclature matter for comparability.",
+      "landingPage": "https://www.cgmlst.org/ncs",
+      "facets": [{ "scheme": "Glitter method stage", "id": "typing", "label": "Typing" }],
+      "sources": [{ "name": "cgMLST.org", "sourceUrl": "https://www.cgmlst.org/ncs", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.iso.org/standard/76677.html",
+      "types": ["DataStandard"],
+      "name": "ISO 15189:2022 — medical laboratories",
+      "description": "Requirements for quality and competence in medical laboratories. Applicable accreditation requirements depend on jurisdiction, service and the exact tests in scope; the full ISO text is not freely available here.",
+      "datePublished": "2022-12-06",
+      "landingPage": "https://www.iso.org/standard/76677.html",
+      "facets": [{ "scheme": "Glitter application", "id": "quality-management", "label": "Quality management" }],
+      "sources": [{ "name": "ISO standard record", "sourceUrl": "https://www.iso.org/standard/76677.html", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://www.iso.org/standard/66912.html",
+      "types": ["DataStandard"],
+      "name": "ISO/IEC 17025:2017 — testing laboratories",
+      "description": "Requirements for competence of testing and calibration laboratories. Whether it is the appropriate route for a pathogen-genomics service depends on the laboratory, test purpose and local accreditation body.",
+      "landingPage": "https://www.iso.org/standard/66912.html",
+      "facets": [{ "scheme": "Glitter application", "id": "quality-management", "label": "Quality management" }],
+      "sources": [{ "name": "ISO standard record", "sourceUrl": "https://www.iso.org/standard/66912.html", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    }
+  ],
+  "relationships": []
+}

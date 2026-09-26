@@ -11,6 +11,11 @@ const catalogue = mergeCatalogue(loadDatasets(root));
 const resources = catalogue.entities.filter((entity) => !entity.types.includes("Organization") && !entity.types.includes("Concept"));
 const organizations = catalogue.entities.filter((entity) => entity.types.includes("Organization"));
 const concepts = catalogue.entities.filter((entity) => entity.types.includes("Concept"));
+const questions = JSON.parse(fs.readFileSync(path.join(root, "content/questions.json"), "utf8"));
+const knownIds = new Set(catalogue.entities.map((entity) => entity.id));
+for (const question of questions) for (const step of question.steps) for (const id of step.resourceIds) {
+  if (!knownIds.has(id)) throw new Error(`Question ${question.id} references unknown resource ${id}`);
+}
 
 const endpoints = {
   index: "/api/v1",
@@ -22,6 +27,7 @@ const endpoints = {
   search: "/api/v1/search",
   resource: "/api/v1/resource",
   connections: "/api/v1/connections",
+  questions: "/api/v1/questions",
   schema: "/api/v1/schema",
   openapi: "/api/v1/openapi",
 };
@@ -74,6 +80,12 @@ const openapi = {
     ConnectionsResponse: { type: "object", required: ["kind", "resource", "total", "items"], properties: { kind: { const: "Connections" }, resource: { type: "object", properties: { id: { type: "string" }, name: { type: "string" } } }, total: { type: "integer" }, items: { type: "array", items: ref("Connection") } } },
   } },
   paths: {
+    [endpoints.questions]: { get: {
+      operationId: "listPracticalQuestions",
+      summary: "Get curated entry points for common pathogen-genomics questions",
+      description: "Returns editorial answers, clarifying questions, ordered resource IDs and explicit knowledge gaps. These routes are not evidence-backed graph relationships. Follow resource IDs with getResource and use getConnections only for verified links.",
+      responses: { "200": jsonResponse("Curated question routes and gaps") },
+    } },
     [endpoints.search]: { get: {
       operationId: "searchResources",
       summary: "Search and filter pathogen-genomics resources",
@@ -118,6 +130,7 @@ const openapi = {
       [endpoints.organizations, "Organisation entities"],
       [endpoints.concepts, "Supporting concepts used to join resources"],
       [endpoints.relationships, "All curated directed relationships, including non-verified assertions"],
+      [endpoints.questions, "Editorial question routes with resource IDs and explicit gaps; not graph relationships"],
       [endpoints.schema, "Glitter JSON Schema"],
     ].map(([endpoint, description]) => [endpoint, { get: { summary: description, responses: { "200": jsonResponse("JSON response") } } }])),
   },
@@ -136,6 +149,7 @@ const documents = {
   "organizations.json": collection("OrganizationCollection", organizations),
   "concepts.json": collection("ConceptCollection", concepts),
   "relationships.json": collection("RelationshipCollection", catalogue.relationships),
+  "questions.json": { apiVersion: "1", kind: "QuestionCollection", total: questions.length, items: questions },
   "schema.json": JSON.parse(fs.readFileSync(path.join(root, "schema/glitter.schema.json"), "utf8")),
   "openapi.json": openapi,
 };

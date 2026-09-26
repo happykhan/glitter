@@ -35,8 +35,21 @@ test("the complete API catalogue retains schema-valid top-level fields", () => {
 test("the API discovery document exposes every public endpoint", () => {
   const index = read("index.json");
   assert.equal(index.documentation, "/api");
-  for (const name of ["catalogue", "resources", "organizations", "concepts", "relationships", "search", "resource", "connections", "schema", "openapi"]) {
+  for (const name of ["catalogue", "resources", "organizations", "concepts", "relationships", "questions", "search", "resource", "connections", "schema", "openapi"]) {
     assert.match(index.endpoints[name], /^\/api\/v1\//);
+  }
+});
+
+test("practical questions are complete routes to real resources, not invented edges", () => {
+  const questions = read("questions.json");
+  const resources = read("resources.json");
+  const ids = new Set(resources.items.map((item) => item.id));
+  assert.equal(questions.kind, "QuestionCollection");
+  assert.equal(questions.total, 6);
+  for (const question of questions.items) {
+    assert.ok(question.answer && question.askFirst && question.gap);
+    assert.ok(question.steps.length > 0);
+    for (const step of question.steps) for (const id of step.resourceIds) assert.ok(ids.has(id), `${question.id}: ${id}`);
   }
 });
 

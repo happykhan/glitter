@@ -17,6 +17,7 @@ Base URL: `https://glitter-roan.vercel.app/api/v1`
 | `/api/v1/search` | Ranked resource search with filters and pagination |
 | `/api/v1/resource?id=URI` | Full record by canonical URI or recorded identifier |
 | `/api/v1/connections?id=URI` | Verified directed links, evidence, and neighbour summaries |
+| `/api/v1/questions` | Curated practical-question routes, referenced resource IDs and explicit gaps |
 | `/api/v1/catalogue` | Complete schema-valid Glitter document |
 | `/api/v1/resources` | Discoverable resources, excluding supporting organisations and concepts |
 | `/api/v1/organizations` | Organisation entities |
@@ -70,3 +71,6 @@ has not been recorded, not that the material is unrestricted.
 The major version in `/api/v1` is the compatibility boundary for endpoint and
 envelope changes. `standardVersion` identifies the Glitter record model used by
 the returned data.
+## Practical questions
+
+`GET /api/v1/questions` returns six editorial entry points for common implementation and learning questions. Each route has a short answer, a clarifying question, ordered catalogue resource IDs and an explicit gap. Use `getResource` for the cited records; only `getConnections` provides verified, evidenced graph relationships. A reading route does not assert that its resources implement, cite or interoperate with one another.

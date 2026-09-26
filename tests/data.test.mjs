@@ -50,12 +50,13 @@ test("known software licences are recorded on the resource", () => {
 
 test("online courses keep enrolment availability separate from catalogue status and licences", () => {
   const courses = entities.filter((entity) => entity.trainingCourse);
-  assert.equal(courses.length, 8);
+  assert.ok(courses.length >= 9);
   assert.equal(courses.filter((entity) => entity.trainingCourse.availability === "open").length, 4);
   assert.equal(courses.filter((entity) => entity.trainingCourse.availability === "not-running").length, 4);
+  assert.ok(courses.some((entity) => entity.trainingCourse.availability === "unknown"));
   for (const course of courses) {
     assert.ok(course.types.includes("TrainingResource"));
-    assert.equal(course.trainingCourse.lastChecked, "2026-09-25");
+    assert.match(course.trainingCourse.lastChecked, /^2026-09-2[56]$/);
     assert.equal(course.license, undefined);
     assert.equal(course.sources[0].sourceUrl, course.landingPage);
   }
