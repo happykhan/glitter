@@ -17,10 +17,10 @@ catalogue remain filters rather than being counted as scientific connections.
 Selecting a resource opens a provenance, licensing and relationship inspector.
 
 The default website view is a searchable resource directory. Search covers
-titles, descriptions, types, facets and source catalogues. Filters cover
+titles, descriptions, types, facets, source catalogues and curated practical-question titles. Filters cover
 resource form, pathogen/method/application, funding state, source catalogue,
 licence availability and the presence of curated connections. The graph is a
-second view of the same filtered result set.
+second view of the same filtered result set; search matches without verified links appear as standalone nodes.
 
 - Live site: <https://glitter-roan.vercel.app>
 - Frontend: React, TypeScript and `react-force-graph-2d`

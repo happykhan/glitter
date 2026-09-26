@@ -60,6 +60,8 @@ test("OpenAPI offers callable discovery operations with their parameters", () =>
     assert.ok(openapi.paths[path].get.parameters.length);
   }
   assert.ok(openapi.paths["/api/v1/search"].get.parameters.some((param) => param.name === "target"));
+  assert.match(openapi.paths["/api/v1/search"].get.description, /questionRoutes/);
+  assert.ok(openapi.components.schemas.ResourceResponse.properties.questionRoutes);
 });
 
 test("the human-readable API page has its own route", () => {

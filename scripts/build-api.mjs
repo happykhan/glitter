@@ -65,6 +65,7 @@ const openapi = {
       fundingOpportunity: { type: "object", description: "For calls that users can apply to; inspect opens, closes and lastChecked before treating as current." },
       trainingCourse: { type: "object", description: "For online courses; availability is time-sensitive and must be read with lastChecked. Resource status active does not mean enrolment is open.", properties: { platform: { type: "string" }, availability: { type: "string", enum: ["open", "upcoming", "not-running", "unknown"] }, lastChecked: { type: "string", format: "date" } } },
       verifiedConnectionCount: { type: "integer", description: "Present on search results, not part of the Glitter entity standard." },
+      questionRoutes: { type: "array", description: "Editorial practical-question routes for this result, not graph relationships; present on search results only.", items: { type: "object", properties: { id: { type: "string" }, question: { type: "string" } } } },
     }, additionalProperties: true },
     Connection: { type: "object", required: ["id", "subject", "predicate", "object", "direction", "status", "evidence", "neighbour"], properties: {
       id: { type: "string" }, subject: { type: "string" }, predicate: { type: "string" }, object: { type: "string" },
@@ -76,7 +77,7 @@ const openapi = {
     SearchResults: { type: "object", required: ["kind", "total", "limit", "offset", "items"], properties: {
       kind: { const: "SearchResults" }, query: { type: "string" }, filters: { type: "object" }, total: { type: "integer" }, limit: { type: "integer" }, offset: { type: "integer" }, items: { type: "array", items: ref("Entity") },
     } },
-    ResourceResponse: { type: "object", required: ["kind", "resource"], properties: { kind: { const: "Resource" }, resource: ref("Entity"), verifiedConnectionCount: { type: "integer" } } },
+    ResourceResponse: { type: "object", required: ["kind", "resource"], properties: { kind: { const: "Resource" }, resource: ref("Entity"), verifiedConnectionCount: { type: "integer" }, questionRoutes: { type: "array", description: "Editorial practical-question routes for this record, not verified relationships.", items: { type: "object", properties: { id: { type: "string" }, question: { type: "string" } } } } } },
     ConnectionsResponse: { type: "object", required: ["kind", "resource", "total", "items"], properties: { kind: { const: "Connections" }, resource: { type: "object", properties: { id: { type: "string" }, name: { type: "string" } } }, total: { type: "integer" }, items: { type: "array", items: ref("Connection") } } },
   } },
   paths: {
@@ -89,9 +90,9 @@ const openapi = {
     [endpoints.search]: { get: {
       operationId: "searchResources",
       summary: "Search and filter pathogen-genomics resources",
-      description: "Use for questions about resources, protocols, standards or funding calls. Search is lexical across titles, descriptions, identifiers and facets; common question words are ignored. Prefer concise topic terms and explicit filters. It is not an LLM-generated answer. Returns full resource records with provenance and licence fields. If there are no results, say the catalogue has no match; do not invent a resource.",
+      description: "Use for questions about resources, protocols, standards or funding calls. Search is lexical across resource fields and curated practical-question titles; common question words are ignored and some extra words are tolerated. Results include editorial questionRoutes, which are not verified graph links. Prefer explicit filters when available. It is not an LLM-generated answer. If there are no results, say the catalogue has no match; do not invent a resource.",
       parameters: [
-        parameter("q", "Topic words to find in resource name, description, identifiers, facets and source name; all substantive words must match. Common question words are ignored. Use funding=open rather than the word open in q."),
+        parameter("q", "Topic words or a natural-language question. Searches resource fields and curated practical-question titles; common question words are ignored. Use funding=open rather than the word open in q."),
         parameter("type", "Resource form, for example Software, Protocol, DataStandard, Publication or FundingOpportunity."),
         parameter("method", "Method-stage facet label or id, for example metadata harmonisation."),
         parameter("application", "Application facet label or id, for example antimicrobial resistance."),

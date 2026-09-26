@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadDatasets, mergeCatalogue } from "../scripts/catalogue-data.mjs";
@@ -6,6 +7,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 export const catalogue = mergeCatalogue(loadDatasets(root));
 export const entitiesById = new Map(catalogue.entities.map((entity) => [entity.id, entity]));
 export const resources = catalogue.entities.filter((entity) => !entity.types.includes("Organization") && !entity.types.includes("Concept"));
+export const practicalQuestions = JSON.parse(fs.readFileSync(path.join(root, "content/questions.json"), "utf8"));
+export const questionRoutesFor = (id) => practicalQuestions.filter((question) => question.steps.some((step) => step.resourceIds.includes(id))).map(({ id: routeId, question }) => ({ id: routeId, question }));
 
 export function json(body, status = 200) {
   return Response.json(body, {

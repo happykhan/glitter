@@ -1,4 +1,6 @@
-import { facetAxis, fundingState, isUsefulRelationship, readableType, resourceRelations, type Entity } from "./data";
+import { facetAxis, fundingState, isUsefulRelationship, resourceRelations, type Entity } from "./data";
+import questions from "../content/questions.json";
+import { questionTitlesByResource, scoreResource } from "../shared/resource-search.js";
 
 export type Filters = {
   types: string[];
@@ -11,37 +13,10 @@ export type Filters = {
 
 export const EMPTY_FILTERS: Filters = { types: [], facets: [], sources: [], funding: [], licenceKnown: false, connectedOnly: false };
 
-const aliases: Record<string, string[]> = {
-  amr: ["antimicrobial resistance"],
-  wgs: ["whole genome sequencing", "genome sequencing", "genomics"],
-  cgmlst: ["core genome multilocus sequence typing", "allele typing"],
-  qc: ["quality control"],
-  sarscov2: ["sars-cov-2"],
-};
-
-const normalise = (value: string) => value.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, " ").trim();
+const routeTitles = questionTitlesByResource(questions);
 
 export function searchScore(entity: Entity, query: string): number {
-  const words = normalise(query).split(/\s+/).filter(Boolean);
-  if (!words.length) return 0;
-  const fields = [
-    [entity.name, 12],
-    ...((entity.identifiers ?? []).flatMap((identifier) => [[identifier.value, 11], [identifier.uri ?? "", 7]] as [string, number][])),
-    [entity.id, 7],
-    [entity.description ?? "", 4],
-    [entity.types.map(readableType).join(" "), 3],
-    [(entity.facets ?? []).map((facet) => `${facet.label} ${facetAxis(facet)}`).join(" "), 5],
-    [(entity.sources ?? []).map((source) => source.name).join(" "), 2],
-  ] as [string, number][];
-  let score = 0;
-  for (const word of words) {
-    const expanded = [word, ...(aliases[word] ?? [])];
-    const best = Math.max(0, ...fields.map(([value, weight]) => expanded.some((term) => normalise(value).includes(normalise(term))) ? weight : 0));
-    if (!best) return -1;
-    score += best;
-  }
-  if (normalise(entity.name).includes(normalise(query))) score += 10;
-  return score;
+  return scoreResource(entity, query, routeTitles.get(entity.id));
 }
 
 export function matchesFilters(entity: Entity, query: string, filters: Filters) {

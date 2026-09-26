@@ -4,7 +4,7 @@
     {
       "id": "https://github.com/pha4ge/infrastructure-resources",
       "types": ["GuidanceDocument"],
-      "name": "PHA4GE infrastructure working group resources",
+      "name": "PHA4GE bioinformatics infrastructure resources",
       "description": "Living repository of PHA4GE-developed guidance and resources on bioinformatics infrastructure for public-health genomics. Use its individual documents to frame local requirements; it is not a hardware purchasing specification.",
       "landingPage": "https://github.com/pha4ge/infrastructure-resources",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
@@ -103,5 +103,36 @@
       "status": "active"
     }
   ],
-  "relationships": []
+  "relationships": [
+    {
+      "id": "https://w3id.org/glitter/assertion/pha4ge-infrastructure-repo-mentions-working-group",
+      "subject": "https://github.com/pha4ge/infrastructure-resources",
+      "predicate": "mentions",
+      "object": "https://pha4ge.org/working-groups/infrastructure/",
+      "description": "The repository identifies the PHA4GE Infrastructure Working Group as the place to join further discussion.",
+      "evidence": [{ "source": "https://github.com/pha4ge/infrastructure-resources", "locator": "README: Contributing" }],
+      "assertedOn": "2026-09-26",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/ballard-describes-iso-15189",
+      "subject": "https://doi.org/10.1099/mgen.0.001097",
+      "predicate": "describes",
+      "object": "https://www.iso.org/standard/76677.html",
+      "description": "The paper discusses ISO 15189 as a medical-laboratory standard relevant to pathogen-genomics accreditation.",
+      "evidence": [{ "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10483410/", "locator": "International Organization for Standardization: two key laboratory standards" }],
+      "assertedOn": "2026-09-26",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/ballard-describes-iso-17025",
+      "subject": "https://doi.org/10.1099/mgen.0.001097",
+      "predicate": "describes",
+      "object": "https://www.iso.org/standard/66912.html",
+      "description": "The paper discusses ISO 17025 for testing laboratories alongside ISO 15189 for medical laboratories.",
+      "evidence": [{ "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10483410/", "locator": "International Organization for Standardization: two key laboratory standards" }],
+      "assertedOn": "2026-09-26",
+      "status": "verified"
+    }
+  ]
 }

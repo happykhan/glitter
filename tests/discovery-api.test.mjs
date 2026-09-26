@@ -95,6 +95,41 @@ test("implementation resources answer concrete planning and accreditation querie
   assert.equal(ballard.license, undefined);
 });
 
+test("natural-language implementation questions retrieve ranked routes and keep route links editorial", async () => {
+  const cases = [
+    ["What server do I buy for bioinformatics?", "bioinformatics-server", "https://github.com/pha4ge/infrastructure-resources"],
+    ["How do I set up foodborne pathogen WGS surveillance?", "foodborne-wgs", "https://www.who.int/publications/i/item/9789240021228"],
+    ["What accreditation applies to pathogen genomics?", "accreditation", "https://doi.org/10.1099/mgen.0.001097"],
+  ];
+  for (const [question, routeId, expectedId] of cases) {
+    const { status, body } = await json(search(request(`/api/v1/search?q=${encodeURIComponent(question)}&limit=50`)));
+    assert.equal(status, 200);
+    assert.ok(body.items.slice(0, 3).some((item) => item.id === expectedId), `${question}: expected ${expectedId} in top 3`);
+    const expected = body.items.find((item) => item.id === expectedId);
+    assert.ok(expected.questionRoutes.some((route) => route.id === routeId));
+    const record = (await json(resource(request(`/api/v1/resource?id=${encodeURIComponent(expectedId)}`)))).body;
+    assert.ok(record.questionRoutes.some((route) => route.id === routeId));
+    assert.ok(record.verifiedConnectionCount > 0);
+    const linked = (await json(connections(request(`/api/v1/connections?id=${encodeURIComponent(expectedId)}`)))).body.items;
+    assert.ok(linked.every((item) => item.status === "verified" && item.evidence.length));
+  }
+  const foodborne = (await json(search(request(`/api/v1/search?q=${encodeURIComponent(cases[1][0])}`)))).body;
+  assert.equal(foodborne.items[0].id, "https://www.who.int/publications/i/item/9789240021228");
+  const unrelated = (await json(search(request("/api/v1/search?q=quantum%20banana")))).body;
+  assert.equal(unrelated.total, 0);
+});
+
+test("implementation graph links state the source-supported relationship, not just a shared topic", async () => {
+  for (const [id, predicate, neighbour] of [
+    ["https://github.com/pha4ge/infrastructure-resources", "mentions", "https://pha4ge.org/working-groups/infrastructure/"],
+    ["https://www.who.int/publications/i/item/9789240021228", "mentions", "https://www.who.int/publications/i/item/9789240021242"],
+    ["https://doi.org/10.1099/mgen.0.001097", "describes", "https://www.iso.org/standard/76677.html"],
+  ]) {
+    const { body } = await json(connections(request(`/api/v1/connections?id=${encodeURIComponent(id)}`)));
+    assert.ok(body.items.some((item) => item.predicate === predicate && item.neighbour.id === neighbour && item.evidence[0].source.startsWith("https://")));
+  }
+});
+
 test("new WHO WGS materials are discoverable by use case", async () => {
   const cases = [
     ["genomics costing", "https://iris.who.int/handle/10665/385075"],

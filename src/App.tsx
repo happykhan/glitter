@@ -41,6 +41,7 @@ import {
 import StandardPage from "./StandardPage";
 import ApiPage from "./ApiPage";
 import QuestionsPage from "./QuestionsPage";
+import questionData from "../content/questions.json";
 import { EMPTY_FILTERS, matchesFilters, readDiscoveryUrl, searchScore, writeDiscoveryUrl, type Filters } from "./discovery";
 
 type View = "resources" | "graph" | "questions" | "standard" | "api";
@@ -189,6 +190,20 @@ function Connections({ entity, onSelect }: { entity: Entity; onSelect: (entity: 
   </section>;
 }
 
+function ReadingRoutes({ entity, onSelect }: { entity: Entity; onSelect: (entity: Entity) => void }) {
+  const routes = questionData.filter((question) => question.steps.some((step) => step.resourceIds.includes(entity.id)));
+  if (!routes.length) return null;
+  return <section className="detail-section reading-routes"><h3>Practical question routes <span>{routes.length}</span></h3>
+    <p>Editorial recommendations for the same question—not verified resource-to-resource links.</p>
+    {routes.map((route) => <div className="reading-route" key={route.id}><strong>{route.question}</strong>
+      {[...route.steps.filter((step) => step.resourceIds.includes(entity.id)), ...route.steps.filter((step) => !step.resourceIds.includes(entity.id))].flatMap((step) => step.resourceIds).filter((id) => id !== entity.id).slice(0, 3).map((id) => {
+        const other = entities.find((candidate) => candidate.id === id);
+        return other ? <button key={id} onClick={() => onSelect(other)}>{other.name}<ChevronRight size={13} /></button> : null;
+      })}
+    </div>)}
+  </section>;
+}
+
 function Details({ entity, onSelect, onClose }: { entity: Entity | null; onSelect: (entity: Entity) => void; onClose: () => void }) {
   if (!entity) return <aside className="details-panel details-empty" aria-label="Resource details"><Info size={23} /><h2>Select a resource</h2><p>Open a result to inspect its scope, licence, provenance and evidence-backed connections.</p></aside>;
   const source = entity.sources?.[0];
@@ -214,6 +229,7 @@ function Details({ entity, onSelect, onClose }: { entity: Entity | null; onSelec
     </dl>
     {(entity.facets?.length ?? 0) > 0 && <section className="detail-section"><h3>Scope</h3><div className="detail-tags">{entity.facets?.map((facet) => <span key={`${facet.scheme}-${facet.id}`}><small>{facetAxis(facet)}</small>{facet.label}</span>)}</div></section>}
     <Connections entity={entity} onSelect={onSelect} />
+    <ReadingRoutes entity={entity} onSelect={onSelect} />
     {(entity.sources?.length ?? 0) > 0 && <section className="detail-section"><h3>Provenance <span>{entity.sources?.length}</span></h3>{entity.sources?.map((item) => <a key={`${item.name}-${item.sourceRecordId}`} href={item.sourceUrl} target="_blank" rel="noreferrer" className="provenance-link"><span><strong>{item.name}</strong><small>Record {item.sourceRecordId ?? "—"}</small></span><ArrowUpRight size={15} /></a>)}</section>}
     {entity.landingPage && <a className="open-resource" href={entity.landingPage} target="_blank" rel="noreferrer">Open canonical resource <ArrowUpRight size={17} /></a>}
   </aside>;
@@ -241,7 +257,8 @@ function drawGraphNode(node: GraphNode, context: CanvasRenderingContext2D, scale
   context.strokeStyle = "#ffffff"; context.lineWidth = 1.4; context.stroke();
   if (selected) { context.beginPath(); context.arc(x, y, radius + 3, 0, Math.PI * 2); context.strokeStyle = "#f96e81"; context.lineWidth = 2 / scale; context.stroke(); }
   if (scale > 0.92 || selected || node.kind === "organization") {
-    const label = node.name.length > 28 ? `${node.name.slice(0, 26)}…` : node.name;
+    const shortName = node.name.replace(/^WHO foodborne WGS guide: /, "WHO WGS · ");
+    const label = shortName.length > 28 ? `${shortName.slice(0, 26)}…` : shortName;
     const fontSize = Math.max(8.5 / scale, 4.1); context.font = `600 ${fontSize}px "IBM Plex Sans"`;
     context.textAlign = "left"; context.textBaseline = "middle"; context.fillStyle = "#25343d"; context.fillText(label, x + radius + 2, y);
   }
@@ -263,6 +280,7 @@ function GraphView({ results, selected, onSelect, onClose, onClear, query, filte
   const [showAll, setShowAll] = useState(false);
   const resultIds = useMemo(() => new Set([...results.map((entity) => entity.id), ...(selected ? [selected.id] : [])]), [results, selected]);
   const graph = useMemo(() => {
+    const includeUnlinkedMatches = showAll || query.trim().length > 0;
     const built = buildResourceGraph(resultIds, includeCatalogueLinks);
     const links = predicate === "all" ? built.links : built.links.filter((link) => link.relationship.predicate === predicate);
     const linkedIds = new Set(links.flatMap((link) => [endpointId(link.source), endpointId(link.target)]));
@@ -271,8 +289,8 @@ function GraphView({ results, selected, onSelect, onClose, onClear, query, filte
       const focusIds = new Set([selected.id, ...focusLinks.flatMap((link) => [endpointId(link.source), endpointId(link.target)])]);
       return { nodes: built.nodes.filter((node) => focusIds.has(node.id)), links: focusLinks };
     }
-    return { nodes: built.nodes.filter((node) => showAll || linkedIds.has(node.id)), links };
-  }, [resultIds, includeCatalogueLinks, predicate, selected, showAll]);
+    return { nodes: built.nodes.filter((node) => includeUnlinkedMatches || linkedIds.has(node.id)), links };
+  }, [resultIds, includeCatalogueLinks, predicate, selected, showAll, query]);
   const selectedId = selected?.id ?? null;
   const neighbours = useMemo(() => {
     if (!selectedId) return null;
@@ -314,7 +332,7 @@ function GraphView({ results, selected, onSelect, onClose, onClear, query, filte
         <div className="graph-controls">
           <label>Relationship<select value={predicate} onChange={(event) => setPredicate(event.target.value)}><option value="all">All useful relationships</option>{predicates.map((value) => <option key={value} value={value}>{predicateLabels[value] ?? value}</option>)}</select></label>
           <label className="catalogue-toggle"><input type="checkbox" checked={includeCatalogueLinks} onChange={(event) => setIncludeCatalogueLinks(event.target.checked)} /> Include catalogue links</label>
-          <label className="unconnected-toggle"><input type="checkbox" checked={showAll} onChange={(event) => setShowAll(event.target.checked)} /> Show all records</label>
+          {!query.trim() && <label className="unconnected-toggle"><input type="checkbox" checked={showAll} onChange={(event) => setShowAll(event.target.checked)} /> Show all records</label>}
           <button onClick={() => graphRef.current?.zoom((graphRef.current?.zoom() ?? 1) * 1.25, 180)} aria-label="Zoom in"><Plus size={16} /></button>
           <button onClick={() => graphRef.current?.zoom((graphRef.current?.zoom() ?? 1) / 1.25, 180)} aria-label="Zoom out"><Minus size={16} /></button>
           <button onClick={() => graphRef.current?.zoomToFit(500, size.width < 600 ? 70 : 54)} aria-label="Fit graph"><LocateFixed size={16} /><span>Fit</span></button>
@@ -350,10 +368,10 @@ function GraphView({ results, selected, onSelect, onClose, onClear, query, filte
           maxZoom={7}
         />
         {!results.length && <div className="graph-state"><h2>No matching resources</h2><p>Broaden your search or filters to find a resource to explore.</p><button onClick={onClear}>Clear search and filters</button></div>}
-        {!!results.length && !selected && <div className="graph-guide"><strong>{suggestedStarts.length ? "Follow a verified path" : "Explore a resource"}</strong><span>{suggestedStarts.length ? "Choose a starting point, then follow the evidence-backed links in the details panel." : "Select a node, or choose from the matching records below. The map will show its direct, verified connections."}</span><div>{suggestedStarts.length ? suggestedStarts.map(({ id, label, detail, entity }) => <button key={id} onClick={() => onSelect(entity)}><span><b>{label}</b><small>{detail}</small></span><ChevronRight size={12} /></button>) : results.slice(0, 6).map((entity) => <button key={entity.id} onClick={() => onSelect(entity)}>{entity.name}<ChevronRight size={12} /></button>)}</div>{!suggestedStarts.length && results.length > 6 && <small>Search to narrow {results.length} matching records.</small>}</div>}
+        {!!results.length && !selected && (suggestedStarts.length ? <div className="graph-guide"><strong>Follow a verified path</strong><span>Choose a starting point, then follow the evidence-backed links in the details panel.</span><div>{suggestedStarts.map(({ id, label, detail, entity }) => <button key={id} onClick={() => onSelect(entity)}><span><b>{label}</b><small>{detail}</small></span><ChevronRight size={12} /></button>)}</div></div> : <details className="graph-guide graph-guide-compact"><summary>Matching records <span>{results.length}</span><ChevronDown size={14} /></summary><div>{results.slice(0, 12).map((entity) => <button key={entity.id} onClick={() => onSelect(entity)}>{entity.name}<ChevronRight size={12} /></button>)}</div>{results.length > 12 && <small>Search to narrow {results.length} matching records.</small>}</details>)}
         {selected && graph.links.length === 0 && <div className="graph-guide graph-guide-isolated"><strong>No reviewed links yet</strong><span>{selected.name} is in the catalogue, but has no recorded {predicate === "all" ? "resource connection" : "connection of this type"}. This is an evidence gap, not a claim of isolation.</span></div>}
       </div>
-      <div className="graph-help"><span>Only evidence-backed assertions are drawn. Shared tags do not create links.</span><span><i /> select a node to focus · evidence in details</span></div>
+      <div className="graph-help"><span>{query.trim() ? "All search matches appear; only evidence-backed assertions are linked." : "Only evidence-backed assertions are drawn. Shared tags do not create links."}</span><span><i /> select a node to focus · evidence in details</span></div>
     </section>
     <Details entity={selected} onSelect={onSelect} onClose={onClose} />
   </main>;

@@ -56,7 +56,7 @@ export default function ApiPage() {
 
       <section id="start" className="standard-section">
         <h2>Find resources</h2>
-        <p>Search with words and filters. Each result includes its canonical ID, source provenance and resource licence when one is recorded. Use the ID to fetch the full record or its verified connections.</p>
+        <p>Search with topic words or a full practical question, then narrow with filters. Each result includes its canonical ID, source provenance, resource licence when recorded, and any editorial question routes it appears in. Use the ID to fetch the full record or its verified connections; question routes are not graph links.</p>
         <div className="api-base"><Database size={18} /><code>{API_BASE}</code><CopyButton value={API_BASE} label="Copy base URL" /></div>
         <CodeExample label="Find AMR software" children={curlExample} />
         <p className="api-inline-note"><a href={`${API_BASE}/search?q=amr&type=Software`} target="_blank" rel="noreferrer"><Search size={14} /> See the search response <ArrowUpRight size={12} /></a> Search also accepts <code>method</code>, <code>application</code>, <code>target</code>, <code>source</code>, <code>funding</code>, <code>licenseKnown</code>, <code>connected</code>, <code>limit</code> and <code>offset</code>.</p>
@@ -77,7 +77,7 @@ export default function ApiPage() {
 
       <section id="responses" className="standard-section">
         <h2>Response format</h2>
-        <p>Search returns matching <code>items</code>, <code>total</code>, <code>limit</code>, <code>offset</code> and applied filters. Resource lookup returns one <code>resource</code>. Connections returns directed <code>items</code> with a neighbour summary, evidence URL and any compatibility note. Export collections use this envelope:</p>
+        <p>Search returns matching <code>items</code>, <code>total</code>, <code>limit</code>, <code>offset</code> and applied filters. Each item may name <code>questionRoutes</code>; resource lookup returns the same editorial route summaries alongside one <code>resource</code>. Connections returns directed <code>items</code> with a neighbour summary, evidence URL and any compatibility note. Export collections use this envelope:</p>
         <table className="field-table">
           <caption>Export collection fields</caption>
           <thead><tr><th scope="col">Field</th><th scope="col">Type</th><th scope="col">Meaning</th></tr></thead>

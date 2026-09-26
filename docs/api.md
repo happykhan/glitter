@@ -28,11 +28,12 @@ Base URL: `https://glitter-roan.vercel.app/api/v1`
 
 Search accepts `q`, `type`, `method`, `application`, `target`, `source`,
 `funding`, `licenseKnown`, `connected`, `limit` and `offset`. Substantive query
-words must all match somewhere in a resource's searchable fields; common
-question words are ignored, and DNA extraction also matches DNA isolation.
-Results are ranked by
-field relevance; filtering is lexical and does not use an LLM or a live web
-search. `funding` is computed from the call's dates at request time. The
+words are matched against resource fields and curated practical-question titles;
+common question words are ignored and some extra words are tolerated. Results
+are ranked by field relevance; filtering is lexical and does not use an LLM or
+a live web search. Search items include `questionRoutes` when a resource is part
+of an editorial reading route. These are not verified graph relationships.
+`funding` is computed from the call's dates at request time. The
 default page size is 10, with a maximum of 50.
 
 ```sh
@@ -50,6 +51,10 @@ An AI assistant host that supports OpenAPI/HTTP tools can import
 record, then follow only verified relationships; cite each resource's
 `landingPage` and each relationship's `evidence` URL. An ordinary chat cannot
 call this API merely because someone pastes the URL into a prompt.
+
+The resource lookup response also includes `questionRoutes` outside the
+schema-valid `resource` object. Use `/api/v1/questions` for each route's ordered
+steps, clarifying question and evidence gap.
 
 For an assistant, pass concise topic terms in `q` and use the dedicated
 filters for resource type, pathogen, source and funding state. Treat zero

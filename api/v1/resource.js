@@ -1,4 +1,4 @@
-import { catalogue, json, readId, usefulRelationships } from "../_data.js";
+import { catalogue, json, questionRoutesFor, readId, usefulRelationships } from "../_data.js";
 
 export function GET(request) {
   const found = readId(new URL(request.url));
@@ -9,5 +9,6 @@ export function GET(request) {
     kind: "Resource",
     resource: found.entity,
     verifiedConnectionCount: usefulRelationships(found.entity.id).length,
+    questionRoutes: questionRoutesFor(found.entity.id),
   });
 }

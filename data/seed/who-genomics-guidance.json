@@ -88,6 +88,26 @@
   ],
   "relationships": [
     {
+      "id": "https://w3id.org/glitter/assertion/who-foodborne-intro-mentions-outbreak-module",
+      "subject": "https://www.who.int/publications/i/item/9789240021228",
+      "predicate": "mentions",
+      "object": "https://www.who.int/publications/i/item/9789240021242",
+      "description": "The introductory module identifies the outbreak-investigation module as one of the three parts of the WHO foodborne WGS guidance.",
+      "evidence": [{ "source": "https://iris.who.int/bitstream/handle/10665/373459/9789240021228-eng.pdf", "locator": "Executive summary: three modules in this guidance" }],
+      "assertedOn": "2026-09-26",
+      "status": "verified"
+    },
+    {
+      "id": "https://w3id.org/glitter/assertion/who-foodborne-intro-mentions-routine-module",
+      "subject": "https://www.who.int/publications/i/item/9789240021228",
+      "predicate": "mentions",
+      "object": "https://www.who.int/publications/i/item/9789240021266",
+      "description": "The introductory module identifies the routine-surveillance module as one of the three parts of the WHO foodborne WGS guidance.",
+      "evidence": [{ "source": "https://iris.who.int/bitstream/handle/10665/373459/9789240021228-eng.pdf", "locator": "Executive summary: three modules in this guidance" }],
+      "assertedOn": "2026-09-26",
+      "status": "verified"
+    },
+    {
       "id": "https://w3id.org/glitter/assertion/who-national-guide-supplements-global-strategy",
       "subject": "https://www.who.int/publications/i/item/9789240076563",
       "predicate": "isSupplementTo",

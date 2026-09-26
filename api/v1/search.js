@@ -1,38 +1,7 @@
-import { catalogue, error, json, resources, usefulRelationships } from "../_data.js";
+import { catalogue, error, json, practicalQuestions, questionRoutesFor, resources, usefulRelationships } from "../_data.js";
+import { matchesText, questionTitlesByResource, scoreResource } from "../../shared/resource-search.js";
 
-const aliases = {
-  amr: "antimicrobial resistance",
-  wgs: "whole genome sequencing",
-  cgmlst: "core genome multilocus sequence typing",
-  qc: "quality control",
-  extraction: "isolation",
-  extract: "isolation",
-};
-const stopWords = new Set(["a", "an", "and", "are", "can", "do", "does", "find", "for", "how", "i", "implement", "in", "is", "me", "of", "on", "show", "the", "to", "use", "using", "what", "which", "with"]);
-const normalise = (value) => String(value ?? "").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, " ").trim();
-const matches = (value, search) => normalise(value).includes(normalise(search));
-
-function score(entity, query) {
-  const words = normalise(query).split(/\s+/).filter((word) => word && !stopWords.has(word));
-  if (!words.length) return 0;
-  const fields = [
-    [entity.name, 12],
-    ...((entity.identifiers ?? []).flatMap((item) => [[item.value, 11], [item.uri, 7]])),
-    [entity.id, 7],
-    [entity.description, 4],
-    [entity.types.join(" "), 3],
-    [(entity.facets ?? []).map((facet) => facet.label).join(" "), 5],
-    [(entity.sources ?? []).map((source) => source.name).join(" "), 2],
-  ];
-  let total = 0;
-  for (const word of words) {
-    const choices = [word, aliases[word]].filter(Boolean);
-    const best = Math.max(0, ...fields.map(([value, weight]) => choices.some((term) => matches(value, term)) ? weight : 0));
-    if (!best) return -1;
-    total += best;
-  }
-  return total + (matches(entity.name, query) ? 10 : 0);
-}
+const routeTitles = questionTitlesByResource(practicalQuestions);
 
 function fundingState(entity) {
   const funding = entity.fundingOpportunity;
@@ -71,13 +40,13 @@ export function GET(request) {
   const connected = params.get("connected") === "true";
   for (const value of [type, method, application, target, source]) if (value && value.length > 100) return error("Filter values must be 100 characters or fewer.");
 
-  const found = resources.map((entity) => ({ entity, relevance: score(entity, q) })).filter(({ entity, relevance }) => {
+  const found = resources.map((entity) => ({ entity, relevance: scoreResource(entity, q, routeTitles.get(entity.id)) })).filter(({ entity, relevance }) => {
     if (relevance < 0) return false;
-    if (type && !entity.types.some((value) => matches(value, type))) return false;
-    if (method && !(entity.facets ?? []).some((facet) => facet.scheme === "Glitter method stage" && (matches(facet.label, method) || matches(facet.id, method)))) return false;
-    if (application && !(entity.facets ?? []).some((facet) => facet.scheme === "Glitter application" && (matches(facet.label, application) || matches(facet.id, application)))) return false;
-    if (target && !(entity.facets ?? []).some((facet) => facet.scheme === "Glitter target" && (matches(facet.label, target) || matches(facet.id, target)))) return false;
-    if (source && !(entity.sources ?? []).some((item) => matches(item.name, source))) return false;
+    if (type && !entity.types.some((value) => matchesText(value, type))) return false;
+    if (method && !(entity.facets ?? []).some((facet) => facet.scheme === "Glitter method stage" && (matchesText(facet.label, method) || matchesText(facet.id, method)))) return false;
+    if (application && !(entity.facets ?? []).some((facet) => facet.scheme === "Glitter application" && (matchesText(facet.label, application) || matchesText(facet.id, application)))) return false;
+    if (target && !(entity.facets ?? []).some((facet) => facet.scheme === "Glitter target" && (matchesText(facet.label, target) || matchesText(facet.id, target)))) return false;
+    if (source && !(entity.sources ?? []).some((item) => matchesText(item.name, source))) return false;
     if (funding && fundingState(entity) !== funding) return false;
     if (licenseKnown && !entity.license) return false;
     if (connected && usefulRelationships(entity.id).length === 0) return false;
@@ -93,6 +62,6 @@ export function GET(request) {
     total: found.length,
     limit,
     offset,
-    items: found.slice(offset, offset + limit).map(({ entity }) => ({ ...entity, verifiedConnectionCount: usefulRelationships(entity.id).length })),
+    items: found.slice(offset, offset + limit).map(({ entity }) => ({ ...entity, verifiedConnectionCount: usefulRelationships(entity.id).length, questionRoutes: questionRoutesFor(entity.id) })),
   });
 }
