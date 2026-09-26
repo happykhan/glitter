@@ -1,0 +1,135 @@
+{
+  "standardVersion": "0.1.0",
+  "entities": [
+    {
+      "id": "https://pathogen.watch/",
+      "types": ["Software"],
+      "name": "Pathogenwatch",
+      "description": "Web platform that integrates analysis tools for pathogen genome assemblies and public genomic collections, including species assignment, typing, AMR prediction and contextual comparison.",
+      "landingPage": "https://pathogen.watch/",
+      "facets": [{ "scheme": "Glitter application", "id": "genomic-surveillance", "label": "Genomic surveillance" }, { "scheme": "Glitter method stage", "id": "bioinformatics", "label": "Bioinformatics" }],
+      "sources": [{ "name": "Pathogenwatch documentation", "sourceUrl": "https://cgps.gitbook.io/pathogenwatch", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/pathogenwatch-oss/speciator",
+      "types": ["Software"],
+      "name": "Speciator",
+      "description": "Assigns a species to a genome assembly using Mash searches against curated and reference-genome libraries; not a metagenomics classifier.",
+      "landingPage": "https://github.com/pathogenwatch-oss/speciator",
+      "facets": [{ "scheme": "Glitter method stage", "id": "species-assignment", "label": "Species assignment" }],
+      "sources": [{ "name": "Pathogenwatch technical documentation", "sourceUrl": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/speciator", "retrievedAt": "2026-09-26" }, { "name": "GitHub repository", "sourceUrl": "https://github.com/pathogenwatch-oss/speciator", "sourceRecordId": "pathogenwatch-oss/speciator", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/pathogenwatch-oss/mlst",
+      "types": ["Software"],
+      "name": "Pathogenwatch MLST/cgMLST",
+      "description": "In-house allele-calling tool for MLST and cgMLST profiles against externally maintained, species-specific schemes. Novel alleles and profiles require confirmation with the scheme host.",
+      "landingPage": "https://github.com/pathogenwatch-oss/mlst",
+      "facets": [{ "scheme": "Glitter method stage", "id": "microbial-typing", "label": "Microbial typing" }],
+      "sources": [{ "name": "Pathogenwatch MLST documentation", "sourceUrl": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/lineage-and-genotyping/mlst", "retrievedAt": "2026-09-26" }, { "name": "GitHub repository", "sourceUrl": "https://github.com/pathogenwatch-oss/mlst", "sourceRecordId": "pathogenwatch-oss/mlst", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/pathogenwatch-oss/amr-search",
+      "types": ["Software"],
+      "name": "Pathogenwatch AMRsearch",
+      "description": "Genotypes resistance determinants in assembled microbial genomes and infers resistance profiles using species-specific curated libraries; coverage is not universal across pathogens or bug–drug pairs.",
+      "landingPage": "https://github.com/pathogenwatch-oss/amr-search",
+      "facets": [{ "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }],
+      "sources": [{ "name": "Pathogenwatch AMR documentation", "sourceUrl": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/antimicrobial-resistance-prediction/pw-amr", "retrievedAt": "2026-09-26" }, { "name": "GitHub repository", "sourceUrl": "https://github.com/pathogenwatch-oss/amr-search", "sourceRecordId": "pathogenwatch-oss/amr-search", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/klebgenomics/Kleborate",
+      "types": ["Software"],
+      "name": "Kleborate",
+      "description": "Analyses Klebsiella genome assemblies for species, sequence type, virulence loci and antimicrobial-resistance determinants, with K/O locus typing through Kaptive.",
+      "landingPage": "https://github.com/klebgenomics/Kleborate",
+      "license": "https://github.com/klebgenomics/Kleborate/blob/main/LICENSE",
+      "facets": [{ "scheme": "Glitter target", "id": "klebsiella", "label": "Klebsiella" }, { "scheme": "Glitter method stage", "id": "microbial-typing", "label": "Microbial typing" }, { "scheme": "Glitter application", "id": "antimicrobial-resistance", "label": "Antimicrobial resistance" }],
+      "sources": [{ "name": "Pathogenwatch Kleborate documentation", "sourceUrl": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/lineage-and-genotyping/kleborate", "retrievedAt": "2026-09-26" }, { "name": "GitHub repository", "sourceUrl": "https://github.com/klebgenomics/Kleborate", "sourceRecordId": "klebgenomics/Kleborate", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/klebgenomics/Kaptive",
+      "types": ["Software"],
+      "name": "Kaptive",
+      "description": "Predicts surface-polysaccharide locus types from Klebsiella and Acinetobacter genome assemblies, including Klebsiella capsule and O-antigen loci.",
+      "landingPage": "https://github.com/klebgenomics/Kaptive",
+      "license": "https://github.com/klebgenomics/Kaptive/blob/master/LICENSE",
+      "facets": [{ "scheme": "Glitter method stage", "id": "serotyping", "label": "Serotyping" }, { "scheme": "Glitter target", "id": "klebsiella-acinetobacter", "label": "Klebsiella and Acinetobacter" }],
+      "sources": [{ "name": "Pathogenwatch Kaptive documentation", "sourceUrl": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/serotyping/kaptive", "retrievedAt": "2026-09-26" }, { "name": "GitHub repository", "sourceUrl": "https://github.com/klebgenomics/Kaptive", "sourceRecordId": "klebgenomics/Kaptive", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/phac-nml/sistr_cmd",
+      "types": ["Software"],
+      "name": "SISTR",
+      "description": "Salmonella in silico typing tool that predicts serovar and cgMLST-derived subspecies from genome assemblies; Pathogenwatch uses selected JSON output fields.",
+      "landingPage": "https://github.com/phac-nml/sistr_cmd",
+      "license": "https://github.com/phac-nml/sistr_cmd/blob/master/LICENSE",
+      "facets": [{ "scheme": "Glitter target", "id": "salmonella", "label": "Salmonella" }, { "scheme": "Glitter method stage", "id": "serotyping", "label": "Serotyping" }, { "scheme": "Glitter application", "id": "foodborne-disease-surveillance", "label": "Foodborne disease surveillance" }],
+      "sources": [{ "name": "Pathogenwatch SISTR documentation", "sourceUrl": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/serotyping/sistr", "retrievedAt": "2026-09-26" }, { "name": "GitHub repository", "sourceUrl": "https://github.com/phac-nml/sistr_cmd", "sourceRecordId": "phac-nml/sistr_cmd", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/bacpop/PopPUNK",
+      "types": ["Software"],
+      "name": "PopPUNK",
+      "description": "K-mer-based population clustering and genomic epidemiology tool; Pathogenwatch documents its use for pneumococcal GPSC assignment.",
+      "landingPage": "https://github.com/bacpop/PopPUNK",
+      "license": "https://github.com/bacpop/PopPUNK/blob/master/LICENSE",
+      "facets": [{ "scheme": "Glitter target", "id": "streptococcus-pneumoniae", "label": "Streptococcus pneumoniae" }, { "scheme": "Glitter method stage", "id": "microbial-typing", "label": "Microbial typing" }],
+      "sources": [{ "name": "Pathogenwatch PopPUNK documentation", "sourceUrl": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/lineage-and-genotyping/poppunk", "retrievedAt": "2026-09-26" }, { "name": "GitHub repository", "sourceUrl": "https://github.com/bacpop/PopPUNK", "sourceRecordId": "bacpop/PopPUNK", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/sanger-pathogens/seroba",
+      "types": ["Software"],
+      "name": "SeroBA",
+      "description": "Predicts pneumococcal (Streptococcus pneumoniae) serotypes from short reads; Pathogenwatch derives reads from assemblies for its SeroBA-based analysis, which can differ from direct-read results.",
+      "landingPage": "https://github.com/sanger-pathogens/seroba",
+      "facets": [{ "scheme": "Glitter target", "id": "streptococcus-pneumoniae", "label": "Streptococcus pneumoniae" }, { "scheme": "Glitter method stage", "id": "serotyping", "label": "Serotyping" }],
+      "sources": [{ "name": "Pathogenwatch SeroBA documentation", "sourceUrl": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/serotyping/seroba", "retrievedAt": "2026-09-26" }, { "name": "GitHub repository", "sourceUrl": "https://github.com/sanger-pathogens/seroba", "sourceRecordId": "sanger-pathogens/seroba", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/MDU-PHL/ngmaster",
+      "types": ["Software"],
+      "name": "NGMASTER",
+      "description": "Assigns NG-MAST multi-antigen sequence types to Neisseria gonorrhoeae genomes using porB and tbpB gene fragments.",
+      "landingPage": "https://github.com/MDU-PHL/ngmaster",
+      "license": "https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE",
+      "facets": [{ "scheme": "Glitter target", "id": "neisseria-gonorrhoeae", "label": "Neisseria gonorrhoeae" }, { "scheme": "Glitter method stage", "id": "microbial-typing", "label": "Microbial typing" }],
+      "sources": [{ "name": "Pathogenwatch NG-MAST documentation", "sourceUrl": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/lineage-and-genotyping/ng-mast", "retrievedAt": "2026-09-26" }, { "name": "GitHub repository", "sourceUrl": "https://github.com/MDU-PHL/ngmaster", "sourceRecordId": "MDU-PHL/ngmaster", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    },
+    {
+      "id": "https://github.com/cov-lineages/pangolin",
+      "types": ["Software"],
+      "name": "Pangolin",
+      "description": "Assigns SARS-CoV-2 genomic lineage names; Pathogenwatch displays lineage assignments in genome reports and collections.",
+      "landingPage": "https://github.com/cov-lineages/pangolin",
+      "license": "https://github.com/cov-lineages/pangolin/blob/master/LICENSE.txt",
+      "facets": [{ "scheme": "Glitter target", "id": "sars-cov-2", "label": "SARS-CoV-2" }, { "scheme": "Glitter method stage", "id": "microbial-typing", "label": "Microbial typing" }],
+      "sources": [{ "name": "Pathogenwatch Pangolin documentation", "sourceUrl": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/lineage-and-genotyping/pangolin", "retrievedAt": "2026-09-26" }, { "name": "GitHub repository", "sourceUrl": "https://github.com/cov-lineages/pangolin", "sourceRecordId": "cov-lineages/pangolin", "retrievedAt": "2026-09-26" }],
+      "status": "active"
+    }
+  ],
+  "relationships": [
+    { "id": "https://w3id.org/glitter/assertion/pathogenwatch-uses-speciator", "subject": "https://pathogen.watch/", "predicate": "uses", "object": "https://github.com/pathogenwatch-oss/speciator", "evidence": [{ "source": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/speciator", "locator": "About: species assignment tool in Pathogenwatch" }], "assertedOn": "2026-09-26", "status": "verified" },
+    { "id": "https://w3id.org/glitter/assertion/pathogenwatch-uses-mlst", "subject": "https://pathogen.watch/", "predicate": "uses", "object": "https://github.com/pathogenwatch-oss/mlst", "evidence": [{ "source": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/lineage-and-genotyping/mlst", "locator": "About and Code Repository: in-house MLST search tool" }], "assertedOn": "2026-09-26", "status": "verified" },
+    { "id": "https://w3id.org/glitter/assertion/pathogenwatch-uses-amrsearch", "subject": "https://pathogen.watch/", "predicate": "uses", "object": "https://github.com/pathogenwatch-oss/amr-search", "evidence": [{ "source": "https://github.com/pathogenwatch-oss/amr-search", "locator": "Repository description: primary Pathogenwatch AMR genotyping and phenotype inference tool" }], "assertedOn": "2026-09-26", "status": "verified" },
+    { "id": "https://w3id.org/glitter/assertion/pathogenwatch-uses-kleborate", "subject": "https://pathogen.watch/", "predicate": "uses", "object": "https://github.com/klebgenomics/Kleborate", "evidence": [{ "source": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/lineage-and-genotyping/kleborate", "locator": "About Kleborate: results in Pathogenwatch reports and collections" }], "assertedOn": "2026-09-26", "status": "verified" },
+    { "id": "https://w3id.org/glitter/assertion/pathogenwatch-uses-kaptive", "subject": "https://pathogen.watch/", "predicate": "uses", "object": "https://github.com/klebgenomics/Kaptive", "evidence": [{ "source": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/serotyping/kaptive", "locator": "Results: directly displayed Kaptive results and Kleborate integration" }], "assertedOn": "2026-09-26", "status": "verified" },
+    { "id": "https://w3id.org/glitter/assertion/kleborate-uses-kaptive", "subject": "https://github.com/klebgenomics/Kleborate", "predicate": "uses", "object": "https://github.com/klebgenomics/Kaptive", "evidence": [{ "source": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/serotyping/kaptive", "locator": "Results: Kaptive is run as part of Kleborate for K. pneumoniae species complex" }], "assertedOn": "2026-09-26", "status": "verified" },
+    { "id": "https://w3id.org/glitter/assertion/pathogenwatch-uses-sistr", "subject": "https://pathogen.watch/", "predicate": "uses", "object": "https://github.com/phac-nml/sistr_cmd", "evidence": [{ "source": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/serotyping/sistr", "locator": "SISTR: Pathogenwatch uses cgmlst_subspecies and serovar JSON output fields" }], "assertedOn": "2026-09-26", "status": "verified" },
+    { "id": "https://w3id.org/glitter/assertion/pathogenwatch-uses-poppunk", "subject": "https://pathogen.watch/", "predicate": "uses", "object": "https://github.com/bacpop/PopPUNK", "evidence": [{ "source": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/lineage-and-genotyping/poppunk", "locator": "PopPUNK: S. pneumoniae GPSC strain assignment" }], "assertedOn": "2026-09-26", "status": "verified" },
+    { "id": "https://w3id.org/glitter/assertion/pathogenwatch-uses-seroba", "subject": "https://pathogen.watch/", "predicate": "uses", "object": "https://github.com/sanger-pathogens/seroba", "description": "Pathogenwatch simulates reads from assemblies before SeroBA-based serotype prediction; direct-read and assembly-derived results can differ.", "evidence": [{ "source": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/serotyping/seroba", "locator": "About: assembly-derived reads and interpretation caveat" }], "assertedOn": "2026-09-26", "status": "verified" },
+    { "id": "https://w3id.org/glitter/assertion/pathogenwatch-uses-ngmaster", "subject": "https://pathogen.watch/", "predicate": "uses", "object": "https://github.com/MDU-PHL/ngmaster", "evidence": [{ "source": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/lineage-and-genotyping/ng-mast", "locator": "About: in silico NG-MAST assignments use ngmaster" }], "assertedOn": "2026-09-26", "status": "verified" },
+    { "id": "https://w3id.org/glitter/assertion/pathogenwatch-uses-pangolin", "subject": "https://pathogen.watch/", "predicate": "uses", "object": "https://github.com/cov-lineages/pangolin", "evidence": [{ "source": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/lineage-and-genotyping/pangolin", "locator": "About and Viewing output in Pathogenwatch" }], "assertedOn": "2026-09-26", "status": "verified" },
+    { "id": "https://w3id.org/glitter/assertion/pathogenwatch-uses-shovill", "subject": "https://pathogen.watch/", "predicate": "uses", "object": "https://github.com/tseemann/shovill", "description": "The optional small-scale Illumina short-read assembly service is based on Shovill; this does not imply all Pathogenwatch genomes are assembled there.", "evidence": [{ "source": "https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools/genome-assembly/short-read-assembly", "locator": "Short Read Assembly: assembly pipeline is based on Shovill" }], "assertedOn": "2026-09-26", "status": "verified" }
+  ]
+}

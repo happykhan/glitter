@@ -5,6 +5,7 @@ const API_BASE = "https://glitter-roan.vercel.app/api/v1";
 const EXAMPLE_ID = "https%3A%2F%2Fgithub.com%2Fcidgoh%2FDataHarmonizer";
 
 const endpoints = [
+  ["Find a practical route", "/question", "Match a real question to an editorial reading route, including what to clarify and what the catalogue cannot yet answer.", "?q=How%20do%20I%20set%20up%20foodborne%20pathogen%20WGS%20surveillance%3F"],
   ["Search resources", "/search", "Find and filter by words, form, method, application, pathogen target or funding state.", "?q=amr&type=Software"],
   ["Get a resource", "/resource", "Look up one record by its stable URI or another recorded identifier, with provenance and licence.", `?id=${EXAMPLE_ID}`],
   ["Get connections", "/connections", "Follow verified, directed relationships with evidence and compatibility notes.", `?id=${EXAMPLE_ID}`],
@@ -14,7 +15,7 @@ const endpoints = [
   ["Organisation export", "/organizations", "Supporting organisations named in the catalogue.", ""],
   ["Concept export", "/concepts", "Supporting formats and other concepts used to join resources.", ""],
   ["Relationship export", "/relationships", "All directed assertions, including catalogue provenance and review status.", ""],
-  ["Practical questions", "/questions", "Editorial routes for common questions, with resource IDs and explicit evidence gaps. These are not graph edges.", ""],
+  ["All practical routes", "/questions", "Export all six editorial routes. Reading routes are not graph edges.", ""],
   ["JSON Schema", "/schema", "Validate a complete Glitter document against the draft record specification.", ""],
   ["OpenAPI", "/openapi", "Machine-readable operations and parameters for tool-capable AI assistants.", ""],
 ] as const;
@@ -24,8 +25,9 @@ const curlExample = `curl -fsSG '${API_BASE}/search' \\
   --data-urlencode 'type=Software'`;
 const connectionExample = `curl -fsSG '${API_BASE}/connections' \\
   --data-urlencode 'id=https://github.com/B-UMMI/chewBBACA'`;
+const questionExample = `curl -fsSG '${API_BASE}/question' --data-urlencode 'q=How do I set up foodborne pathogen WGS surveillance?'`;
 const assistantInstruction = `Use the Glitter API tool specification at ${API_BASE}/openapi.
-For a broad practical question, call listPracticalQuestions to check for a curated route. Otherwise call searchResources. Use getResource to inspect each relevant item and getConnections only for verified links. Cite each resource's landingPage and each relationship's evidence URL. State the route's gaps and ask for missing context. Treat missing licences as unknown. Do not infer compatibility from shared tags or from a reading route.`;
+For a practical question, call findPracticalQuestion first. If it returns no route, or more resources are needed, call searchResources. Use getResource to inspect relevant records and getConnections only for verified links. Cite each resource's landingPage and each relationship's evidence URL. State the route's gap and ask for missing context. Treat missing licences as unknown. Do not infer compatibility from shared tags or from a reading route.`;
 
 export default function ApiPage() {
   return <main className="standard-page api-page">
@@ -56,22 +58,24 @@ export default function ApiPage() {
 
       <section id="start" className="standard-section">
         <h2>Find resources</h2>
-        <p>Search with topic words or a full practical question, then narrow with filters. Each result includes its canonical ID, source provenance, resource licence when recorded, and any editorial question routes it appears in. Use the ID to fetch the full record or its verified connections; question routes are not graph links.</p>
+        <p>Start with a practical question or search with topic words, then narrow resources with filters. A question route gives an ordered starting point, what to clarify, and what Glitter cannot answer yet. Search results include their canonical IDs, source provenance, resource licences when recorded, and any editorial routes they appear in.</p>
         <div className="api-base"><Database size={18} /><code>{API_BASE}</code><CopyButton value={API_BASE} label="Copy base URL" /></div>
+        <CodeExample label="Find a route for a real question" children={questionExample} />
+        <p className="api-inline-note">No matching route? Search the full catalogue. A missing route is a catalogue gap, not evidence that no guidance exists. Reading routes are not verified graph links.</p>
         <CodeExample label="Find AMR software" children={curlExample} />
         <p className="api-inline-note"><a href={`${API_BASE}/search?q=amr&type=Software`} target="_blank" rel="noreferrer"><Search size={14} /> See the search response <ArrowUpRight size={12} /></a> Search also accepts <code>method</code>, <code>application</code>, <code>target</code>, <code>source</code>, <code>funding</code>, <code>licenseKnown</code>, <code>connected</code>, <code>limit</code> and <code>offset</code>.</p>
       </section>
 
       <section id="assistant" className="standard-section">
         <h2>Use it with an AI assistant</h2>
-        <p>Import the <a href={`${API_BASE}/openapi`} target="_blank" rel="noreferrer">OpenAPI tool specification</a> into an assistant or agent platform that supports HTTP tools. It defines four callable operations: <code>listPracticalQuestions</code>, <code>searchResources</code>, <code>getResource</code> and <code>getConnections</code>. Give the assistant these instructions alongside the tool:</p>
+        <p>Import the <a href={`${API_BASE}/openapi`} target="_blank" rel="noreferrer">OpenAPI tool specification</a> into an assistant or agent platform that supports HTTP tools. It defines <code>findPracticalQuestion</code>, <code>listPracticalQuestions</code>, <code>searchResources</code>, <code>getResource</code> and <code>getConnections</code>. Give the assistant these instructions alongside the tool:</p>
         <CodeExample label="Suggested assistant instruction" children={assistantInstruction} />
         <p className="api-inline-note">An ordinary chat cannot call this API merely because you paste a URL. Its host must support importing an OpenAPI action or making HTTP tool calls. Results are catalogue records, not clinical advice or an answer generated by Glitter.</p>
       </section>
 
       <section id="endpoints" className="standard-section">
         <h2>Operations and exports</h2>
-        <p>The question routes and first three resource endpoints support discovery. The others provide complete exports for analysis or validation. Fetch <code>/catalogue</code> when you need one document matching the Glitter resource specification.</p>
+        <p>The question lookup and three resource endpoints support discovery. The others provide complete exports for analysis or validation. Fetch <code>/catalogue</code> when you need one document matching the Glitter resource specification.</p>
         <div className="endpoint-list">{endpoints.map(([name, path, description, example]) => <div key={name}><div><strong>{name}</strong><code>GET /api/v1{path}</code></div><p>{description}</p><a href={`${API_BASE}${path}${example}`} target="_blank" rel="noreferrer" aria-label={`Open ${name} example response`}><ArrowUpRight size={16} /></a></div>)}</div>
       </section>
 

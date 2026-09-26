@@ -160,3 +160,22 @@ The source page's modification timestamp is retained as the source revision.
 The page does not state a blanket reusable-data licence, so imports are limited
 to catalogue metadata and links. Licences for the target repositories and
 documents should be checked individually before importing their contents.
+
+## Pathogenwatch analysis software
+
+`data/seed/pathogenwatch-tools.json` is a hand-reviewed selection from the
+current [Pathogenwatch technical descriptions](https://cgps.gitbook.io/pathogenwatch/technical-descriptions-of-analysis-tools)
+and each tool's canonical repository. Pathogenwatch is a platform-level
+`Software` record; each externally identifiable analysis project is a separate
+software record. Verified `uses` assertions link the platform to documented
+components and carry page-level evidence. They do not imply that every genome
+is processed by every tool. The optional Shovill short-read assembly service is
+marked accordingly.
+
+Repository licences are recorded only where a specific licence document was
+found. The Pathogenwatch-OSS repositories and SeroBA were left without a
+resource licence when GitHub did not identify a specific SPDX licence; an
+“open source” statement alone is not a reusable licence URI. Genotyphi is not
+linked to its upstream repository as a component, because Pathogenwatch says
+it uses an in-house assembly-based implementation of that method. Review
+method descriptions and licence links again during source refreshes.

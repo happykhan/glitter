@@ -12,7 +12,7 @@ relationships:
 
   - id: uses
     label: uses
-    description: A protocol or workflow uses the software, standard or other resource represented by the object.
+    description: A software service, protocol or workflow uses the software, standard or other resource represented by the object in its operation.
 
   - id: acceptsInput
     label: accepts input

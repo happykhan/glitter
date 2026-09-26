@@ -2,6 +2,7 @@
   {
     "id": "bioinformatics-server",
     "question": "What server do I buy for bioinformatics?",
+    "matchTerms": ["server", "servers", "hardware", "compute", "infrastructure"],
     "answer": "Start with the workload and operating model, not a hardware model. Estimate samples per week, read volume, pipeline memory and CPU peaks, retention and backup needs, security requirements, local support, and whether shared or cloud compute is viable. Glitter does not yet have enough benchmarked workload data to recommend a particular server.",
     "askFirst": "Which pathogens and pipelines, how many samples per week, what data-retention policy, and what local IT support?",
     "steps": [
@@ -13,6 +14,7 @@
   {
     "id": "wastewater-sequencing",
     "question": "How do I sequence wastewater for pathogen surveillance?",
+    "matchTerms": ["wastewater", "sewage"],
     "answer": "First define the public-health question and target pathogen. Wastewater is a mixed population sample; sampling, concentration, extraction, assay choice, sequencing strategy and interpretation depend on that target. Do not apply an isolate-WGS protocol unchanged.",
     "askFirst": "Which pathogen, sampling setting, surveillance purpose, and available laboratory and bioinformatics capacity?",
     "steps": [
@@ -24,6 +26,7 @@
   {
     "id": "foodborne-wgs",
     "question": "How do I set up foodborne pathogen WGS surveillance?",
+    "matchTerms": ["foodborne", "food-borne", "food safety"],
     "answer": "Build on epidemiological and laboratory surveillance already in place. WHO's modular guide separates readiness, outbreak investigations and routine use; those are different operational stages.",
     "askFirst": "Which pathogen, country, existing foodborne surveillance capacity, and whether the first use is outbreaks or routine monitoring?",
     "steps": [
@@ -36,6 +39,7 @@
   {
     "id": "mlst-cgmlst",
     "question": "What are MLST and cgMLST?",
+    "matchTerms": ["mlst", "cgmlst", "multilocus sequence typing"],
     "answer": "MLST assigns allele profiles from a small set of housekeeping genes, usually seven. cgMLST extends allele-based comparison to a defined set of core genes across a bacterial species or group. A type or distance is only interpretable with its named scheme and quality rules; the two methods are not interchangeable.",
     "askFirst": "Which species and what is the purpose: broad lineage assignment or higher-resolution genomic comparison?",
     "steps": [
@@ -47,6 +51,7 @@
   {
     "id": "bioinformatics-skills",
     "question": "What skills does a public-health bioinformatics team need?",
+    "matchTerms": ["skills", "competencies", "competency", "workforce", "training"],
     "answer": "The CDC–APHL framework covers bioinformatics, data management, interpretation, communication, surveillance and quality management at different proficiency levels. A service also needs people who can connect laboratory results with epidemiological decisions; no single person must hold every skill.",
     "askFirst": "Is this for a job description, an individual learning plan or a whole laboratory team?",
     "steps": [
@@ -58,6 +63,7 @@
   {
     "id": "accreditation",
     "question": "What accreditation applies to pathogen-genomics work?",
+    "matchTerms": ["accreditation", "accredited", "iso 15189", "iso 17025"],
     "answer": "There is no single answer for every genomics service. ISO 15189 addresses medical laboratories; ISO/IEC 17025 addresses testing laboratories. The relevant route, scope of tests, validation evidence and regulatory requirements depend on jurisdiction and whether the service is clinical, public-health, environmental or research.",
     "askFirst": "In which jurisdiction, for which service and test scope, and who will use the result?",
     "steps": [

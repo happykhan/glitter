@@ -35,7 +35,7 @@ test("the complete API catalogue retains schema-valid top-level fields", () => {
 test("the API discovery document exposes every public endpoint", () => {
   const index = read("index.json");
   assert.equal(index.documentation, "/api");
-  for (const name of ["catalogue", "resources", "organizations", "concepts", "relationships", "questions", "search", "resource", "connections", "schema", "openapi"]) {
+  for (const name of ["catalogue", "resources", "organizations", "concepts", "relationships", "question", "questions", "search", "resource", "connections", "schema", "openapi"]) {
     assert.match(index.endpoints[name], /^\/api\/v1\//);
   }
 });
@@ -45,9 +45,11 @@ test("practical questions are complete routes to real resources, not invented ed
   const resources = read("resources.json");
   const ids = new Set(resources.items.map((item) => item.id));
   assert.equal(questions.kind, "QuestionCollection");
+  assert.equal(questions.standardVersion, "0.1.0");
   assert.equal(questions.total, 6);
   for (const question of questions.items) {
     assert.ok(question.answer && question.askFirst && question.gap);
+    assert.ok(question.matchTerms.length);
     assert.ok(question.steps.length > 0);
     for (const step of question.steps) for (const id of step.resourceIds) assert.ok(ids.has(id), `${question.id}: ${id}`);
   }
@@ -55,10 +57,14 @@ test("practical questions are complete routes to real resources, not invented ed
 
 test("OpenAPI offers callable discovery operations with their parameters", () => {
   const openapi = read("openapi.json");
-  for (const [path, operation] of [["/api/v1/search", "searchResources"], ["/api/v1/resource", "getResource"], ["/api/v1/connections", "getConnections"]]) {
+  for (const [path, operation] of [["/api/v1/question", "findPracticalQuestion"], ["/api/v1/search", "searchResources"], ["/api/v1/resource", "getResource"], ["/api/v1/connections", "getConnections"]]) {
     assert.equal(openapi.paths[path].get.operationId, operation);
     assert.ok(openapi.paths[path].get.parameters.length);
   }
+  assert.equal(openapi.paths["/api/v1/questions"].get.operationId, "listPracticalQuestions");
+  assert.deepEqual(openapi.paths["/api/v1/questions"].get.responses["200"].content["application/json"].schema, { $ref: "#/components/schemas/QuestionCollection" });
+  assert.ok(openapi.paths["/api/v1/question"].get.parameters.some((param) => param.name === "q"));
+  assert.ok(openapi.components.schemas.QuestionMatches);
   assert.ok(openapi.paths["/api/v1/search"].get.parameters.some((param) => param.name === "target"));
   assert.match(openapi.paths["/api/v1/search"].get.description, /questionRoutes/);
   assert.ok(openapi.components.schemas.ResourceResponse.properties.questionRoutes);

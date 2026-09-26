@@ -63,9 +63,11 @@ every analysis reported by every paper.
 - [Initial imported seed records](data/seed/initial-resources.json)
 - [PHA4GE guidance and standards seed](data/seed/pha4ge-guidance.json)
 - [Curated papers, software and funding calls](data/seed/curated-resources.json)
+- [Pathogenwatch and its documented analysis tools](data/seed/pathogenwatch-tools.json)
 - [Source-ingestion design](docs/source-ingestion.md)
 - [Initial source registry](config/sources.yaml)
 - [API reference](docs/api.md)
+- [Current roadmap and acceptance criteria](ROADMAP.md)
 - [Contribution guide](CONTRIBUTING.md)
 
 Refresh the PHA4GE seed from its public WordPress feed with:
@@ -90,6 +92,7 @@ pathogen-genomics contextual metadata standards.
 
 ## Next decisions
 
-Before calling v0.1 stable, the community needs to agree the initial use cases,
-minimum required fields by resource type, relationship names, governance
-process, and two or three real interoperability pilots.
+The [roadmap](ROADMAP.md) distinguishes shipped prototype capability from the
+content, interoperability and governance work still needed before v0.1 can be
+called stable. The next content milestone is deeper wastewater wet-lab and
+Salmonella typing coverage, with source-specific licensing and evidence review.

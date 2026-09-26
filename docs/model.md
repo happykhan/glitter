@@ -96,7 +96,7 @@ The controlled predicates are defined in
 
 - a paper `mentions` software, a protocol, dataset or standard when that
   connection is useful for discovery;
-- a workflow or protocol `uses` software without identifying every release;
+- a software service, workflow or protocol `uses` software without identifying every release;
 - software or workflows `acceptInput` and `produceOutput` data or format concepts;
 - a training resource `teaches` a tool, method, protocol or standard;
 - a resource `conformsTo` a standard, while a standard `mapsTo` another standard;

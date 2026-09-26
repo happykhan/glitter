@@ -51,3 +51,20 @@ export function questionTitlesByResource(questions) {
   }
   return titles;
 }
+
+export function scoreQuestionRoute(route, query) {
+  const words = normalise(query).split(/\s+/).filter((word) => word && !stopWords.has(word));
+  if (!words.length) return -1;
+  if (!route.matchTerms.some((term) => matchesText(query, term))) return -1;
+  const fields = [[route.question, 12], [route.matchTerms.join(" "), 6], [route.answer, 4], [route.askFirst, 2], [route.steps.map((step) => step.title).join(" "), 4]];
+  let score = 0;
+  let matched = 0;
+  for (const word of words) {
+    const choices = [word, ...(aliases[word] ?? [])];
+    const best = Math.max(0, ...fields.map(([value, weight]) => choices.some((term) => matchesText(value, term)) ? weight : 0));
+    if (best) { matched += 1; score += best; }
+  }
+  if (matched < Math.max(1, Math.ceil(words.length * 0.75))) return -1;
+  if (matchesText(route.question, query)) score += 20;
+  return score + matched * 2;
+}

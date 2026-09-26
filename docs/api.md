@@ -17,6 +17,8 @@ Base URL: `https://glitter-roan.vercel.app/api/v1`
 | `/api/v1/search` | Ranked resource search with filters and pagination |
 | `/api/v1/resource?id=URI` | Full record by canonical URI or recorded identifier |
 | `/api/v1/connections?id=URI` | Verified directed links, evidence, and neighbour summaries |
+| `/api/v1/question?q=QUESTION` | Ranked curated route matches with answer, clarifying context, ordered resource summaries and explicit gap |
+| `/api/v1/question?id=ROUTE_ID` | One curated route by exact ID |
 | `/api/v1/questions` | Curated practical-question routes, referenced resource IDs and explicit gaps |
 | `/api/v1/catalogue` | Complete schema-valid Glitter document |
 | `/api/v1/resources` | Discoverable resources, excluding supporting organisations and concepts |
@@ -46,15 +48,21 @@ curl -fsSG 'https://glitter-roan.vercel.app/api/v1/connections' \
 ```
 
 An AI assistant host that supports OpenAPI/HTTP tools can import
-`/api/v1/openapi` and call `searchResources`, `getResource` and
-`getConnections`. Suggested instruction: search first, inspect the selected
-record, then follow only verified relationships; cite each resource's
+`/api/v1/openapi` and call `findPracticalQuestion`, `searchResources`,
+`getResource` and `getConnections`. Suggested instruction: try route lookup for
+a practical question, then search when no route matches or more material is
+needed; inspect selected records and follow only verified relationships. Cite each resource's
 `landingPage` and each relationship's `evidence` URL. An ordinary chat cannot
 call this API merely because someone pastes the URL into a prompt.
 
-The resource lookup response also includes `questionRoutes` outside the
+The question lookup is lexical and deliberately conservative: it requires a
+route-specific term and enough matching words. Zero matches mean no curated
+route for that wording, not that the wider catalogue or web lacks guidance.
+Its `items[].steps[].resources` are ordered summaries, not inferred scientific
+links. The resource lookup response also includes `questionRoutes` outside the
 schema-valid `resource` object. Use `/api/v1/questions` for each route's ordered
-steps, clarifying question and evidence gap.
+steps, clarifying question and evidence gap, or `/api/v1/question?id=...` for
+one route with resource summaries.
 
 For an assistant, pass concise topic terms in `q` and use the dedicated
 filters for resource type, pathogen, source and funding state. Treat zero

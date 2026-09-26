@@ -3,6 +3,7 @@ import test from "node:test";
 import { GET as search } from "../api/v1/search.js";
 import { GET as resource } from "../api/v1/resource.js";
 import { GET as connections } from "../api/v1/connections.js";
+import { GET as question } from "../api/v1/question.js";
 
 const request = (route) => new Request(`https://glitter-roan.vercel.app${route}`);
 const json = async (response) => ({ status: response.status, body: await response.json() });
@@ -119,6 +120,33 @@ test("natural-language implementation questions retrieve ranked routes and keep 
   assert.equal(unrelated.total, 0);
 });
 
+test("question lookup selects the right route and includes ordered resource summaries", async () => {
+  for (const [query, expectedId] of [
+    ["What server do I buy for bioinformatics?", "bioinformatics-server"],
+    ["How do I sequence wastewater for pathogen surveillance?", "wastewater-sequencing"],
+    ["How do I set up foodborne pathogen WGS surveillance?", "foodborne-wgs"],
+    ["What are MLST and cgMLST?", "mlst-cgmlst"],
+    ["What skills does a public-health bioinformatics team need?", "bioinformatics-skills"],
+    ["What accreditation applies to pathogen-genomics work?", "accreditation"],
+  ]) {
+    const { status, body } = await json(question(request(`/api/v1/question?q=${encodeURIComponent(query)}`)));
+    assert.equal(status, 200);
+    assert.equal(body.kind, "QuestionMatches");
+    assert.equal(body.items[0]?.id, expectedId, query);
+    assert.ok(body.items[0].answer && body.items[0].askFirst && body.items[0].gap);
+    assert.ok(body.items[0].steps.every((step) => step.resources.length === step.resourceIds.length && step.resources.every((item) => item.id && item.name && item.landingPage)));
+  }
+  const foodborne = (await json(question(request("/api/v1/question?q=foodborne%20WGS%20surveillance")))).body;
+  assert.ok(foodborne.items.every((item) => item.id !== "wastewater-sequencing"));
+  assert.equal((await json(question(request("/api/v1/question?q=sewage%20sequencing")))).body.items[0]?.id, "wastewater-sequencing");
+  assert.equal((await json(question(request("/api/v1/question?q=food-borne%20WGS")))).body.items[0]?.id, "foodborne-wgs");
+  const unknown = (await json(question(request("/api/v1/question?q=quantum%20banana")))).body;
+  assert.equal(unknown.total, 0);
+  assert.equal((await json(question(request("/api/v1/question?id=mlst-cgmlst")))).body.items[0].id, "mlst-cgmlst");
+  assert.equal((await json(question(request("/api/v1/question?id=unknown")))).status, 404);
+  assert.equal((await json(question(request("/api/v1/question?q=foodborne&id=foodborne-wgs")))).status, 400);
+});
+
 test("implementation graph links state the source-supported relationship, not just a shared topic", async () => {
   for (const [id, predicate, neighbour] of [
     ["https://github.com/pha4ge/infrastructure-resources", "mentions", "https://pha4ge.org/working-groups/infrastructure/"],
@@ -175,4 +203,24 @@ test("course search distinguishes open enrolment from courses that are not runni
   assert.ok(harvard.some((item) => item.trainingCourse?.availability === "open" && item.trainingCourse.platform === "Harvard Medical School"));
   const futurelearn = (await json(search(request("/api/v1/search?q=SARS-CoV-2%20whole%20genome%20sequencing&type=TrainingResource&source=FutureLearn")))).body.items;
   assert.ok(futurelearn.some((item) => item.trainingCourse?.availability === "not-running"));
+});
+
+test("Pathogenwatch software is discoverable and its components are independently inspectable", async () => {
+  for (const [q, expectedId] of [
+    ["Pathogenwatch", "https://pathogen.watch/"],
+    ["Pathogenwatch tools", "https://pathogen.watch/"],
+    ["Kleborate Klebsiella AMR", "https://github.com/klebgenomics/Kleborate"],
+    ["Salmonella serotyping", "https://github.com/phac-nml/sistr_cmd"],
+    ["Salmonella serotyping SISTR", "https://github.com/phac-nml/sistr_cmd"],
+    ["pneumococcal SeroBA", "https://github.com/sanger-pathogens/seroba"],
+  ]) {
+    const { body } = await json(search(request(`/api/v1/search?q=${encodeURIComponent(q)}&limit=50`)));
+    assert.ok(body.items.some((item) => item.id === expectedId), `${q}: ${expectedId}`);
+  }
+  const platform = encodeURIComponent("https://pathogen.watch/");
+  const { body } = await json(connections(request(`/api/v1/connections?id=${platform}`)));
+  assert.ok(body.items.some((item) => item.predicate === "uses" && item.neighbour.id === "https://github.com/klebgenomics/Kleborate"));
+  assert.ok(body.items.some((item) => item.predicate === "uses" && item.neighbour.id === "https://github.com/phac-nml/sistr_cmd"));
+  const kaptive = (await json(resource(request(`/api/v1/resource?id=${encodeURIComponent("https://github.com/klebgenomics/Kaptive")}`)))).body.resource;
+  assert.match(kaptive.license, /LICENSE$/);
 });

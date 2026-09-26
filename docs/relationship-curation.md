@@ -11,6 +11,7 @@ resource.
 | Publication | `describes` | Software, protocol, dataset or standard | Move from evidence to the usable resource |
 | Publication | `mentions` | Software, protocol, dataset or standard | Find a materially discussed resource without claiming it is the paper's main subject |
 | Protocol or workflow | `uses` | Software, instrument or standard | Identify what is needed to execute the procedure |
+| Software service | `uses` | Software | Discover a documented analysis component without conflating the service with that tool |
 | Software or workflow | `acceptsInput` | Data or format concept | Check whether existing inputs are compatible |
 | Software or workflow | `producesOutput` | Data or format concept | Plan downstream interoperability |
 | Software | `implements` | Standard or method | Find a practical implementation |
@@ -41,6 +42,15 @@ These examples are stored in `data/seed/graph-paths.json` alongside their
 source URLs and locators. The map and resource inspector show verified
 connections by default. Proposed, disputed and retracted assertions remain
 available in the data API but are not drawn as established links.
+
+Pathogenwatch provides a service-level example in
+`data/seed/pathogenwatch-tools.json`: `uses` links its documented analysis
+components to the platform. A component's presence does not mean every genome
+receives that analysis. For example, SISTR is Salmonella-specific, Kleborate is
+Klebsiella-focused, and the optional Shovill service handles short-read
+assembly. The Kleborate-to-Kaptive edge has its own source evidence. Genotyphi
+is not linked to the upstream repository as a `uses` edge because Pathogenwatch
+documents an in-house implementation of that method.
 
 ## Evidence rule
 

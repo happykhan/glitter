@@ -13,8 +13,16 @@ const organizations = catalogue.entities.filter((entity) => entity.types.include
 const concepts = catalogue.entities.filter((entity) => entity.types.includes("Concept"));
 const questions = JSON.parse(fs.readFileSync(path.join(root, "content/questions.json"), "utf8"));
 const knownIds = new Set(catalogue.entities.map((entity) => entity.id));
-for (const question of questions) for (const step of question.steps) for (const id of step.resourceIds) {
-  if (!knownIds.has(id)) throw new Error(`Question ${question.id} references unknown resource ${id}`);
+const routeIds = new Set();
+for (const question of questions) {
+  if (routeIds.has(question.id)) throw new Error(`Duplicate question route id ${question.id}`);
+  routeIds.add(question.id);
+  if (!Array.isArray(question.matchTerms) || !question.matchTerms.length || question.matchTerms.some((term) => typeof term !== "string" || !term.trim())) {
+    throw new Error(`Question ${question.id} needs non-empty matchTerms`);
+  }
+  for (const step of question.steps) for (const id of step.resourceIds) {
+    if (!knownIds.has(id)) throw new Error(`Question ${question.id} references unknown resource ${id}`);
+  }
 }
 
 const endpoints = {
@@ -27,6 +35,7 @@ const endpoints = {
   search: "/api/v1/search",
   resource: "/api/v1/resource",
   connections: "/api/v1/connections",
+  question: "/api/v1/question",
   questions: "/api/v1/questions",
   schema: "/api/v1/schema",
   openapi: "/api/v1/openapi",
@@ -79,13 +88,39 @@ const openapi = {
     } },
     ResourceResponse: { type: "object", required: ["kind", "resource"], properties: { kind: { const: "Resource" }, resource: ref("Entity"), verifiedConnectionCount: { type: "integer" }, questionRoutes: { type: "array", description: "Editorial practical-question routes for this record, not verified relationships.", items: { type: "object", properties: { id: { type: "string" }, question: { type: "string" } } } } } },
     ConnectionsResponse: { type: "object", required: ["kind", "resource", "total", "items"], properties: { kind: { const: "Connections" }, resource: { type: "object", properties: { id: { type: "string" }, name: { type: "string" } } }, total: { type: "integer" }, items: { type: "array", items: ref("Connection") } } },
+    QuestionRoute: { type: "object", required: ["id", "question", "answer", "askFirst", "steps", "gap"], properties: {
+      id: { type: "string" }, question: { type: "string" }, answer: { type: "string" }, askFirst: { type: "string" }, gap: { type: "string" },
+      matchTerms: { type: "array", items: { type: "string" }, description: "Editorial route-discovery terms, not controlled vocabulary or graph assertions." },
+      steps: { type: "array", items: { type: "object", required: ["title", "resourceIds"], properties: {
+        title: { type: "string" }, resourceIds: { type: "array", items: { type: "string" } },
+        resources: { type: "array", items: { type: "object", required: ["id", "name", "types"], properties: {
+          id: { type: "string" }, name: { type: "string" }, types: { type: "array", items: { type: "string" } }, landingPage: { type: "string", format: "uri" }, sources: { type: "array", items: { type: "object" } },
+        } } },
+      } } },
+    } },
+    QuestionMatches: { type: "object", required: ["kind", "total", "items", "note"], properties: {
+      kind: { const: "QuestionMatches" }, query: { type: ["string", "null"] }, id: { type: ["string", "null"] }, total: { type: "integer" }, items: { type: "array", items: ref("QuestionRoute") }, note: { type: "string" },
+    } },
+    QuestionCollection: { type: "object", required: ["kind", "total", "items"], properties: {
+      kind: { const: "QuestionCollection" }, total: { type: "integer" }, items: { type: "array", items: ref("QuestionRoute") },
+    } },
   } },
   paths: {
+    [endpoints.question]: { get: {
+      operationId: "findPracticalQuestion",
+      summary: "Find a curated route for a practical pathogen-genomics question",
+      description: "Provide either q for ranked editorial routes or id for one exact route. Each route includes an answer, context to clarify, ordered resource summaries and an explicit gap. A zero-result q means Glitter has no curated route, not that no guidance exists. These reading routes are not verified graph links; use getConnections for evidence-backed relationships.",
+      parameters: [
+        parameter("q", "A practical question, such as how to set up foodborne pathogen WGS surveillance. Mutually exclusive with id; maximum 200 characters."),
+        parameter("id", "Exact route id from listPracticalQuestions or a resource's questionRoutes. Mutually exclusive with q; maximum 100 characters."),
+      ],
+      responses: { "200": jsonResponse("Ranked editorial routes with ordered resource summaries and gaps", ref("QuestionMatches")), "400": jsonResponse("Invalid query parameter"), "404": jsonResponse("Unknown route id") },
+    } },
     [endpoints.questions]: { get: {
       operationId: "listPracticalQuestions",
       summary: "Get curated entry points for common pathogen-genomics questions",
       description: "Returns editorial answers, clarifying questions, ordered resource IDs and explicit knowledge gaps. These routes are not evidence-backed graph relationships. Follow resource IDs with getResource and use getConnections only for verified links.",
-      responses: { "200": jsonResponse("Curated question routes and gaps") },
+      responses: { "200": jsonResponse("Curated question routes and gaps", ref("QuestionCollection")) },
     } },
     [endpoints.search]: { get: {
       operationId: "searchResources",
@@ -131,7 +166,6 @@ const openapi = {
       [endpoints.organizations, "Organisation entities"],
       [endpoints.concepts, "Supporting concepts used to join resources"],
       [endpoints.relationships, "All curated directed relationships, including non-verified assertions"],
-      [endpoints.questions, "Editorial question routes with resource IDs and explicit gaps; not graph relationships"],
       [endpoints.schema, "Glitter JSON Schema"],
     ].map(([endpoint, description]) => [endpoint, { get: { summary: description, responses: { "200": jsonResponse("JSON response") } } }])),
   },
@@ -150,7 +184,7 @@ const documents = {
   "organizations.json": collection("OrganizationCollection", organizations),
   "concepts.json": collection("ConceptCollection", concepts),
   "relationships.json": collection("RelationshipCollection", catalogue.relationships),
-  "questions.json": { apiVersion: "1", kind: "QuestionCollection", total: questions.length, items: questions },
+  "questions.json": { apiVersion: "1", standardVersion: catalogue.standardVersion, kind: "QuestionCollection", total: questions.length, items: questions },
   "schema.json": JSON.parse(fs.readFileSync(path.join(root, "schema/glitter.schema.json"), "utf8")),
   "openapi.json": openapi,
 };
